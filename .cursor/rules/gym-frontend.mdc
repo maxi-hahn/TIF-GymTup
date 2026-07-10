@@ -1,0 +1,31 @@
+---
+alwaysApply: true
+---
+---
+alwaysApply: true
+---
+
+# Gym Frontend Project Rule
+
+Before making any architectural or implementation decisions, always read the following project documentation:
+
+- AI_CONTEXT.md
+- FRONTEND_ARCHITECTURE.md
+- CURSOR_RULES.md
+
+These documents define the project architecture, coding conventions, development workflow and project goals.
+
+Follow these documents throughout the entire conversation.
+
+Do not modify the project architecture unless explicitly instructed.
+
+Do not install new dependencies without approval.
+
+Do not invent backend endpoints, request/response models or business logic.
+
+If a request conflicts with the project documentation or if something is unclear, stop and ask for clarification before generating code.
+
+After implementing a feature, briefly explain:
+- What was implemented.
+- Which files were modified.
+- Why the chosen solution follows the project architecture.
