@@ -2,11 +2,11 @@ import _axiosClient from '@/api/axiosClient'
 
 const userService = {
   getProfile: () => {},
-  updateProfile: (data) => {},
+  updateProfile: (_data) => {},
   getUsers: (_params) => {},
   updateUserRole: (_id, _role) => {},
-  getUserById: (id) => {},
-  deleteUser: (id) => {},
+  getUserById: (_id) => {},
+  deleteUser: (_id) => {},
 }
 
 export default userService
