@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-function ProtectedRoute() {
+const ProtectedRoute = () => {
   // TODO: Implement authentication check
   return <Outlet />
 }

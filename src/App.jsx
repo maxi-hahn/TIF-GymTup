@@ -1,7 +1,7 @@
 import AppProviders from '@/shared/contexts/AppProviders'
 import AppRouter from '@/routes/AppRouter'
 
-function App() {
+const App = () => {
   return (
     <AppProviders>
       <AppRouter />

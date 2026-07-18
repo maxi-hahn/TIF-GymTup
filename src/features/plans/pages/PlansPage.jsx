@@ -1,4 +1,4 @@
-function PlansPage() {
+const PlansPage = () => {
   return (
     <div>
       <h1>Plans Page</h1>

@@ -7,7 +7,7 @@ import LoginPage from '@/features/auth/pages/LoginPage'
 import ClassesPage from '@/features/classes/pages/ClassesPage'
 import PlansPage from '@/features/plans/pages/PlansPage'
 
-function AppRouter() {
+const AppRouter = () => {
   return (
     <Routes>
       {/* Public routes */}

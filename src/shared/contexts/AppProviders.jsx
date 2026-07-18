@@ -1,4 +1,4 @@
-function AppProviders({ children }) {
+const AppProviders = ({ children }) => {
 
   return <>{children}</>
 

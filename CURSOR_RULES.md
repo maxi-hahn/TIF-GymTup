@@ -346,7 +346,29 @@ Never invent backend behavior.
 Never assume API endpoints that do not exist.
 
 ---
+## React Component Style
 
+- Always declare React components using arrow functions.
+- Always declare Provider components using arrow functions.
+- Always declare custom hooks using arrow functions.
+- Use `const` for all components and hooks.
+- Do not use `function ComponentName()` unless there is a specific technical reason.
+## File Structure
+
+Every React file should follow this order:
+
+1. Imports
+2. Constants
+3. Component / Hook
+4. Export
+## Naming Convention
+
+- Components: PascalCase
+- Contexts: PascalCase
+- Providers: PascalCase
+- Hooks: camelCase starting with "use"
+- Variables: camelCase
+- Constants: UPPER_SNAKE_CASE when immutable
 # Learning Mindset
 
 This project has an educational purpose.

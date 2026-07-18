@@ -1,4 +1,4 @@
-function ClassesPage() {
+const ClassesPage = () => {
   return (
     <div>
       <h1>Classes Page</h1>

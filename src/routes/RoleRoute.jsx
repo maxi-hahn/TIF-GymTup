@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-function RoleRoute() {
+const RoleRoute = () => {
   // TODO: Implement role check
   return <Outlet />
 }

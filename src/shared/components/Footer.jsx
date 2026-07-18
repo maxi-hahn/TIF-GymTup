@@ -1,4 +1,4 @@
-function Footer() {
+const Footer = () => {
   return (
     <footer>
       <p>&copy; {new Date().getFullYear()} GymTup. All rights reserved.</p>
