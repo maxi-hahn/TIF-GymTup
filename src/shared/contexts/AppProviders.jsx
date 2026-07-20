@@ -1,7 +1,9 @@
+import { LanguageProvider } from './LanguageContext';
 const AppProviders = ({ children }) => {
-
-  return <>{children}</>
-
-}
-
+  return (
+      <LanguageProvider>
+          {children}
+      </LanguageProvider>
+  );
+};
 export default AppProviders
