@@ -1,3 +1,7 @@
 {
-  "greeting": "Hola"
+  "home": "Inicio",
+  "classes": "Clases",
+  "plans": "Planes",
+  "language": "Idioma",
+  "login": "Iniciar sesión"
 }

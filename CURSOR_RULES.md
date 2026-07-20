@@ -361,6 +361,14 @@ Every React file should follow this order:
 2. Constants
 3. Component / Hook
 4. Export
+
+## JSX formatting
+Keep simple props on a single line whenever possible.
+Avoid unnecessarily expanding JSX elements over many lines.
+If an event handler is a single expression, keep it inline.
+Only expand JSX into multiple lines when readability clearly improves.
+Keep code compact but never sacrifice clarity.
+
 ## Naming Convention
 
 - Components: PascalCase
