@@ -1,25 +1,36 @@
 import axios from 'axios'
 
 const axiosClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
-  timeout: 10000,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+    baseURL: import.meta.env.VITE_API_URL,
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 })
 
-// TODO: Attach the JWT token from AuthContext or localStorage to the
-// Authorization header before every outgoing request.
+// Adjunta el token a cada request saliente
 axiosClient.interceptors.request.use(
-  (config) => config,
-  (error) => Promise.reject(error),
+    (config) => {
+        const token = localStorage.getItem('token')
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        return config
+    },
+    (error) => Promise.reject(error),
 )
 
-// TODO: Intercept 401 Unauthorized responses globally and redirect the user
-// to the login page or trigger a token refresh flow.
+// Si el backend responde 401, limpiamos sesión y mandamos al login
 axiosClient.interceptors.response.use(
-  (response) => response,
-  (error) => Promise.reject(error),
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            window.location.href = '/login'
+        }
+        return Promise.reject(error)
+    },
 )
 
 export default axiosClient
