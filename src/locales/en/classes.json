@@ -1,3 +1,27 @@
 {
-    "title": "Classes"
-}
+  "ViewSchedules": "View schedules",
+  "back": "Back",
+  "enroll": "Enroll",
+  "full": "Full",
+  "availableSpots": "Available spots",
+  "enrolledUsers": "Enrolled users",
+  "maximumCapacity": "Maximum capacity for turn",
+  "schedule": "Schedule",
+  "schedules": "Schedules",
+  "day": "Day",
+  "time": "Time",
+  "available": "Available",
+  "allSchedulesAvailable": "Schedules available",
+  "someSchedulesAvailable": "Some schedules are full",
+  "noSchedulesAvailable": "No schedules available",
+
+    "days": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    }
+  }

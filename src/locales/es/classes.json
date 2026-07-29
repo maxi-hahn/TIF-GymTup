@@ -1,3 +1,27 @@
 {
-    "title": "Clases"
-}
+    "ViewSchedules": "Ver horarios",
+    "back": "Volver",
+    "enroll": "Inscribirse",
+    "full": "Completo",
+    "availableSpots": "Cupos disponibles",
+    "enrolledUsers": "Inscriptos",
+    "maximumCapacity": "Capacidad máxima por horario",
+    "schedule": "Horario",
+    "schedules": "Horarios",
+    "day": "Día",
+    "time": "Horario",
+    "available": "Disponible",
+    "allSchedulesAvailable": "Horarios disponibles",
+    "someSchedulesAvailable": "Algunos horarios completos",
+    "noSchedulesAvailable": "Sin horarios disponibles",
+
+    "days": {
+      "sunday": "Domingo",
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado"
+    }
+  }

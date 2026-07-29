@@ -1,21 +1,31 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import ClassCatalog from '../components/ClassCatalog'
 import classService from '@/shared/services/classService'
 
 const ClassesPage = () => {
-  useEffect(() => {
-    loadClasses()
-  }, [])
   const [classes, setClasses] = useState([])
-  const loadClasses = async () => {
-    try {
-      const data = await classService.getClasses()
-      setClasses(data)
-    } catch (error) {
-      console.error(error)
-    }
-  }
 
-  return <h1>Classes</h1>
+
+
+  useEffect(() => {
+    const fetchClasses = async () => {
+        try {
+            const data = await classService.getClasses()
+            setClasses(data)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    fetchClasses()
+}, [])
+  return (
+    <>
+      <h1>Classes</h1>
+
+      <ClassCatalog classes={classes} />
+    </>
+  )
 }
 
 export default ClassesPage
