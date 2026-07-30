@@ -1,11 +1,14 @@
-import _axiosClient from '@/api/axiosClient'
+import axiosClient from '@/api/axiosClient'
 
 const planService = {
-  getPlans: () => {},
-  getPlanById: (_id) => {},
-  createPlan: (_data) => {},
-  updatePlan: (_id, _data) => {},
-  deletePlan: (_id) => {},
+    getPlans: async () => {
+        const { data } = await axiosClient.get('/Plan/GetPlan')
+        return data
+    },
+    getPlanById: (_id) => { },
+    createPlan: (_data) => { },
+    updatePlan: (_id, _data) => { },
+    deletePlan: (_id) => { },
 }
 
 export default planService
