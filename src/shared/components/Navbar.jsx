@@ -29,7 +29,7 @@ const Navbar = () => {
 
     const [open, setOpen] = useState(false)
 
-    const { isAuthenticated, logout } = useAuth()
+    const { isAuthenticated, logout, user } = useAuth()
 
     const navigate = useNavigate()
 
@@ -37,6 +37,8 @@ const Navbar = () => {
         logout()
         navigate('/login')
     }
+
+    const isAdmin = isAuthenticated && (user?.rol === 'Admin' || user?.rol === 'SysAdmin')
 
     return (
         <header className="navbar">
@@ -68,6 +70,12 @@ const Navbar = () => {
                             {language.toUpperCase()}
                         </button>
                     </li>
+
+                    {isAdmin && (
+                        <li>
+                            <Link to="/admin/plans">Admin</Link>
+                        </li>
+                    )}
 
                     <li>
                         {isAuthenticated ? (
@@ -110,6 +118,12 @@ const Navbar = () => {
                                 {language.toUpperCase()}
                             </button>
                         </li>
+
+                        {isAdmin && (
+                            <li>
+                                <Link to="/admin/plans" onClick={() => setOpen(false)}>Admin</Link>
+                            </li>
+                        )}
 
                         <li>
                             {isAuthenticated ? (

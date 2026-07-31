@@ -6,9 +6,22 @@ const planService = {
         return data
     },
     getPlanById: (_id) => { },
-    createPlan: (_data) => { },
-    updatePlan: (_id, _data) => { },
-    deletePlan: (_id) => { },
+    createPlan: async (data) => {
+        const { data: result } = await axiosClient.post('/Plan/CreatePlan', data)
+        return result
+    },
+    updatePlan: async (id, data) => {
+        const { data: result } = await axiosClient.put('/Plan/UpdatePlan', data, {
+            params: { id },
+        })
+        return result
+    },
+    deletePlan: async (id) => {
+        const { data } = await axiosClient.delete('/Plan/DeletePlan', {
+            params: { id },
+        })
+        return data
+    },
 }
 
 export default planService
