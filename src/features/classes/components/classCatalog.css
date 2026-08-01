@@ -1,0 +1,31 @@
+.class-catalog{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
+
+    justify-items:center;
+
+    gap:28px;
+
+}
+
+@media(max-width:1200px){
+
+    .class-catalog{
+
+        grid-template-columns:repeat(2,minmax(320px,380px));
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .class-catalog{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

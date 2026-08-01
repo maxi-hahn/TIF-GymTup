@@ -1,3 +1,40 @@
 {
-    "title": "Clases"
-}
+    "title": "Clases",
+    "ViewSchedules": "Ver horarios",
+    "back": "Volver",
+    "enroll": "Inscribirse",
+    "full": "Completo",
+    "availableSpots": "Cupos disponibles",
+    "enrolledUsers": "Inscriptos",
+    "maximumCapacity": "Capacidad máxima por horario",
+    "schedule": "Horario",
+    "schedules": "Horarios",
+    "day": "Día",
+    "time": "Horario",
+    "available": "Disponible",
+    "allSchedulesAvailable": "Horarios disponibles",
+    "someSchedulesAvailable": "Algunos horarios completos",
+    "noSchedulesAvailable": "Sin horarios disponibles",
+    "cancel": "Cancelar",
+    "cancelEnrollment": "Cancelar inscripción",
+    "enrollmentSuccess": "¡Inscripción exitosa!",
+    "enrollmentError": "Error al inscribirse.",
+    "cancelSuccess": "Inscripción cancelada.",
+    "cancelError": "Error al cancelar la inscripción.",
+    "enrolling": "Inscribiendo...",
+    "canceling": "Cancelando...",
+    "alreadyEnrolled": "Ya estás inscripto",
+    "loadingError": "Error al cargar los datos",
+    "loading": "Cargando...",
+    "noClassesAvailable": "No hay clases disponibles.",
+    "emptyStateDescription":"No hay clases disponibles por el momento.",
+    "days": {
+      "sunday": "Domingo",
+      "monday": "Lunes",
+      "tuesday": "Martes",
+      "wednesday": "Miércoles",
+      "thursday": "Jueves",
+      "friday": "Viernes",
+      "saturday": "Sábado"
+    }
+  }
