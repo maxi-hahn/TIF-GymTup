@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import dayOfWeekMap from '@/utils/dayOfWeekMap'
 import './ScheduleClassCard.css';
-const ScheduleCard = ({ schedule }) => {
+const ScheduleCard = ({ schedule, onEnroll, onCancel, isLoading }) => {
   const { t } = useTranslation('classes')
 
   return (
@@ -25,14 +25,26 @@ const ScheduleCard = ({ schedule }) => {
         {t('availableSpots')}: {schedule.availableSpots}
       </p>
 
-      <button
-        disabled={schedule.isFull}
-        // onClick={() => handleEnroll(schedule.id)}
-      >
-        {schedule.isFull
-          ? t('full')
-          : t('enroll')}
-      </button>
+      {schedule.isEnrolled ? (
+        <button
+          className="cancel-btn"
+          disabled={isLoading}
+          onClick={() => onCancel(schedule.id)}
+        >
+          {isLoading ? t('canceling') : t('cancelEnrollment')}
+        </button>
+      ) : (
+        <button
+          disabled={schedule.isFull || isLoading}
+          onClick={() => onEnroll(schedule.id)}
+        >
+          {isLoading
+            ? t('enrolling')
+            : schedule.isFull
+              ? t('full')
+              : t('enroll')}
+        </button>
+      )}
 
     </div>
   )

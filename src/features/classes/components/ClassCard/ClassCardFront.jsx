@@ -1,9 +1,11 @@
 import { useTranslation } from 'react-i18next'
-import classContent from '../../data/ClassInfo'
+import { getClassInfo } from '../../data/GetClassInfo'
+
 
 const ClassCardFront = ({ gymClass, onMoreInfo }) => {
-  const { t } = useTranslation('classes')
-
+  const { t, i18n } = useTranslation('classes')
+  const classContent = getClassInfo(i18n.language)
+  
   const extraInfo = classContent[gymClass.name] ?? {
     image: '',
     badge: '',

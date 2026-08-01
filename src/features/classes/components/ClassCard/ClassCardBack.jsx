@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import ScheduleCard from './ScheduleCard'
 
-const ClassCardBack = ({ gymClass, onBack }) => {
+const ClassCardBack = ({ gymClass, onBack, onEnroll, onCancel, loadingSchedule }) => {
   const { t } = useTranslation('classes')
 
   return (
@@ -17,6 +17,9 @@ const ClassCardBack = ({ gymClass, onBack }) => {
         <ScheduleCard
           key={schedule.id}
           schedule={schedule}
+          onEnroll={onEnroll}
+          onCancel={onCancel}
+          isLoading={loadingSchedule === schedule.id}
         />))}
       </div>
 

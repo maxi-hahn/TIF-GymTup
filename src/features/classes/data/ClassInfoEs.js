@@ -1,7 +1,7 @@
 import yoga from '../public/class-yoga.png'
 import spinning from '../public/class-spinning.png'
 import funcional from '../public/class-Funcional.png'
-const classContent = {
+export const ClassInfoEs = {
   "yoga": {
     image: yoga,
     badge: "Respirá, estirá, equilibrá",
@@ -30,7 +30,7 @@ const classContent = {
     ]
   },
 
- "spinning": {
+  "spinning": {
     image: spinning,
     badge: "Ritmo, cardio y energía",
     description:
@@ -43,5 +43,4 @@ const classContent = {
       "Alto gasto calórico en poco tiempo",
     ]
   }
-}
-export default classContent
+} 

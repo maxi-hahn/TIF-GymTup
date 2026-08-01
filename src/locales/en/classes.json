@@ -1,4 +1,5 @@
 {
+  "title": "Classes",
   "ViewSchedules": "View schedules",
   "back": "Back",
   "enroll": "Enroll",
@@ -14,6 +15,19 @@
   "allSchedulesAvailable": "Schedules available",
   "someSchedulesAvailable": "Some schedules are full",
   "noSchedulesAvailable": "No schedules available",
+  "cancel": "Cancel",
+  "cancelEnrollment": "Cancel Enrollment",
+  "enrollmentSuccess": "Successfully enrolled!",
+  "enrollmentError": "Error during enrollment.",
+  "cancelSuccess": "Enrollment cancelled.",
+  "cancelError": "Error cancelling enrollment.",
+  "enrolling": "Enrolling...",
+  "canceling": "Canceling...",
+  "alreadyEnrolled": "Already Enrolled",
+  "loadingError": "Error loading data",
+  "loading": "Loading...",
+  "noClassesAvailable": "No classes available.",
+"emptyStateDescription":"There are no classes available at the moment.",
 
     "days": {
       "sunday": "Sunday",
