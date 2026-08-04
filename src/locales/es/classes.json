@@ -28,6 +28,7 @@
     "loading": "Cargando...",
     "noClassesAvailable": "No hay clases disponibles.",
     "emptyStateDescription":"No hay clases disponibles por el momento.",
+    "planRequired": "Necesitás un plan",
     "days": {
       "sunday": "Domingo",
       "monday": "Lunes",
@@ -36,5 +37,19 @@
       "thursday": "Jueves",
       "friday": "Viernes",
       "saturday": "Sábado"
-    }
-  }
+    },
+    "errors": {
+      "PLAN_REQUIRED": "Necesitás contratar un plan.",
+      "PLAN_INACTIVE": "Tu plan no está activo.",
+      "EMAIL_NOT_VERIFIED": "Debés verificar tu email.",
+      "CLASS_FULL": "No quedan cupos.",
+      "ALREADY_ENROLLED": "Ya estás inscripto.",
+      "PLAN_LIMIT_REACHED": "Alcanzaste el límite de clases.",
+      "SCHEDULE_OVERLAP": "Ese horario se superpone con otra clase.",
+      "USER_NOT_FOUND": "Usuario inexistente."
+  },
+  "planRequiredTitle": "Necesitás un plan activo",
+  "planRequiredDescription": "Para inscribirte a clases primero debés contratar un plan. Una vez activado podrás reservar cualquier horario disponible.",
+  "viewPlans": "Ver planes",
+  "cancelEnrollmentMessage": "¿Estás seguro de que querés cancelar tu inscripción a esta clase?"
+}

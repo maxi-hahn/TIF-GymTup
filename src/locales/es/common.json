@@ -3,5 +3,8 @@
   "classes": "Clases",
   "plans": "Planes",
   "language": "Idioma",
-  "login": "Iniciar sesión"
+  "login": "Iniciar sesión",
+  "cancelEnrollmentMessage": "¿Estás seguro de que querés cancelar tu inscripción a esta clase?",
+  "confirm": "Confirmar",
+  "back": "Volver"
 }
