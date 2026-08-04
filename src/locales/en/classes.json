@@ -27,8 +27,8 @@
   "loadingError": "Error loading data",
   "loading": "Loading...",
   "noClassesAvailable": "No classes available.",
-"emptyStateDescription":"There are no classes available at the moment.",
-
+  "emptyStateDescription":"There are no classes available at the moment.",
+  "planRequired": "Plan required",
     "days": {
       "sunday": "Sunday",
       "monday": "Monday",
@@ -37,5 +37,19 @@
       "thursday": "Thursday",
       "friday": "Friday",
       "saturday": "Saturday"
-    }
+    },
+    "errors": {
+      "PLAN_REQUIRED": "You need an active membership.",
+      "PLAN_INACTIVE": "Your membership is inactive.",
+      "EMAIL_NOT_VERIFIED": "Please verify your email.",
+      "CLASS_FULL": "No spots available.",
+      "ALREADY_ENROLLED": "You're already enrolled.",
+      "PLAN_LIMIT_REACHED": "You've reached your plan limit.",
+      "SCHEDULE_OVERLAP": "Schedule overlaps another class.",
+      "USER_NOT_FOUND": "User not found."
+    },
+    "planRequiredTitle": "Active plan required",
+    "planRequiredDescription": "You need an active membership plan before enrolling in classes. Once your plan is active, you'll be able to book any available schedule.",
+    "viewPlans": "View plans",
+    "cancelEnrollmentMessage": "Are you sure you want to cancel your enrollment for this class?"
   }

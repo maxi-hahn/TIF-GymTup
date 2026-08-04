@@ -9,16 +9,15 @@ const axiosClient = axios.create({
 })
 
 // Adjunta el token a cada request saliente
-axiosClient.interceptors.request.use(
-    (config) => {
-        const token = localStorage.getItem('token')
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`
-        }
-        return config
-    },
-    (error) => Promise.reject(error),
-)
+axiosClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+
+    return config
+})
 
 // Si el backend responde 401, limpiamos sesión y mandamos al login
 axiosClient.interceptors.response.use(

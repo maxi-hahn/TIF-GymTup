@@ -6,10 +6,17 @@ import LoadingSpinner from '@/shared/components/LoadingSpinner'
 import ClassCatalog from '../components/ClassCatalog'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
+import { handleBackendError } from '@/shared/utils/errorHandler'
+import PlanRequiredBanner from '@/shared/components/PlanRequiredBanner'
+import { useAuth } from '@/shared/contexts/AuthContext'
+import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 const ClassesPage = () => {
+  const navigate = useNavigate()
   const [classes, setClasses] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [loadingSchedule, setLoadingSchedule] = useState(null)
+  const [scheduleToCancel, setScheduleToCancel] = useState(null)
   const { t } = useTranslation('classes')
 
   /**
@@ -21,6 +28,20 @@ const ClassesPage = () => {
    * When Sprint 1 delivers AuthContext, only authUtils.getAuthToken() needs
    * to be updated — no changes are required here.
    */
+  const openCancelModal = (scheduleId) => {
+  setScheduleToCancel(scheduleId)
+  }
+
+  const closeCancelModal = () => {
+    setScheduleToCancel(null)
+  }
+
+  const confirmCancel = async () => {
+
+    await handleCancel(scheduleToCancel)
+    closeCancelModal()
+  }
+  const { user } = useAuth()
   const loadData = useCallback(async () => {
     try {
       setIsLoading(true)
@@ -45,7 +66,7 @@ const ClassesPage = () => {
       setClasses(mergedClasses)
     } catch (error) {
       console.error(error)
-      toast.error(i18n.t('loadingError'))
+      toast.error(t('loadingError'))
     } finally {
       setIsLoading(false)
     }
@@ -68,12 +89,12 @@ const ClassesPage = () => {
       await inscriptionService.enroll(scheduleId)
       toast.success(t('enrollmentSuccess'))
       await loadData()
-    } catch (error) {
-      console.error(error)
-      toast.error(t('enrollmentError'))
-    } finally {
+    }catch (error) {
+      handleBackendError(error, navigate, t)
+    }finally {
       setLoadingSchedule(null)
     }
+    
   }
 
   const handleCancel = async (scheduleId) => {
@@ -83,9 +104,8 @@ const ClassesPage = () => {
       toast.success(t('cancelSuccess'))
       await loadData()
     } catch (error) {
-      console.error(error)
-      toast.error(t('cancelError'))
-    } finally {
+      handleBackendError(error, navigate, t)
+    }finally {
       setLoadingSchedule(null)
     }
   }
@@ -95,11 +115,24 @@ const ClassesPage = () => {
   return (
     <>
       <h1>{t("title")}</h1>
-      <ClassCatalog 
+      {!user?.hasPlan && (
+         <PlanRequiredBanner />
+      )}
+
+      <ClassCatalog
         classes={classes} 
         onEnroll={handleEnroll}
-        onCancel={handleCancel}
+        onCancel={openCancelModal}
         loadingSchedule={loadingSchedule}
+      />
+      <ConfirmationModal
+          isOpen={scheduleToCancel !== null}
+          title={t("cancelEnrollment")}
+          message={t("cancelEnrollmentMessage")}
+          confirmText={t("confirm")}
+          cancelText={t("back")}
+          onConfirm={confirmCancel}
+          onCancel={closeCancelModal}
       />
     </>
   )

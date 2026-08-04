@@ -1,0 +1,84 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.55);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.modal-container {
+    width: 420px;
+    max-width: 90%;
+
+    background: white;
+
+    border-radius: 14px;
+
+    padding: 24px;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,.25);
+
+    animation: modalFade .2s ease;
+}
+
+.modal-container h2 {
+    margin: 0 0 15px 0;
+}
+
+.modal-container p {
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions button {
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.modal-cancel {
+    background: #dcdcdc;
+}
+
+.modal-cancel:hover {
+    background: #c9c9c9;
+}
+
+.modal-confirm {
+    background: #dc3545;
+    color: white;
+}
+
+.modal-confirm:hover {
+    background: #bb2d3b;
+}
+
+@keyframes modalFade {
+
+    from {
+        opacity: 0;
+        transform: scale(.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
