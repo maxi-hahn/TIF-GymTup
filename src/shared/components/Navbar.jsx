@@ -39,6 +39,7 @@ const Navbar = () => {
     }
 
     const isAdmin = isAuthenticated && (user?.rol === 'Admin' || user?.rol === 'SysAdmin')
+    const isSysAdmin = isAuthenticated && user?.rol === 'SysAdmin'
 
     return (
         <header className="navbar">
@@ -74,6 +75,12 @@ const Navbar = () => {
                     {isAdmin && (
                         <li>
                             <Link to="/admin/plans">Admin</Link>
+                        </li>
+                    )}
+
+                    {isSysAdmin && (
+                        <li>
+                            <Link to="/admin/roles">Roles</Link>
                         </li>
                     )}
 
@@ -122,6 +129,12 @@ const Navbar = () => {
                         {isAdmin && (
                             <li>
                                 <Link to="/admin/plans" onClick={() => setOpen(false)}>Admin</Link>
+                            </li>
+                        )}
+
+                        {isSysAdmin && (
+                            <li>
+                                <Link to="/admin/roles" onClick={() => setOpen(false)}>Roles</Link>
                             </li>
                         )}
 

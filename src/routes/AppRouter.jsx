@@ -8,6 +8,7 @@ import LoginPage from '@/features/auth/pages/LoginPage'
 import ClassesPage from '@/features/classes/pages/ClassesPage'
 import PlansPage from '@/features/plans/pages/PlansPage'
 import AdminPlansPage from '@/features/admin/pages/AdminPlansPage'
+import UserRolesPage from '@/features/admin/pages/UserRolesPage'
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,13 @@ const AppRouter = () => {
       <Route element={<RoleRoute allowedRoles={['Admin', 'SysAdmin']} />}>
         <Route element={<MainLayout />}>
           <Route path="/admin/plans" element={<AdminPlansPage />} />
+        </Route>
+      </Route>
+
+      {/* SysAdmin-only routes */}
+      <Route element={<RoleRoute allowedRoles={['SysAdmin']} />}>
+        <Route element={<MainLayout />}>
+          <Route path="/admin/roles" element={<UserRolesPage />} />
         </Route>
       </Route>
     </Routes>
