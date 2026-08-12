@@ -72,6 +72,12 @@ const Navbar = () => {
                         </button>
                     </li>
 
+                    {isAuthenticated && (
+                        <li>
+                            <Link to="/profile">Mi perfil</Link>
+                        </li>
+                    )}
+
                     {isAdmin && (
                         <li>
                             <Link to="/admin/plans">Admin</Link>
@@ -125,6 +131,12 @@ const Navbar = () => {
                                 {language.toUpperCase()}
                             </button>
                         </li>
+
+                        {isAuthenticated && (
+                            <li>
+                                <Link to="/profile" onClick={() => setOpen(false)}>Mi perfil</Link>
+                            </li>
+                        )}
 
                         {isAdmin && (
                             <li>

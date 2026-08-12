@@ -32,11 +32,11 @@ export function AuthProvider({ children }) {
             planName,
             hasPlan,
         } = await authService.login(email, password)
-        
+
         const userData = {
             id,
             name,
-            email,
+            email: userEmail,
             rol,
             planName,
             hasPlan,
@@ -56,12 +56,21 @@ export function AuthProvider({ children }) {
         setUser(null)
     }
 
+    const updateUser = (changes) => {
+        setUser((prev) => {
+            const updated = { ...prev, ...changes }
+            localStorage.setItem('user', JSON.stringify(updated))
+            return updated
+        })
+    }
+
     const value = {
         user,
         isAuthenticated: !!user,
         loading,
         login,
         logout,
+        updateUser,
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
