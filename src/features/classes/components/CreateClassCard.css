@@ -1,0 +1,360 @@
+/*==========================
+  CREATE CLASS CARD - 3D FLIP
+==========================*/
+
+.create-class-card {
+    width: 400px;
+    height: 560px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  .create-class-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .create-class-card.is-flipped .create-class-card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /*==========================
+    FACES
+  ==========================*/
+  
+  .create-class-front,
+  .create-class-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 18px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #2b3e4f transparent;
+    overscroll-behavior: contain;
+  }
+  
+  .create-class-front {
+    z-index: 2;
+    transform: rotateY(0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #13212d 0%, #1d2d3a 100%);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .create-class-front:hover {
+    border-color: #24d1a7;
+    background: linear-gradient(135deg, #162634 0%, #1f3040 100%);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .create-class-back {
+    z-index: 1;
+    transform: rotateY(180deg);
+    background: #13212d;
+    color: white;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Cuando está flipeada */
+  .create-class-card.is-flipped .create-class-front {
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .create-class-card.is-flipped .create-class-back {
+    z-index: 2;
+    pointer-events: auto;
+  }
+  
+  /*==========================
+    FRONT CONTENT
+  ==========================*/
+  
+  .create-class-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(36, 209, 167, 0.1);
+    border: 3px solid #24d1a7;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .create-class-button:hover {
+    background: rgba(36, 209, 167, 0.2);
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(36, 209, 167, 0.3);
+  }
+  
+  .create-class-icon {
+    font-size: 60px;
+    color: #24d1a7;
+    font-weight: 300;
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+  
+  /*==========================
+    BACK CONTENT
+  ==========================*/
+  .create-class-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 24px;
+
+    pointer-events: auto;
+  }
+  
+  .create-class-form::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .create-class-form::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .create-class-form::-webkit-scrollbar-thumb {
+    background: #2b3e4f;
+    border-radius: 4px;
+  }
+  
+  .create-class-form::-webkit-scrollbar-thumb:hover {
+    background: #3a5065;
+  }
+  
+  .create-class-title {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: #24d1a7;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  
+  .form-step {
+    margin-bottom: 24px;
+  }
+  
+  .step-title {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #e0e0e0;
+  }
+  
+  .schedule-step-title {
+    color: #24d1a7;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  
+  .form-select {
+    width: 100%;
+    padding: 12px;
+    background: #1d2d3a;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 16px;
+  }
+  
+  .form-select:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .form-select:focus {
+    border-color: #24d1a7;
+    box-shadow: 0 0 0 2px rgba(36, 209, 167, 0.1);
+  }
+  
+  .form-select option {
+    background: #13212d;
+    color: white;
+  }
+  
+  .form-select option:disabled {
+    color: #666;
+    background: #1d2d3a;
+  }
+  
+  .form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #b0b0b0;
+  }
+  
+  .schedule-form-group {
+    margin-bottom: 16px;
+  }
+  
+  .schedule-time-group {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .time-field {
+    flex: 1;
+  }
+  
+  .form-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex-shrink: 0;
+    padding-top: 20px;
+  }
+  
+  .create-class-submit {
+    width: 100%;
+    padding: 14px;
+    background: #24d1a7;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .create-class-submit:hover:not(:disabled) {
+    background: #1fb893;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(36, 209, 167, 0.3);
+  }
+  
+  .create-class-submit:disabled {
+    background: #555;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  .create-class-back-button {
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+  }
+  
+  .create-class-back-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  /*==========================
+    RESPONSIVE
+  ==========================*/
+  
+  @media (max-width: 480px) {
+    .create-class-card {
+      width: 100%;
+      height: 500px;
+    }
+    
+    .schedule-time-group {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+  /*==========================
+  SCHEDULES LIST
+==========================*/
+
+.schedules-list {
+  margin-bottom: 16px;
+}
+
+.schedules-list-title {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #24d1a7;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #1d2d3a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #d8d8d8;
+}
+
+.remove-schedule-button {
+  background: transparent;
+  border: none;
+  color: #ff5050;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+
+.remove-schedule-button:hover {
+  color: #ff3030;
+  transform: scale(1.2);
+}
+
+/*==========================
+  ADD SCHEDULE BUTTON
+==========================*/
+
+.add-schedule-button {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #24d1a7;
+  border: 1px dashed #24d1a7;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+.add-schedule-button:hover {
+  background: rgba(36, 209, 167, 0.1);
+  border-style: solid;
+}

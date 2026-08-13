@@ -1,11 +1,15 @@
 import { useTranslation } from 'react-i18next'
 import { getClassInfo } from '../../data/GetClassInfo'
 
-
-const ClassCardFront = ({ gymClass, onMoreInfo }) => {
+const ClassCardFront = ({
+  gymClass,
+  onMoreInfo,
+  isAdmin,
+  onManage
+}) => {
   const { t, i18n } = useTranslation('classes')
   const classContent = getClassInfo(i18n.language)
-  
+
   const extraInfo = classContent[gymClass.name] ?? {
     image: '',
     badge: '',
@@ -16,8 +20,14 @@ const ClassCardFront = ({ gymClass, onMoreInfo }) => {
   }
 
   const getAvailabilityMessage = () => {
+    if (!gymClass.isActive) {
+      return t('classDisabled')
+    }
+
     const totalSchedules = gymClass.schedules.length
-    const fullSchedules = gymClass.schedules.filter(s => s.isFull).length
+    const fullSchedules = gymClass.schedules.filter(
+      s => s.isFull
+    ).length
 
     if (fullSchedules === totalSchedules)
       return t('noSchedulesAvailable')
@@ -33,6 +43,19 @@ const ClassCardFront = ({ gymClass, onMoreInfo }) => {
 
       <div className="class-image">
 
+        {isAdmin && (
+          <button
+            type="button"
+            className={`class-admin-button ${
+              !gymClass.isActive ? 'class-admin-button-active' : ''
+            }`}
+            onClick={onManage}
+            aria-label={t('manageClass')}
+          >
+            {gymClass.isActive ? '×' : '✓'}
+          </button>
+        )}
+
         <img
           src={extraInfo.image}
           alt={gymClass.name}
@@ -43,6 +66,12 @@ const ClassCardFront = ({ gymClass, onMoreInfo }) => {
         <span className="badge">
           {extraInfo.badge}
         </span>
+
+        {!gymClass.isActive && !isAdmin && (
+          <span className="class-disabled-badge">
+            {t('classDisabled')}
+          </span>
+        )}
 
       </div>
 
@@ -57,31 +86,36 @@ const ClassCardFront = ({ gymClass, onMoreInfo }) => {
           <span>🔥 {extraInfo.intensity}</span>
 
         </div>
+
         <hr />
+
       </div>
-      <div className='class-content'>
+
+      <div className="class-content">
+
         <p className="description">
           {extraInfo.description}
         </p>
 
         <ul>
-
           {extraInfo.benefits.map((benefit, index) => (
-
             <li key={index}>
               ✔ {benefit}
             </li>
-
           ))}
-
         </ul>
 
-        <p className="availability">
+        <p
+          className={`availability ${
+            !gymClass.isActive ? 'availability-disabled' : ''
+          }`}
+        >
           {getAvailabilityMessage()}
         </p>
 
         <button
           onClick={onMoreInfo}
+          
           className="view-button"
         >
           {t('ViewSchedules')}
