@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 import planService from '@/shared/services/planService'
 import userService from '@/shared/services/userService'
 import PlanCard from '@/features/plans/components/PlanCard'
+import LoadingSpinner from '@/shared/components/LoadingSpinner'
+import EmptyState from '@/shared/components/EmptyState'
 
 const PlansPage = () => {
   const [plans, setPlans] = useState([])
   const [myPlan, setMyPlan] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const [loadError, setLoadError] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +19,8 @@ const PlansPage = () => {
         setPlans(plansData)
       } catch (err) {
         console.log('error real:', err)
-        setError('No se pudieron cargar los planes.')
+        toast.error('No se pudieron cargar los planes.')
+        setLoadError(true)
         setLoading(false)
         return
       }
@@ -35,25 +39,24 @@ const PlansPage = () => {
     fetchData()
   }, [])
 
-  if (loading) return <p>Cargando planes...</p>
-  if (error) return <p>{error}</p>
+  if (loading) return <LoadingSpinner />
+  if (loadError) return <EmptyState message="No se pudieron cargar los planes. Intentá recargar la página." />
 
   return (
-    <div>
-      <h1>Plans Page</h1>
-      <p>Choose the best membership plan for you.</p>
-
       <div>
-        {plans.map((plan) => (
-          <PlanCard
-            key={plan.id}
-            plan={plan}
-            isMyActivePlan={myPlan?.isActive && myPlan?.planId === plan.id}
-            hasActivePlan={myPlan?.isActive ?? false}
-          />
-        ))}
+          {plans.length === 0 ? (
+              <EmptyState message="Todavía no hay planes disponibles." />
+          ) : (
+              plans.map((plan) => (
+                  <PlanCard
+                      key={plan.id}
+                      plan={plan}
+                      isMyActivePlan={myPlan?.isActive && myPlan?.planId === plan.id}
+                      hasActivePlan={myPlan?.isActive ?? false}
+                  />
+              ))
+          )}
       </div>
-    </div>
   )
 }
 

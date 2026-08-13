@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import toast from 'react-hot-toast'
 import userService from '@/shared/services/userService'
 import { useAuth } from '@/shared/contexts/AuthContext'
+import SubmitButton from '@/shared/components/SubmitButton'
+
 
 const profileSchema = z
   .object({
@@ -21,8 +23,6 @@ const profileSchema = z
 
 const ProfilePage = () => {
   const { user, updateUser } = useAuth()
-  const [message, setMessage] = useState('')
-  const [error, setError] = useState('')
 
   const {
     register,
@@ -40,9 +40,6 @@ const ProfilePage = () => {
   })
 
   const onSubmit = async (formData) => {
-    setMessage('')
-    setError('')
-
     const payload = {
       name: formData.name,
       email: formData.email,
@@ -52,13 +49,13 @@ const ProfilePage = () => {
     try {
       await userService.updateProfile(payload)
       updateUser({ name: formData.name, email: formData.email })
-      setMessage('Perfil actualizado correctamente.')
+      toast.success('Perfil actualizado correctamente.')
     } catch (err) {
-        const backendError = err.response?.data?.error
-        const errorMessages = {
-            'Email is already in use': 'Ese email ya está en uso por otro usuario.',
-        }
-        setError(errorMessages[backendError] ?? 'No se pudo actualizar el perfil.')
+      const backendError = err.response?.data?.error
+      const errorMessages = {
+        'Email is already in use': 'Ese email ya está en uso por otro usuario.',
+      }
+      toast.error(errorMessages[backendError] ?? 'No se pudo actualizar el perfil.')
     }
   }
 
@@ -101,12 +98,9 @@ const ProfilePage = () => {
             {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
           </div>
 
-          {message && <p>{message}</p>}
-          {error && <p>{error}</p>}
-
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar cambios'}
-          </button>
+          <SubmitButton loading={isSubmitting} loadingText="Guardando...">
+            Guardar cambios
+          </SubmitButton>
         </form>
       </div>
     </div>

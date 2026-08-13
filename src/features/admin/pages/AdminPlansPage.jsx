@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
+import toast from 'react-hot-toast'
 import planService from '@/shared/services/planService'
 import PlanTable from '@/features/admin/components/PlanTable'
 import PlanFormModal from '@/features/admin/components/PlanFormModal'
+import LoadingSpinner from '@/shared/components/LoadingSpinner'
+import EmptyState from '@/shared/components/EmptyState'
 
 const AdminPlansPage = () => {
     const [plans, setPlans] = useState([])
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState('')
+    const [loadError, setLoadError] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [editingPlan, setEditingPlan] = useState(null)
 
@@ -15,7 +18,8 @@ const AdminPlansPage = () => {
             const data = await planService.getPlans()
             setPlans(data)
         } catch {
-            setError('No se pudieron cargar los planes.')
+            toast.error('No se pudieron cargar los planes.')
+            setLoadError(true)
         } finally {
             setLoading(false)
         }
@@ -44,9 +48,10 @@ const AdminPlansPage = () => {
 
         try {
             await planService.deletePlan(plan.id)
+            toast.success('Plan eliminado correctamente.')
             fetchPlans()
         } catch {
-            setError('No se pudo eliminar el plan.')
+            toast.error('No se pudo eliminar el plan.')
         }
     }
 
@@ -61,15 +66,19 @@ const AdminPlansPage = () => {
         fetchPlans()
     }
 
-    if (loading) return <p>Cargando planes...</p>
-    if (error) return <p>{error}</p>
+    if (loading) return <LoadingSpinner />
+    if (loadError) return <EmptyState message="No se pudieron cargar los planes. Intentá recargar la página." />
 
     return (
         <div>
             <h1>Gestión de Planes</h1>
             <button onClick={handleNew}>Nuevo plan</button>
 
-            <PlanTable plans={plans} onEdit={handleEdit} onDelete={handleDelete} />
+            {plans.length === 0 ? (
+                <EmptyState message="Todavía no hay planes cargados." />
+            ) : (
+                <PlanTable plans={plans} onEdit={handleEdit} onDelete={handleDelete} />
+            )}
 
             {modalOpen && (
                 <PlanFormModal
