@@ -1,9 +1,10 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import toast from 'react-hot-toast'
 import { useAuth } from '@/shared/contexts/AuthContext'
+import SubmitButton from '@/shared/components/SubmitButton'
 
 const loginSchema = z.object({
     email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
@@ -13,7 +14,6 @@ const loginSchema = z.object({
 const LoginPage = () => {
     const { login } = useAuth()
     const navigate = useNavigate()
-    const [serverError, setServerError] = useState('')
 
     const {
         register,
@@ -24,15 +24,14 @@ const LoginPage = () => {
     })
 
     const onSubmit = async (formData) => {
-        setServerError('')
         try {
             await login(formData.email, formData.password)
             navigate('/')
         } catch (error) {
             if (error.response?.status === 401) {
-                setServerError('Email o contraseña incorrectos.')
+                toast.error('Email o contraseña incorrectos.')
             } else {
-                setServerError('Ocurrió un error. Intentá de nuevo.')
+                toast.error('Ocurrió un error. Intentá de nuevo.')
             }
         }
     }
@@ -55,11 +54,9 @@ const LoginPage = () => {
                     {errors.password && <span>{errors.password.message}</span>}
                 </div>
 
-                {serverError && <p>{serverError}</p>}
-
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? 'Ingresando...' : 'Ingresar'}
-                </button>
+                <SubmitButton loading={isSubmitting} loadingText="Ingresando...">
+                    Ingresar
+                </SubmitButton>
             </form>
         </div>
     )

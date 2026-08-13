@@ -1,9 +1,9 @@
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import userService from '@/shared/services/userService'
 
 const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
     const [loading, setLoading] = useState(false)
-    const [error, setError] = useState('')
 
     const handleBuy = async () => {
         if (hasActivePlan) {
@@ -13,16 +13,15 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
             if (!confirmChange) return
         }
 
-        setError('')
         setLoading(true)
         try {
             const { paymentUrl } = await userService.buyPlan(plan.id)
             window.location.href = paymentUrl
         } catch (err) {
             if (err.response?.status === 403) {
-                setError('Los administradores no pueden comprar planes. Iniciá sesión con una cuenta de cliente.')
+                toast.error('Los administradores no pueden comprar planes. Iniciá sesión con una cuenta de cliente.')
             } else {
-                setError('No se pudo iniciar la compra. Intentá de nuevo.')
+                toast.error('No se pudo iniciar la compra. Intentá de nuevo.')
             }
             setLoading(false)
         }
@@ -45,8 +44,6 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
                     {loading ? 'Redirigiendo...' : hasActivePlan ? 'Cambiar a este plan' : 'Comprar'}
                 </button>
             )}
-
-            {error && <p>{error}</p>}
         </div>
     )
 }

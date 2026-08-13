@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import toast from 'react-hot-toast'
 import planService from '@/shared/services/planService'
+import SubmitButton from '@/shared/components/SubmitButton'
 
 const planSchema = z.object({
   name: z.string().min(1, 'El nombre es obligatorio').max(50, 'Máximo 50 caracteres'),
@@ -12,7 +14,6 @@ const planSchema = z.object({
 
 const PlanFormModal = ({ plan, onClose, onSaved }) => {
   const isEditing = !!plan
-  const [serverError, setServerError] = useState('')
 
   const {
     register,
@@ -39,16 +40,17 @@ const PlanFormModal = ({ plan, onClose, onSaved }) => {
   }, [plan, reset])
 
   const onSubmit = async (formData) => {
-    setServerError('')
     try {
       if (isEditing) {
         await planService.updatePlan(plan.id, formData)
+        toast.success('Plan actualizado correctamente.')
       } else {
         await planService.createPlan(formData)
+        toast.success('Plan creado correctamente.')
       }
       onSaved()
     } catch {
-      setServerError('No se pudo guardar el plan. Intentá de nuevo.')
+      toast.error('No se pudo guardar el plan. Intentá de nuevo.')
     }
   }
 
@@ -76,14 +78,12 @@ const PlanFormModal = ({ plan, onClose, onSaved }) => {
             {errors.max_Clases && <span>{errors.max_Clases.message}</span>}
           </div>
 
-          {serverError && <p>{serverError}</p>}
-
           <button type="button" onClick={onClose}>
             Cancelar
           </button>
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Guardando...' : 'Guardar'}
-          </button>
+          <SubmitButton loading={isSubmitting} loadingText="Guardando...">
+            Guardar
+          </SubmitButton>
         </form>
       </div>
     </div>

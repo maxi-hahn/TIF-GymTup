@@ -6,5 +6,6 @@
   "login": "Login",
   "cancelEnrollmentMessage": "Are you sure you want to cancel your enrollment for this class?",
   "confirm": "Confirm",
-  "back": "Back"
+  "back": "Back",
+  "loading": "Loading..."
 }

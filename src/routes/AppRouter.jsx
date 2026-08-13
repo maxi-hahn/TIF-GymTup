@@ -7,6 +7,7 @@ import HomePage from '@/features/home/pages/HomePage'
 import LoginPage from '@/features/auth/pages/LoginPage'
 import ClassesPage from '@/features/classes/pages/ClassesPage'
 import PlansPage from '@/features/plans/pages/PlansPage'
+import ProfilePage from '@/features/profile/pages/ProfilePage'
 import AdminPlansPage from '@/features/admin/pages/AdminPlansPage'
 import UserRolesPage from '@/features/admin/pages/UserRolesPage'
 
@@ -24,6 +25,7 @@ const AppRouter = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/plans" element={<PlansPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Route>
 

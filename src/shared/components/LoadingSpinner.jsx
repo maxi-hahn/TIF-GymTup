@@ -2,14 +2,14 @@ import './LoadingSpinner.css'
 import { useTranslation } from 'react-i18next'
 
 const LoadingSpinner = () => {
-  const { t } = useTranslation('classes')
+    const { t } = useTranslation('common')
 
-  return (
-    <div className="loading-container">
-      <div className="spinner"></div>
-      <p>{t('loading')}</p>
-    </div>
-  )
+    return (
+        <div className="loading-container">
+            <div className="spinner"></div>
+            <p>{t('loading')}</p>
+        </div>
+    )
 }
 
 export default LoadingSpinner

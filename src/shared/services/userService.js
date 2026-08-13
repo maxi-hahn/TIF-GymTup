@@ -2,7 +2,10 @@ import axiosClient from '@/api/axiosClient'
 
 const userService = {
     getProfile: () => { },
-    updateProfile: (_data) => { },
+    updateProfile: async (data) => {
+        const { data: result } = await axiosClient.put('/Client/UpdateMe', data)
+        return result
+    },
     getUsers: async () => {
         const { data } = await axiosClient.get('/Client')
         return data
