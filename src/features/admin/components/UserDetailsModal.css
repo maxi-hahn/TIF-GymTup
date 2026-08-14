@@ -1,0 +1,352 @@
+/* Modal Overlay */
+.um-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 50;
+}
+
+/* Modal Content */
+.um-modal-content {
+    background-color: #ffffff;
+    margin-top: 40px;
+    border-radius: 0.5rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    max-width: 42rem;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    animation: um-modal-in 0.3s ease-out;
+}
+
+@keyframes um-modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Header */
+.um-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.um-modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.um-modal-close-button {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+}
+
+.um-modal-close-button:hover {
+    color: #6b7280;
+}
+
+.um-close-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+/* Modal Body */
+.um-modal-body {
+    padding: 1.5rem;
+}
+
+/* Modal Footer */
+.um-modal-footer {
+    padding: 1rem 1.5rem;
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.um-modal-action-button {
+    padding: 0.5rem 1rem;
+    background-color: #e5e7eb;
+    color: #374151;
+    border: none;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.um-modal-action-button:hover {
+    background-color: #d1d5db;
+}
+
+/* User Details Header */
+.um-user-details-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.um-user-details-avatar {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background-color: #dbeafe;
+    border: 2px solid #bfdbfe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.um-user-details-avatar-letter {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1d4ed8;
+}
+
+.um-user-details-info {
+    flex: 1;
+}
+
+.um-user-details-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
+}
+
+.um-user-details-email {
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Details Grid */
+.um-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.um-detail-card {
+    background-color: #f9fafb;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.um-detail-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    margin: 0 0 0.5rem 0;
+}
+
+/* Details Sections */
+.um-details-section {
+    margin-bottom: 1.5rem;
+}
+
+.um-details-section:last-child {
+    margin-bottom: 0;
+}
+
+.um-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.um-section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+/* Loading Container */
+.um-loading-container {
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Error Card */
+.um-error-card {
+    background-color: #fee2e2;
+    border: 1px solid #fecaca;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.um-error-card p {
+    color: #dc2626;
+    margin: 0;
+}
+
+/* Plan Card */
+.um-plan-card {
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.um-plan-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.um-plan-name {
+    font-weight: 500;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
+}
+
+.um-plan-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.um-plan-status {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-radius: 9999px;
+    white-space: nowrap;
+}
+
+.um-plan-status.um-status-active {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.um-plan-status.um-status-inactive {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.um-plan-expiration {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0.5rem 0 0 0;
+}
+
+/* Empty Card */
+.um-empty-card {
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.um-empty-card p {
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Classes List */
+.um-classes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.um-class-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    transition: background-color 0.2s;
+    min-height: 70px;
+}
+
+.um-class-card:hover {
+    background-color: #f9fafb;
+}
+
+.um-class-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.um-class-info > div {
+    flex: 1;
+}
+
+.um-class-name {
+    font-weight: 500;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
+}
+
+.um-class-schedule {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Remove Button */
+.um-remove-button {
+    padding: 0.375rem 0.75rem;
+    background-color: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.um-remove-button:hover {
+    background-color: #fecaca;
+    border-color: #fca5a5;
+}
+
+.um-remove-button-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .um-details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .um-modal-content {
+        margin-top: 20px;
+        max-height: 90vh;
+    }
+}

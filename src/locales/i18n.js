@@ -15,6 +15,8 @@ import enAdmin from './en/admin.json';
 import esAdmin from './es/admin.json';
 import enValidation from './en/validation.json';
 import esValidation from './es/validation.json';
+import enManagmentUser from './en/managmentUser.json'
+import esManagmentUser from './es/managmentUser.json'
 const resources = {
   en: {
     common: enCommon,
@@ -23,7 +25,8 @@ const resources = {
     plans: enPlans,
     profile: enProfile,
     admin: enAdmin,
-    validation: enValidation
+    validation: enValidation,
+    managmentUser: enManagmentUser
   },
   es: {
     common: esCommon,
@@ -32,7 +35,8 @@ const resources = {
     plans: esPlans,
     profile: esProfile,
     admin: esAdmin,
-    validation: esValidation
+    validation: esValidation,
+    managmentUser: esManagmentUser
   }
 };
 
