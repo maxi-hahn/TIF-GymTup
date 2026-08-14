@@ -21,7 +21,7 @@ const userService = {
     },
     getMyPlanStatus: async () => {
         const { data } = await axiosClient.get('/Client/me')
-        return data // { planId, planName, isActive, subscriptionStartDate, subscriptionEndDate }
+        return data
     },
     changeRole: async (email, rol) => {
         const { data } = await axiosClient.post('/SysAdmin/UpgradeUsersRol', { email, rol })
@@ -31,6 +31,23 @@ const userService = {
         const { data } = await axiosClient.patch('/SysAdmin/ToggleUserStatus', null, {
             params: { userId },
         })
+        return data
+    },
+    // Nuevos métodos para gestión de usuarios
+    getUserPlan: async (userId) => {
+        const { data } = await axiosClient.get(`/Client/${userId}/plan`)
+        return data
+    },
+    removeUserPlan: async (userId) => {
+        const { data } = await axiosClient.delete(`/Client/${userId}/plan`)
+        return data
+    },
+    getUserInscriptions: async (userId) => {
+        const { data } = await axiosClient.get(`/Inscription/user/${userId}`)
+        return data
+    },
+    removeUserInscription: async (userId, scheduleId) => {
+        const { data } = await axiosClient.delete(`/Inscription/user/${userId}/${scheduleId}`)
         return data
     },
 }

@@ -1,31 +1,38 @@
-.class-catalog{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(400px,1fr));
-
-    justify-items:center;
-
-    gap:28px;
-
+html:has(.class-catalog) {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--navbar-height, 70px);
 }
 
-@media(max-width:1200px){
-
-    .class-catalog{
-
-        grid-template-columns:repeat(2,minmax(320px,380px));
-
-    }
-
+.class-catalog {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    justify-items: center;
+    gap: 28px;
+    --card-snap-half-height: 280px;
+    padding-block: max(0px, calc(50dvh - var(--card-snap-half-height)));
 }
 
-@media(max-width:768px){
+.class-catalog .class-card,
+.class-catalog .create-class-card {
+    scroll-snap-align: center;
+    scroll-snap-stop: normal
+}
 
-    .class-catalog{
-
-        grid-template-columns:1fr;
-
+@media (max-width: 1200px) {
+    .class-catalog {
+        grid-template-columns: repeat(2, minmax(320px, 380px));
     }
+}
 
+@media (max-width: 768px) {
+    .class-catalog {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .class-catalog {
+        --card-snap-half-height: 250px;
+    }
 }

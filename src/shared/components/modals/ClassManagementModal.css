@@ -1,0 +1,129 @@
+.class-modal-overlay {
+    position: fixed;
+    inset: 0;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background: rgba(0, 0, 0, 0.65);
+  
+    z-index: 1000;
+  
+    padding: 20px;
+  }
+  
+  .class-management-modal {
+    width: min(420px, 100%);
+  
+    background: #13212d;
+    color: white;
+  
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+  
+    padding: 24px;
+  
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+  }
+  
+  .class-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    gap: 15px;
+  }
+  
+  .class-modal-header h2 {
+    margin: 0;
+  
+    font-size: 24px;
+  }
+  
+  .class-modal-close {
+    width: 34px;
+    height: 34px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+  
+    color: white;
+    font-size: 24px;
+  
+    cursor: pointer;
+  }
+  
+  .class-modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .class-modal-class-name {
+    margin: 20px 0 8px;
+  
+    color: #6ff3c4;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  
+  .class-modal-description {
+    margin-bottom: 24px;
+  
+    color: #d6d6d6;
+    line-height: 1.5;
+  }
+  
+  .class-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .class-modal-actions button,
+  .class-modal-cancel {
+    width: 100%;
+  
+    border: none;
+    border-radius: 10px;
+  
+    padding: 13px;
+  
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  .class-modal-disable {
+    background: #2b3e4f;
+    color: white;
+  }
+  
+  .class-modal-disable:hover {
+    background: #385166;
+  }
+  
+  .class-modal-delete {
+    background: #b83b3b;
+    color: white;
+  }
+  
+  .class-modal-delete:hover {
+    background: #d14a4a;
+  }
+  
+  .class-modal-cancel {
+    margin-top: 12px;
+  
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  
+    color: #d6d6d6;
+  }
+  
+  .class-modal-cancel:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }

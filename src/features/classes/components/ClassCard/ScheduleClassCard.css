@@ -1,61 +1,153 @@
 .schedule-card{
-
     background:#1d2d3a;
-
     border-radius:12px;
-
     padding:14px;
-
     margin-bottom:12px;
-
     border:1px solid rgba(255,255,255,.08);
-
 }
 
-.schedule-card h4{
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
 
-    margin-bottom:8px;
+.schedule-header h4 {
+    margin: 0;
+    font-size: 1.1rem;
+}
 
-    font-size:18px;
-
+.schedule-disabled-badge {
+    background: rgba(185, 28, 28, 0.85);
+    border: 1px solid rgba(248, 113, 113, 0.8);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
 .schedule-card p{
-
     margin:4px 0;
-
     color:#d8d8d8;
-
     font-size:.95rem;
+}
 
+.schedule-select {
+    background: #13212d;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.schedule-select:focus {
+    border-color: #24d1a7;
+}
+
+.schedule-select option {
+    background: #13212d;
+    color: white;
+}
+
+.schedule-select option:disabled {
+    color: #666;
+    background: #1d2d3a;
+}
+
+.schedule-day-select {
+    font-weight: bold;
+}
+
+.schedule-time-edit {
+    margin: 8px 0;
+}
+
+.schedule-time-selects {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.schedule-time-separator {
+    color: #d8d8d8;
+    font-weight: bold;
 }
 
 .schedule-card button{
-
     width:100%;
-
     margin-top:12px;
-
     padding:10px;
-
     border:none;
-
     border-radius:8px;
-
     background:#24d1a7;
-
     color:black;
-
     font-weight:bold;
-
     cursor:pointer;
-
 }
 
 .schedule-card button:disabled{
-
     background:#555;
-
     color:#999;
+}
 
+.schedule-admin-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.schedule-admin-actions button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.schedule-edit-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: white;
+}
+
+.schedule-edit-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.schedule-save-btn {
+  background: #24d1a7 !important;
+  color: black !important;
+  border: none !important;
+}
+
+.schedule-save-btn:hover {
+  background: #1fb893 !important;
+}
+
+.schedule-cancel-btn {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  color: white !important;
+}
+
+.schedule-cancel-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.schedule-delete-btn {
+  background: transparent;
+  border: 1px solid #ff5050;
+  color: #ff5050;
+}
+
+.schedule-delete-btn:hover {
+  background: rgba(255, 80, 80, 0.1);
 }
