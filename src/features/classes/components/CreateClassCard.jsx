@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { getClassInfo } from '@/features/classes/data/GetClassInfo'
+import { ClassInfoEs } from '@/features/classes/data/ClassInfoEs' // Importar directamente el español
 import classService from '@/shared/services/classService'
 import { handleBackendError } from '@/shared/utils/errorHandler'
 import { useNavigate } from 'react-router-dom'
@@ -10,9 +10,11 @@ import scheduleService from '@/shared/services/scheduleService'
 import { TIME_SLOTS, DAYS_ORDER } from '@/utils/scheduleConstants'
 
 const CreateClassCard = ({ onCreateClass, isAdmin }) => {
-  const { t, i18n } = useTranslation('classes')
+  const { t } = useTranslation('classes')
   const navigate = useNavigate()
-  const classContent = getClassInfo(i18n.language)
+  
+  // Usar siempre las claves en español
+  const classContent = ClassInfoEs
 
   const [isFlipped, setIsFlipped] = useState(false)
   const [formData, setFormData] = useState({
@@ -62,6 +64,7 @@ const CreateClassCard = ({ onCreateClass, isAdmin }) => {
       return newData
     })
   }
+
   const handleAddSchedule = () => {
     const newSchedule = {
       dayOfWeek: Number(formData.day),
@@ -82,9 +85,11 @@ const CreateClassCard = ({ onCreateClass, isAdmin }) => {
     // Mantener visible el formulario de horario
     setShowScheduleForm(true)
   }
+
   const handleRemoveSchedule = (index) => {
     setSchedules(prev => prev.filter((_, i) => i !== index))
   }
+
   const isStep1Complete = formData.discipline && formData.capacity
   const hasCurrentSchedule = formData.day !== '' && formData.startTime && formData.endTime
   const isFormValid = isStep1Complete &&
@@ -132,7 +137,6 @@ const CreateClassCard = ({ onCreateClass, isAdmin }) => {
         await onCreateClass()
       }
 
-
       // Reset form after successful creation
       setFormData({
         discipline: '',
@@ -162,6 +166,7 @@ const CreateClassCard = ({ onCreateClass, isAdmin }) => {
   }
 
   const getDisciplineOptions = () => {
+    // Usar Object.keys de ClassInfoEs que ahora siempre tiene las claves en español
     return Object.keys(classContent).map(disciplineKey => ({
       value: disciplineKey,
       label: disciplineKey

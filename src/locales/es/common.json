@@ -7,5 +7,10 @@
   "cancelEnrollmentMessage": "¿Estás seguro de que querés cancelar tu inscripción a esta clase?",
   "confirm": "Confirmar",
   "back": "Volver",
-  "loading": "Cargando..."
+  "loading": "Cargando...",
+  "noPlan": "Sin plan",
+  "credits": "Cupos",
+  "noCredits": "Cupos: -",
+  "openMenu": "Abrir menú",
+  "closeMenu": "Cerrar menú"
 }

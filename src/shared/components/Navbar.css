@@ -1,207 +1,339 @@
 /* ==========================================================================
    Variables
    ========================================================================== */
-:root {
-  --navbar-bg: #ffffff;
-  --navbar-text: #333333;
-  --navbar-hover: #007bff;
-  --navbar-active: #0056b3;
-  --navbar-height: 70px;
-  --navbar-padding-desktop: 0 2rem;
-  --navbar-padding-mobile: 0 1rem;
-  --transition-speed: 0.2s ease-in-out;
+   :root {
+    --navbar-bg: oklch(0.17 0.024 235 / 80%);
+    --navbar-bg-solid: oklch(0.17 0.024 235);
+    --navbar-border: oklch(0.98 0.01 220 / 12%);
+    --navbar-text: oklch(0.96 0.008 220);
+    --navbar-muted: oklch(0.7 0.02 220);
+    --navbar-hover: oklch(0.96 0.008 220);
+    --navbar-active-bg: oklch(0.27 0.03 235);
+    --navbar-primary: oklch(0.86 0.14 168);
+    --navbar-primary-foreground: oklch(0.2 0.03 235);
+    --navbar-height: 64px;
+    --navbar-padding-desktop: 0 1.5rem;
+    --navbar-padding-mobile: 0 1rem;
+    --transition-speed: 0.2s ease;
+    --radius: 0.5rem;
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 }
 
 /* ==========================================================================
    Navbar
    ========================================================================== */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--navbar-bg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--navbar-border);
 }
 
 .navbar-container {
-  display: flex;
-  align-items: center;
-  height: var(--navbar-height);
-  padding: var(--navbar-padding-desktop);
-  max-width: 1200px;
-  margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: var(--navbar-height);
+    padding: var(--navbar-padding-desktop);
+    max-width: 72rem;
+    margin: 0 auto;
+    gap: 1rem;
 }
 
 /* ==========================================================================
    Logo
    ========================================================================== */
 .navbar-logo {
-  flex: 1;
-  display: flex;
-  justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
-.navbar-logo a {
-  font-size: 1.5rem;
-  text-decoration: none;
-  color: var(--navbar-text);
+.navbar-logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    background-color: var(--navbar-primary);
+    color: var(--navbar-primary-foreground);
 }
 
-.navbar-logo a strong {
-  font-weight: 700;
+.navbar-logo-text {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navbar-text);
+    letter-spacing: -0.025em;
 }
 
 /* ==========================================================================
-   Navigation Links
+   Navigation Links (Desktop)
    ========================================================================== */
 .navbar-links {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+    justify-content: center;
 }
 
-.navbar-links a {
-  text-decoration: none;
-  color: var(--navbar-text);
-  font-size: 1rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem;
-  transition: color var(--transition-speed);
+.navbar-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--navbar-muted);
+    transition: all var(--transition-speed);
 }
 
-.navbar-links a:hover {
-  color: var(--navbar-hover);
+.navbar-link:hover {
+    color: var(--navbar-hover);
 }
 
-.navbar-links a.active {
-  color: var(--navbar-active);
-  font-weight: 600;
+.navbar-link.active {
+    background-color: var(--navbar-active-bg);
+    color: var(--navbar-hover);
+    font-weight: 600;
 }
 
 /* ==========================================================================
-   Actions
+   Actions (Desktop)
    ========================================================================== */
 .navbar-actions {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
 }
 
-.navbar-actions a,
-.navbar-actions button {
-  text-decoration: none;
-  color: var(--navbar-text);
-  font-size: 1rem;
-  font-weight: 500;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem;
-  transition: color var(--transition-speed);
+.navbar-icon-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: none;
+    border: none;
+    color: var(--navbar-muted);
+    cursor: pointer;
+    transition: all var(--transition-speed);
 }
 
-.navbar-actions a:hover,
-.navbar-actions button:hover {
-  color: var(--navbar-hover);
+.navbar-icon-button:hover {
+    color: var(--navbar-hover);
+    background-color: var(--navbar-active-bg);
+}
+
+.navbar-language-text {
+    font-size: 0.7rem;
+}
+
+/* ==========================================================================
+   User Info Card
+   ========================================================================== */
+.user-info-card-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.user-info-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+    min-width: 120px;
+    max-width: 160px;
+    text-align: center;
+    user-select: none;
+}
+
+.user-info-card:focus {
+    outline: 2px solid var(--navbar-primary);
+    outline-offset: 2px;
+}
+
+/* Estilo para clientes (verde) */
+.user-info-card.client {
+    background-color: oklch(0.55 0.13 155 / 15%);
+    border: 1px solid oklch(0.55 0.13 155 / 25%);
+}
+
+.user-info-card.client:hover {
+    background-color: oklch(0.55 0.13 155 / 25%);
+    border-color: oklch(0.55 0.13 155 / 40%);
+}
+
+/* Estilo para admin (dorado) */
+.user-info-card.admin {
+    background-color: oklch(0.75 0.1 80 / 15%);
+    border: 1px solid oklch(0.75 0.1 80 / 25%);
+}
+
+.user-info-card.admin:hover {
+    background-color: oklch(0.75 0.1 80 / 25%);
+    border-color: oklch(0.75 0.1 80 / 40%);
+}
+
+.user-info-name {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--navbar-text);
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info-details {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.65rem;
+    justify-content: center;
+}
+
+.user-info-plan {
+    color: var(--navbar-muted);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 70px;
+}
+
+.user-info-divider {
+    width: 1px;
+    height: 12px;
+    background-color: var(--navbar-border);
+    flex-shrink: 0;
+}
+
+.user-info-credits {
+    color: var(--navbar-muted);
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 /* ==========================================================================
    Mobile Button
    ========================================================================== */
 .mobile-menu-button {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--navbar-text);
-  cursor: pointer;
-  padding: 0.5rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius);
+    background: none;
+    border: none;
+    color: var(--navbar-text);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+    flex-shrink: 0;
+}
+
+.mobile-menu-button:hover {
+    background-color: var(--navbar-active-bg);
 }
 
 /* ==========================================================================
    Mobile Menu
    ========================================================================== */
 .mobile-menu {
-  display: none;
+    display: none;
+    border-top: 1px solid var(--navbar-border);
+    background-color: oklch(0.17 0.024 235 / 95%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 0.75rem 1rem;
+}
+
+.mobile-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.mobile-link {
+    display: flex;
+    align-items: center;
+    padding: 0.625rem 0.75rem;
+    border-radius: var(--radius);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--navbar-muted);
+    transition: all var(--transition-speed);
+}
+
+.mobile-link:hover {
+    color: var(--navbar-hover);
+}
+
+.mobile-link.active {
+    background-color: var(--navbar-active-bg);
+    color: var(--navbar-hover);
+    font-weight: 600;
+}
+
+.user-info-card-wrapper-mobile {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5rem 0;
+}
+
+.mobile-login-button {
+    margin-top: 0.5rem;
+    width: 100%;
 }
 
 /* ==========================================================================
    Responsive
    ========================================================================== */
 @media (max-width: 767px) {
-  .navbar-container {
-    padding: var(--navbar-padding-mobile);
-  }
+    .navbar-container {
+        padding: var(--navbar-padding-mobile);
+        gap: 0.5rem;
+    }
 
-  .navbar-links,
-  .navbar-actions {
-    display: none;
-  }
+    .navbar-links,
+    .navbar-actions {
+        display: none;
+    }
 
-  .mobile-menu-button {
-    display: flex;
-    margin-left: auto;
-    align-items: center;
-    justify-content: center;
-  }
+    .mobile-menu-button {
+        display: flex;
+        margin-left: auto;
+    }
 
-  .mobile-menu {
-    display: block;
-    background-color: var(--navbar-bg);
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
-    padding: 1rem var(--navbar-padding-mobile);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  }
+    .mobile-menu {
+        display: block;
+    }
+}
 
-  .mobile-menu ul {
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 0.5rem;
-  }
-
-  .mobile-menu a,
-  .mobile-menu button {
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0.8rem 0;
-    color: var(--navbar-text);
-    text-decoration: none;
-    background: none;
-    border: none;
-    font-size: 1.1rem;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  .mobile-menu a:hover,
-  .mobile-menu button:hover {
-    color: var(--navbar-hover);
-  }
-
-  .mobile-menu a.active {
-    color: var(--navbar-active);
-    font-weight: 600;
-  }
+@media (min-width: 768px) {
+    .user-info-card-wrapper-mobile {
+        display: none;
+    }
 }
