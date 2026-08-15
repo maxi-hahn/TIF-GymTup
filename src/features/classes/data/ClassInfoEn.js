@@ -5,18 +5,18 @@ import funcional from '../public/class-Funcional.png'
 // import pilates from '../public/class-pilates.png'
 // import crossfit from '../public/class-crossfit.png'
 // import zumba from '../public/class-zumba.png'
-// import boxeo from '../public/class-boxing.png'
+// import boxeo from '../public/class-boxeo.png'
 // import kickboxing from '../public/class-kickboxing.png'
 // import hiit from '../public/class-hiit.png'
-// import calistenia from '../public/class-calisthenics.png'
 // import gap from '../public/class-gap.png'
+// import calistenia from '../public/class-calistenia.png'
 // import trx from '../public/class-trx.png'
-// import indoorRunning from '../public/class-indoor-running.png'
 // import stretching from '../public/class-stretching.png'
-// import aeroLocal from '../public/class-aerolocal.png'
-// import powerlifting from '../public/class-powerlifting.png'
-// import bodyPump from '../public/class-bodypump.png'
-// import dance from '../public/class-dance.png'
+// import bodypump from '../public/class-bodypump.png'
+// import bodycombat from '../public/class-bodycombat.png'
+// import indoorwalking from '../public/class-indoorwalking.png'
+// import aerobox from '../public/class-aerobox.png'
+// import dancefit from '../public/class-dancefit.png'
 
 export const ClassInfoEn = {
   "yoga": {
@@ -61,7 +61,21 @@ export const ClassInfoEn = {
     ]
   },
 
-  "Weight Training": {
+  "Pilates": {
+    // image: pilates,
+    badge: "Control, posture, precision",
+    description:
+      "Controlled exercises that improve posture, flexibility, breathing, and core stability.",
+    duration: "60 min",
+    intensity: "Low",
+    benefits: [
+      "Strengthens the core",
+      "Improves posture",
+      "Enhances flexibility"
+    ]
+  },
+
+  "Musculación": {
     // image: musculacion,
     badge: "Build strength every day",
     description:
@@ -72,20 +86,6 @@ export const ClassInfoEn = {
       "Increases muscle mass",
       "Improves posture and bone density",
       "Boosts overall strength"
-    ]
-  },
-
-  "Pilates": {
-    // image: pilates,
-    badge: "Control, posture, precision",
-    description:
-      "Controlled exercises that improve posture, flexibility, breathing, and core stability.",
-    duration: "50 min",
-    intensity: "Low",
-    benefits: [
-      "Strengthens the core",
-      "Improves posture",
-      "Enhances flexibility"
     ]
   },
 
@@ -117,7 +117,7 @@ export const ClassInfoEn = {
     ]
   },
 
-  "Boxing": {
+  "Boxeo": {
     // image: boxeo,
     badge: "Technique and power",
     description:
@@ -159,20 +159,6 @@ export const ClassInfoEn = {
     ]
   },
 
-  "Calisthenics": {
-    // image: calistenia,
-    badge: "Master your body",
-    description:
-      "Bodyweight exercises that build strength, balance, and body control.",
-    duration: "60 min",
-    intensity: "High",
-    benefits: [
-      "Develops functional strength",
-      "Improves balance",
-      "Increases mobility"
-    ]
-  },
-
   "GAP": {
     // image: gap,
     badge: "Glutes, abs and legs",
@@ -184,6 +170,20 @@ export const ClassInfoEn = {
       "Strengthens lower body",
       "Tones muscles",
       "Improves stability"
+    ]
+  },
+
+  "Calistenia": {
+    // image: calistenia,
+    badge: "Master your body",
+    description:
+      "Bodyweight exercises that build strength, balance, and body control.",
+    duration: "60 min",
+    intensity: "High",
+    benefits: [
+      "Develops functional strength",
+      "Improves balance",
+      "Increases mobility"
     ]
   },
 
@@ -201,20 +201,6 @@ export const ClassInfoEn = {
     ]
   },
 
-  "Indoor Running": {
-    // image: indoorRunning,
-    badge: "Run with purpose",
-    description:
-      "Guided treadmill sessions combining endurance, speed, and interval training.",
-    duration: "45 min",
-    intensity: "High",
-    benefits: [
-      "Improves cardiovascular endurance",
-      "Burns calories",
-      "Increases running performance"
-    ]
-  },
-
   "Stretching": {
     // image: stretching,
     badge: "Move freely",
@@ -229,41 +215,13 @@ export const ClassInfoEn = {
     ]
   },
 
-  "Aerobics": {
-    // image: aeroLocal,
-    badge: "Energy in motion",
-    description:
-      "Classic aerobic workouts combining cardio exercises with simple choreography.",
-    duration: "50 min",
-    intensity: "Medium",
-    benefits: [
-      "Improves cardiovascular health",
-      "Burns calories",
-      "Boosts coordination"
-    ]
-  },
-
-  "Powerlifting": {
-    // image: powerlifting,
-    badge: "Pure strength",
-    description:
-      "Strength training centered around the squat, bench press, and deadlift.",
-    duration: "75 min",
-    intensity: "High",
-    benefits: [
-      "Maximizes strength",
-      "Improves lifting technique",
-      "Builds muscle mass"
-    ]
-  },
-
-  "BodyPump": {
-    // image: bodyPump,
+  "Body Pump": {
+    // image: bodypump,
     badge: "Strength meets rhythm",
     description:
       "Barbell workouts performed to music using high repetitions and moderate weights.",
-    duration: "55 min",
-    intensity: "Medium",
+    duration: "60 min",
+    intensity: "High",
     benefits: [
       "Builds muscular endurance",
       "Burns calories",
@@ -271,17 +229,59 @@ export const ClassInfoEn = {
     ]
   },
 
-  "Dance Fitness": {
-    // image: dance,
-    badge: "Fitness through dance",
+  "Body Combat": {
+    // image: bodycombat,
+    badge: "Release your energy",
     description:
-      "Fun dance sessions with different music styles to improve fitness and coordination.",
+      "Martial arts-inspired class combining intense cardio with combat movements.",
+    duration: "55 min",
+    intensity: "High",
+    benefits: [
+      "Improves endurance",
+      "Increases coordination",
+      "High energy expenditure"
+    ]
+  },
+
+  "Indoor Walking": {
+    // image: indoorwalking,
+    badge: "Walk towards your goals",
+    description:
+      "Cardiovascular training on treadmills with different incline and speed levels.",
+    duration: "45 min",
+    intensity: "Medium",
+    benefits: [
+      "Improves cardiovascular health",
+      "Low joint impact",
+      "Helps with weight loss"
+    ]
+  },
+
+  "Aerobox": {
+    // image: aerobox,
+    badge: "Cardio with punches",
+    description:
+      "Aerobic routine inspired by boxing movements without physical contact.",
+    duration: "50 min",
+    intensity: "High",
+    benefits: [
+      "Improves coordination",
+      "Burns many calories",
+      "Increases endurance"
+    ]
+  },
+
+  "Dance Fit": {
+    // image: dancefit,
+    badge: "Train by dancing",
+    description:
+      "Dynamic choreographies that combine dance and cardiovascular training.",
     duration: "50 min",
     intensity: "Medium",
     benefits: [
       "Improves coordination",
-      "Boosts cardiovascular fitness",
-      "Makes exercise enjoyable"
+      "Reduces stress",
+      "Promotes cardiovascular health"
     ]
   }
 }
