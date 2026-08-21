@@ -121,5 +121,15 @@
   "editCapacity": "Edit capacity",
   "capacityUpdated": "Capacity updated successfully",
   "invalidCapacity": "Capacity must be a positive number",
-  "saving": "Saving..."
+  "saving": "Saving...",
+  "confirmEnrollment": "Confirm Enrollment",
+  "youAreAboutToEnroll": "you are about to Enroll",
+  "confirm": "confirm",
+
+  "heroBadge": "Our classes",
+  "heroTitle": "Move, push yourself and feel better",
+  "heroDescription": "Each discipline has different goals and benefits. Choose the one that motivates you most; they all count towards your plan's class allowance.",
+  "cancellationPolicyTitle": "Cancellation policy",
+  "policy30min": "If you cancel within 30 minutes of enrolling, you get your credit back.",
+  "policy3days": "If you cancel more than 3 days in advance, you get your credit back."
 }

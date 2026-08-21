@@ -9,10 +9,10 @@ import { useAuth } from '@/shared/contexts/AuthContext'
 import ClassCatalog from '../components/ClassCatalog'
 import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 import toast from 'react-hot-toast'
+import './ClassesPage.css'
 
 const ClassesPage = () => {
   const navigate = useNavigate()
-
   const [classes, setClasses] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [loadingSchedule, setLoadingSchedule] = useState(null)
@@ -22,6 +22,8 @@ const ClassesPage = () => {
   const { user } = useAuth()
 
   const isAdmin = user?.rol === 'Admin' || user?.rol === 'SysAdmin'
+  const isClient = user?.rol === 'Client'
+
   const loadData = useCallback(async () => {
     try {
       const classesData = await classService.getClasses()
@@ -32,11 +34,9 @@ const ClassesPage = () => {
     } finally {
       setIsLoading(false)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadData()
   }, [loadData])
 
@@ -56,34 +56,36 @@ const ClassesPage = () => {
   const handleEnroll = async (scheduleId) => {
     try {
       setLoadingSchedule(scheduleId)
-
       await inscriptionService.enroll(scheduleId)
-
       toast.success(t('enrollmentSuccess'))
-
+      
+      // Disparar evento para actualizar navbar
+      window.dispatchEvent(new Event('planUpdated'))
+      
       await loadData()
     } catch (error) {
       handleBackendError(error, navigate, t)
     } finally {
       setLoadingSchedule(null)
     }
-  }
+}
 
-  const handleCancel = async (scheduleId) => {
+const handleCancel = async (scheduleId) => {
     try {
       setLoadingSchedule(scheduleId)
-
       await inscriptionService.cancel(scheduleId)
-
       toast.success(t('cancelSuccess'))
-
+      
+      // Disparar evento para actualizar navbar
+      window.dispatchEvent(new Event('planUpdated'))
+      
       await loadData()
     } catch (error) {
       handleBackendError(error, navigate, t)
     } finally {
       setLoadingSchedule(null)
     }
-  }
+}
 
   const handleDisable = async (gymClass) => {
     try {
@@ -195,14 +197,45 @@ const ClassesPage = () => {
     }
   }
 
+
   if (isLoading) {
-    return <div>{t('loading')}</div>
+    return <div className="classes-loading">{t('loading')}</div>
   }
 
   return (
-    <>
-      <h1>{t('title')}</h1>
+    <div className="classes-page">
+      {/* Hero Section */}
+      <section className="classes-hero">
+        <div className="classes-hero-content">
+          <span className="classes-hero-badge">
+            {t('heroBadge')}
+          </span>
+          <h1 className="classes-hero-title">
+            {t('heroTitle')}
+          </h1>
+          <p className="classes-hero-description">
+            {t('heroDescription')}
+          </p>
+        </div>
+      </section>
 
+      {/* Política de cancelación - solo para clientes */}
+      {isClient && (
+        <section className="cancellation-policy">
+          <div className="cancellation-policy-icon">📌</div>
+          <div className="cancellation-policy-content">
+            <h3 className="cancellation-policy-title">
+              {t('cancellationPolicyTitle')}
+            </h3>
+            <ul className="cancellation-policy-list">
+              <li>{t('policy30min')}</li>
+              <li>{t('policy3days')}</li>
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* Catálogo de clases */}
       <ClassCatalog
         classes={classes}
         onEnroll={handleEnroll}
@@ -228,7 +261,7 @@ const ClassesPage = () => {
         onConfirm={confirmCancel}
         onCancel={closeCancelModal}
       />
-    </>
+    </div>
   )
 }
 

@@ -9,7 +9,9 @@ import SubmitButton from '@/shared/components/SubmitButton'
 const planSchema = z.object({
   name: z.string().min(1, 'El nombre es obligatorio').max(50, 'Máximo 50 caracteres'),
   value: z.coerce.number().positive('El precio debe ser mayor a 0'),
-  max_Clases: z.coerce.number().int().min(1, 'Debe ser al menos 1'),
+  max_Class: z.coerce.number().int().min(1, 'Debe ser al menos 1'),
+  isUnlimited: z.boolean(),
+  benefits: z.string().max(500, 'Máximo 500 caracteres').optional(),
 })
 
 const PlanFormModal = ({ plan, onClose, onSaved }) => {
@@ -19,22 +21,29 @@ const PlanFormModal = ({ plan, onClose, onSaved }) => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: zodResolver(planSchema),
     defaultValues: {
       name: '',
       value: 0,
-      max_Clases: 1,
+      max_Class: 1,
+      isUnlimited: false,
+      benefits: '',
     },
   })
+
+  const isUnlimited = watch('isUnlimited')
 
   useEffect(() => {
     if (plan) {
       reset({
         name: plan.name,
         value: plan.value,
-        max_Clases: plan.max_Class,
+        max_Class: plan.max_Class,
+        isUnlimited: plan.isUnlimited,
+        benefits: plan.benefits || '',
       })
     }
   }, [plan, reset])
@@ -73,9 +82,35 @@ const PlanFormModal = ({ plan, onClose, onSaved }) => {
           </div>
 
           <div>
-            <label htmlFor="max_Clases">Cantidad de clases</label>
-            <input id="max_Clases" type="number" {...register('max_Clases')} />
-            {errors.max_Clases && <span>{errors.max_Clases.message}</span>}
+            <label htmlFor="isUnlimited">
+              <input 
+                id="isUnlimited" 
+                type="checkbox" 
+                {...register('isUnlimited')} 
+              />
+              Plan ilimitado
+            </label>
+          </div>
+
+          {/* Solo mostrar cantidad de clases si NO es ilimitado */}
+          {!isUnlimited && (
+            <div>
+              <label htmlFor="max_Class">Cantidad de clases</label>
+              <input id="max_Class" type="number" {...register('max_Class')} />
+              {errors.max_Class && <span>{errors.max_Class.message}</span>}
+            </div>
+          )}
+
+          <div>
+            <label htmlFor="benefits">Beneficios</label>
+            <textarea 
+              id="benefits" 
+              rows="4"
+              placeholder="Ej: 3 horas de Personal Trainer, Acceso a todas las actividades"
+              {...register('benefits')} 
+            />
+            {errors.benefits && <span>{errors.benefits.message}</span>}
+            <small>Separá los beneficios con comas (,)</small>
           </div>
 
           <button type="button" onClick={onClose}>

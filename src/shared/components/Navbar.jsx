@@ -59,17 +59,32 @@ const Navbar = () => {
         
         if (isClient) {
             fetchPlanInfo()
+            
+            // Escuchar evento de actualización de plan
+            const handlePlanUpdate = () => {
+                fetchPlanInfo()
+            }
+            
+            window.addEventListener('planUpdated', handlePlanUpdate)
+            
+            return () => {
+                window.removeEventListener('planUpdated', handlePlanUpdate)
+            }
         } else {
             setPlanInfo(null)
         }
     }, [isClient, user?.id])
-
-    // Calcular cupos restantes
+    
+    // Actualizar calculateRemainingClasses
     const calculateRemainingClasses = () => {
         if (!planInfo?.planId) return null
         
         if (planInfo.planIsUnlimited) {
             return '∞'
+        }
+        
+        if (planInfo.classesRemaining !== null && planInfo.classesRemaining !== undefined) {
+            return planInfo.classesRemaining
         }
         
         if (planInfo.planMaxClass) {

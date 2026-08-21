@@ -10,7 +10,7 @@ import PlansPage from '@/features/plans/pages/PlansPage'
 import ProfilePage from '@/features/profile/pages/ProfilePage'
 import AdminPlansPage from '@/features/admin/pages/AdminPlansPage'
 import UserRolesPage from '@/features/admin/pages/UserRolesPage'
-
+import PaymentSuccessPage from '@/features/payments/pages/PaymentSuccessPage'
 const AppRouter = () => {
   return (
     <Routes>
@@ -26,6 +26,9 @@ const AppRouter = () => {
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/failure" element={<PaymentSuccessPage />} />
+          <Route path="/payment/pending" element={<PaymentSuccessPage />} />
         </Route>
       </Route>
 

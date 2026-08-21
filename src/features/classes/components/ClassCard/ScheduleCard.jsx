@@ -4,7 +4,9 @@ import dayOfWeekMap from '@/utils/dayOfWeekMap'
 import './ScheduleClassCard.css'
 import { useAuth } from '@/shared/contexts/AuthContext'
 import ScheduleManagementModal from '@/shared/components/modals/ScheduleManagementModal'
+import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 import { TIME_SLOTS, DAYS_ORDER } from '@/utils/scheduleConstants'
+
 const ScheduleCard = ({
   schedule,
   onEnroll,
@@ -19,6 +21,7 @@ const ScheduleCard = ({
   const { user } = useAuth()
   const { t } = useTranslation('classes')
   const [showManagementModal, setShowManagementModal] = useState(false)
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   // Inline Editing state
   const [isEditing, setIsEditing] = useState(false)
@@ -31,18 +34,11 @@ const ScheduleCard = ({
   )
 
   const isScheduleActive = schedule.isActive
-
   const isDisabled = !classIsActive || !isScheduleActive
 
   const getDisabledMessage = () => {
-    if (!classIsActive) {
-      return t('classDisabled')
-    }
-
-    if (!isScheduleActive) {
-      return t('scheduleDisabled')
-    }
-
+    if (!classIsActive) return t('classDisabled')
+    if (!isScheduleActive) return t('scheduleDisabled')
     return null
   }
 
@@ -50,8 +46,6 @@ const ScheduleCard = ({
     const newStart = e.target.value
     setEditStartTime(newStart)
 
-    // Validation rule: If Start Time changes to a value equal to or after current End Time,
-    // automatically reset End Time to the next valid slot.
     if (editEndTime <= newStart) {
       const startIndex = TIME_SLOTS.indexOf(newStart)
       const nextSlot =
@@ -105,11 +99,29 @@ const ScheduleCard = ({
     setShowManagementModal(false)
   }
 
+  const handleEnrollClick = () => {
+    setShowConfirmModal(true)
+  }
+
+  const handleConfirmEnroll = () => {
+    onEnroll(schedule.id)
+    setShowConfirmModal(false)
+  }
+
+  const formatClassDate = (dateString) => {
+    if (!dateString) return ''
+    
+    const date = new Date(dateString)
+    
+    return date.toLocaleDateString('es-AR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    })
+}
   return (
     <div className="schedule-card">
-
       <div className="schedule-header">
-
         {isEditing ? (
           <select
             className="schedule-select schedule-day-select"
@@ -123,9 +135,7 @@ const ScheduleCard = ({
             ))}
           </select>
         ) : (
-          <h4>
-            {t(dayOfWeekMap[schedule.dayOfWeek])}
-          </h4>
+          <h4>{t(dayOfWeekMap[schedule.dayOfWeek])}</h4>
         )}
 
         {isDisabled && (
@@ -133,7 +143,6 @@ const ScheduleCard = ({
             {getDisabledMessage()}
           </span>
         )}
-
       </div>
 
       {isEditing ? (
@@ -161,11 +170,7 @@ const ScheduleCard = ({
               {TIME_SLOTS.map((time) => {
                 const isOptionDisabled = time <= editStartTime
                 return (
-                  <option
-                    key={time}
-                    value={time}
-                    disabled={isOptionDisabled}
-                  >
+                  <option key={time} value={time} disabled={isOptionDisabled}>
                     {time}
                   </option>
                 )
@@ -181,6 +186,11 @@ const ScheduleCard = ({
         </p>
       )}
 
+      {schedule.nextClassDate && (
+        <p className="next-class-date">
+          📅 {t(dayOfWeekMap[schedule.dayOfWeek])} {formatClassDate(schedule.nextClassDate)}
+        </p>
+      )}
       <p>
         {t('enrolledUsers')}: {schedule.enrolledUsers}
       </p>
@@ -190,9 +200,7 @@ const ScheduleCard = ({
       </p>
 
       {isAdmin ? (
-
         <div className="schedule-admin-actions">
-
           {isEditing ? (
             <>
               <button
@@ -203,7 +211,6 @@ const ScheduleCard = ({
               >
                 ✓
               </button>
-
               <button
                 type="button"
                 className="schedule-cancel-btn"
@@ -221,14 +228,10 @@ const ScheduleCard = ({
                 onClick={() => {
                   setEditDay(schedule.dayOfWeek)
                   setEditStartTime(
-                    schedule.startTime
-                      ? schedule.startTime.slice(0, 5)
-                      : '08:00'
+                    schedule.startTime ? schedule.startTime.slice(0, 5) : '08:00'
                   )
                   setEditEndTime(
-                    schedule.endTime
-                      ? schedule.endTime.slice(0, 5)
-                      : '09:00'
+                    schedule.endTime ? schedule.endTime.slice(0, 5) : '09:00'
                   )
                   setIsEditing(true)
                 }}
@@ -236,7 +239,6 @@ const ScheduleCard = ({
               >
                 ✎
               </button>
-
               <button
                 type="button"
                 className="schedule-delete-btn"
@@ -247,25 +249,17 @@ const ScheduleCard = ({
               </button>
             </>
           )}
-
         </div>
-
       ) : (
-
         schedule.isEnrolled ? (
-
           <button
             className="cancel-btn"
             disabled={isLoading}
             onClick={() => onCancel(schedule.id)}
           >
-            {isLoading
-              ? t('canceling')
-              : t('cancelEnrollment')}
+            {isLoading ? t('canceling') : t('cancelEnrollment')}
           </button>
-
         ) : (
-
           <button
             disabled={
               isDisabled ||
@@ -273,7 +267,7 @@ const ScheduleCard = ({
               isLoading ||
               !user?.hasPlan
             }
-            onClick={() => onEnroll(schedule.id)}
+            onClick={handleEnrollClick}
           >
             {isLoading
               ? t('enrolling')
@@ -287,10 +281,19 @@ const ScheduleCard = ({
                       ? t('full')
                       : t('enroll')}
           </button>
-
         )
-
       )}
+
+      {/* Modal de confirmación usando ConfirmationModal existente */}
+      <ConfirmationModal
+        isOpen={showConfirmModal}
+        title={t('confirmEnrollment')}
+        message={`${t('youAreAboutToEnroll')}:\n${t(dayOfWeekMap[schedule.dayOfWeek])}\n${formatClassDate(schedule.nextClassDate)}\n${schedule.startTime?.slice(0, 5)} - ${schedule.endTime?.slice(0, 5)}`}
+        confirmText={t('confirm')}
+        cancelText={t('cancel')}
+        onConfirm={handleConfirmEnroll}
+        onCancel={() => setShowConfirmModal(false)}
+      />
 
       {showManagementModal && (
         <ScheduleManagementModal
@@ -300,7 +303,6 @@ const ScheduleCard = ({
           onClose={() => setShowManagementModal(false)}
         />
       )}
-
     </div>
   )
 }
