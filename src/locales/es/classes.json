@@ -121,5 +121,15 @@
   "editCapacity": "Editar capacidad",
   "capacityUpdated": "Capacidad actualizada exitosamente",
   "invalidCapacity": "La capacidad debe ser un número positivo",
-  "saving": "Guardando..."
+  "saving": "Guardando...",
+  "confirmEnrollment": "Confirmar inscripcion",
+  "youAreAboutToEnroll": "Está a punto de inscribirse",
+  "confirm": "confirmar",
+  
+  "heroBadge": "Nuestras clases",
+  "heroTitle": "Movete, superate y sentite mejor",
+  "heroDescription": "Cada disciplina tiene un objetivo y beneficios distintos. Elegí la que más te motive; todas suman a la cantidad de clases de tu plan.",
+  "cancellationPolicyTitle": "Política de cancelación",
+  "policy30min": "Si cancelas dentro de los 30 minutos posteriores a la inscripción, recuperas tu cupo.",
+  "policy3days": "Si cancelas con más de 3 días de anticipación, recuperas tu cupo."
 }

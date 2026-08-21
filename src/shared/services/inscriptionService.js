@@ -14,6 +14,12 @@ const inscriptionService = {
   cancel: async (scheduleId) => {
     const response = await axiosClient.delete(`/Inscription/${scheduleId}`)
     return response.data
+  },
+
+  // Nuevo: Obtener próxima fecha para un horario
+  getNextClassDate: async (scheduleId) => {
+    const response = await axiosClient.get(`/Inscription/next-date/${scheduleId}`)
+    return response.data
   }
 }
 
