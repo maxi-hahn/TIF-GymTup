@@ -11,9 +11,13 @@ import ProfilePage from '@/features/profile/pages/ProfilePage'
 import AdminPlansPage from '@/features/admin/pages/AdminPlansPage'
 import UserRolesPage from '@/features/admin/pages/UserRolesPage'
 import PaymentSuccessPage from '@/features/payments/pages/PaymentSuccessPage'
+import ScrollToTop from '@/shared/components/ScrollToTop'
+
 const AppRouter = () => {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
       {/* Public routes */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
@@ -45,7 +49,8 @@ const AppRouter = () => {
           <Route path="/admin/roles" element={<UserRolesPage />} />
         </Route>
       </Route>
-    </Routes>
+      </Routes>
+    </>
   )
 }
 

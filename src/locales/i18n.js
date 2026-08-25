@@ -15,8 +15,11 @@ import enAdmin from './en/admin.json';
 import esAdmin from './es/admin.json';
 import enValidation from './en/validation.json';
 import esValidation from './es/validation.json';
-import enManagmentUser from './en/managmentUser.json'
-import esManagmentUser from './es/managmentUser.json'
+import enManagmentUser from './en/managmentUser.json';
+import esManagmentUser from './es/managmentUser.json';
+import enHome from './en/home.json';
+import esHome from './es/home.json';
+
 const resources = {
   en: {
     common: enCommon,
@@ -26,7 +29,8 @@ const resources = {
     profile: enProfile,
     admin: enAdmin,
     validation: enValidation,
-    managmentUser: enManagmentUser
+    managmentUser: enManagmentUser,
+    home: enHome
   },
   es: {
     common: esCommon,
@@ -36,7 +40,8 @@ const resources = {
     profile: esProfile,
     admin: esAdmin,
     validation: esValidation,
-    managmentUser: esManagmentUser
+    managmentUser: esManagmentUser,
+    home: esHome
   }
 };
 

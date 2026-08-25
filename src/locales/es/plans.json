@@ -1,3 +1,30 @@
 {
-     "title": "Planes"
-}
+     "heroBadge": "Planes y precios",
+     "heroTitle": "Elegí cuántas clases querés tomar",
+     "heroDescription": "Planes flexibles y sin permanencia. Pagás por la cantidad de clases que se adapta a tu ritmo de vida.",
+     "changeInfoTitle": "¿Querés cambiar de plan?",
+     "changeInfoText": "Podés cambiar a otro plan en cualquier momento. Se realizará un nuevo pago por el plan elegido y se activará inmediatamente. Las clases no usadas no se acumulan.",
+     "changePlanTitle": "Cambiar de plan",
+     "changePlanMessage": "¿Seguro que querés cambiar a \"{{planName}}\"? Se realizará un nuevo pago y el plan se activará inmediatamente.",
+     "confirmChange": "Sí, cambiar",
+     "cancel": "Cancelar",
+     "faqTitle": "Preguntas frecuentes",
+     "faqQ1": "¿Las clases no usadas se acumulan?",
+     "faqA1": "Las clases se renuevan cada mes. En el plan Ilimitado no tenés límite de reservas.",
+     "faqQ2": "¿Puedo cambiar de plan cuando quiera?",
+     "faqA2": "Sí, podés cambiar de plan en cualquier momento. Se realizará un nuevo pago y el plan se activará inmediatamente.",
+     "faqQ3": "¿Hay permanencia mínima?",
+     "faqA3": "No. Todos los planes son mensuales y podés cancelar en cualquier momento.",
+     "loadingError": "No se pudieron cargar los planes.",
+     "noPlansAvailable": "Todavía no hay planes disponibles.",
+     "activePlan": "Plan activo",
+     "unlimitedClasses": "Clases ilimitadas",
+     "classesPerMonth": "Hasta {{count}} clases por mes",
+     "month": "mes",
+     "planActiveIndicator": "Este es tu plan actual",
+     "redirecting": "Redirigiendo...",
+     "changePlan": "Cambiar a este plan",
+     "buyPlan": "Comprar",
+     "adminCannotBuy": "Los administradores no pueden comprar planes. Iniciá sesión con una cuenta de cliente.",
+     "buyError": "No se pudo iniciar la compra. Intentá de nuevo."
+ }

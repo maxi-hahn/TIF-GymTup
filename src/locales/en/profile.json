@@ -1,3 +1,69 @@
 {
-    "title": "Profile"
+  "title": "My Profile",
+  "subtitle": "Manage your personal information, membership, and booked classes.",
+  "sections": {
+    "profileInfo": "Personal Information",
+    "currentPlan": "Your Membership",
+    "myClasses": "My Booked Classes"
+  },
+  "info": {
+    "name": "Full Name",
+    "email": "Email Address",
+    "dni": "DNI / ID",
+    "role": "Account Role",
+    "verified": "Email verified",
+    "notVerified": "Email not verified",
+    "editProfile": "Edit profile",
+    "saveChanges": "Save changes",
+    "cancelEdit": "Cancel",
+    "newPassword": "New password (optional)",
+    "confirmPassword": "Confirm new password",
+    "profileUpdated": "Profile updated successfully",
+    "updateError": "Could not update profile"
+  },
+  "plan": {
+    "activeStatus": "Active",
+    "expiredStatus": "Expired / Inactive",
+    "noActivePlan": "You have no active plan",
+    "noActivePlanDesc": "Subscribe to a plan to start booking your favorite classes.",
+    "explorePlans": "Explore available plans",
+    "price": "Price",
+    "perMonth": "/ month",
+    "classesRemaining": "Classes remaining",
+    "unlimited": "Unlimited",
+    "startDate": "Start date",
+    "endDate": "Expiration date",
+    "benefits": "Included benefits",
+    "removePlan": "Remove plan",
+    "changePlan": "Change plan",
+    "removingPlan": "Removing..."
+  },
+  "classes": {
+    "noClassesTitle": "No booked classes",
+    "noClassesDesc": "You haven't enrolled in any classes yet. Explore the catalog and reserve your spot!",
+    "exploreClasses": "Explore classes",
+    "upcoming": "Upcoming",
+    "passed": "Completed",
+    "day": "Day",
+    "time": "Time",
+    "date": "Date",
+    "cancelEnrollment": "Cancel booking",
+    "canceling": "Canceling..."
+  },
+  "modals": {
+    "removePlanTitle": "Remove active plan?",
+    "removePlanWarning": "This will cancel your current membership. You won't be able to enroll in classes until you purchase a new plan.",
+    "confirmRemove": "Yes, remove plan",
+    "cancelClassTitle": "Cancel class reservation?",
+    "cancelClassWarning3Days": "Important: If you cancel with less than 3 days notice or past the 30-min window, you will not recover your class credit.",
+    "cancelClassDetails": "You are about to cancel your reservation for:",
+    "confirmCancelClass": "Yes, cancel booking",
+    "close": "Cancel"
+  },
+  "toasts": {
+    "planRemoved": "Plan removed successfully.",
+    "planRemoveError": "Error removing plan.",
+    "classCancelled": "Reservation cancelled successfully.",
+    "classCancelError": "Could not cancel reservation."
+  }
 }

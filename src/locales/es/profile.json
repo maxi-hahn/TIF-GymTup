@@ -1,3 +1,69 @@
 {
-    "title": "Perfil"
+  "title": "Mi Perfil",
+  "subtitle": "Gestioná tu información personal, membresía y clases reservadas.",
+  "sections": {
+    "profileInfo": "Información Personal",
+    "currentPlan": "Tu Membresía",
+    "myClasses": "Mis Clases Reservadas"
+  },
+  "info": {
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "dni": "DNI",
+    "role": "Rol de cuenta",
+    "verified": "Email verificado",
+    "notVerified": "Email no verificado",
+    "editProfile": "Editar perfil",
+    "saveChanges": "Guardar cambios",
+    "cancelEdit": "Cancelar",
+    "newPassword": "Nueva contraseña (opcional)",
+    "confirmPassword": "Confirmar nueva contraseña",
+    "profileUpdated": "Perfil actualizado correctamente",
+    "updateError": "No se pudo actualizar el perfil"
+  },
+  "plan": {
+    "activeStatus": "Activo",
+    "expiredStatus": "Expirado / Inactivo",
+    "noActivePlan": "No tenés ningún plan activo",
+    "noActivePlanDesc": "Suscribite a un plan para comenzar a reservar tus clases favoritas.",
+    "explorePlans": "Ver planes disponibles",
+    "price": "Precio",
+    "perMonth": "/ mes",
+    "classesRemaining": "Clases restantes",
+    "unlimited": "Ilimitadas",
+    "startDate": "Fecha de inicio",
+    "endDate": "Fecha de vencimiento",
+    "benefits": "Beneficios incluidos",
+    "removePlan": "Eliminar plan",
+    "changePlan": "Cambiar plan",
+    "removingPlan": "Eliminando..."
+  },
+  "classes": {
+    "noClassesTitle": "Sin clases reservadas",
+    "noClassesDesc": "Aún no te has inscripto a ninguna clase. ¡Explorá el catálogo y reservá tu lugar!",
+    "exploreClasses": "Explorar clases",
+    "upcoming": "Próxima",
+    "passed": "Finalizada",
+    "day": "Día",
+    "time": "Horario",
+    "date": "Fecha",
+    "cancelEnrollment": "Cancelar reserva",
+    "canceling": "Cancelando..."
+  },
+  "modals": {
+    "removePlanTitle": "¿Eliminar plan activo?",
+    "removePlanWarning": "Esta acción cancelará tu membresía actual. No podrás seguir inscribiéndote a clases hasta contratar un nuevo plan.",
+    "confirmRemove": "Sí, eliminar plan",
+    "cancelClassTitle": "¿Cancelar reserva de clase?",
+    "cancelClassWarning3Days": "Importante: Si cancelás con menos de 3 días de anticipación o fuera de los 30 min de reserva, no recuperarás el crédito de tu clase.",
+    "cancelClassDetails": "Vas a cancelar la reserva para:",
+    "confirmCancelClass": "Sí, cancelar reserva",
+    "close": "Cancelar"
+  },
+  "toasts": {
+    "planRemoved": "Plan eliminado correctamente.",
+    "planRemoveError": "Error al eliminar el plan.",
+    "classCancelled": "Reserva cancelada con éxito.",
+    "classCancelError": "No se pudo cancelar la reserva."
+  }
 }
