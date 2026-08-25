@@ -6,6 +6,7 @@ import { useAuth } from '@/shared/contexts/AuthContext'
 import ScheduleManagementModal from '@/shared/components/modals/ScheduleManagementModal'
 import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 import { TIME_SLOTS, DAYS_ORDER } from '@/utils/scheduleConstants'
+import { calculateNextClassDate } from '@/utils/dateUtils'
 
 const ScheduleCard = ({
   schedule,
@@ -108,17 +109,22 @@ const ScheduleCard = ({
     setShowConfirmModal(false)
   }
 
-  const formatClassDate = (dateString) => {
-    if (!dateString) return ''
-    
-    const date = new Date(dateString)
-    
-    return date.toLocaleDateString('es-AR', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
+  const computedClassDate = calculateNextClassDate(
+    schedule.dayOfWeek,
+    schedule.startTime
+  )
+
+  const formatClassDate = (val) => {
+    if (!val) return ''
+    const d = val instanceof Date ? val : new Date(val)
+    if (isNaN(d.getTime())) return ''
+    return d.toLocaleDateString('es-AR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
     })
-}
+  }
+
   return (
     <div className="schedule-card">
       <div className="schedule-header">
@@ -186,9 +192,9 @@ const ScheduleCard = ({
         </p>
       )}
 
-      {schedule.nextClassDate && (
+      {computedClassDate && (
         <p className="next-class-date">
-          📅 {t(dayOfWeekMap[schedule.dayOfWeek])} {formatClassDate(schedule.nextClassDate)}
+          📅 {t(dayOfWeekMap[schedule.dayOfWeek])} {formatClassDate(computedClassDate)}
         </p>
       )}
       <p>
@@ -288,7 +294,7 @@ const ScheduleCard = ({
       <ConfirmationModal
         isOpen={showConfirmModal}
         title={t('confirmEnrollment')}
-        message={`${t('youAreAboutToEnroll')}:\n${t(dayOfWeekMap[schedule.dayOfWeek])}\n${formatClassDate(schedule.nextClassDate)}\n${schedule.startTime?.slice(0, 5)} - ${schedule.endTime?.slice(0, 5)}`}
+        message={`${t('youAreAboutToEnroll')}:\n${t(dayOfWeekMap[schedule.dayOfWeek])}\n${formatClassDate(computedClassDate)}\n${schedule.startTime?.slice(0, 5)} - ${schedule.endTime?.slice(0, 5)}`}
         confirmText={t('confirm')}
         cancelText={t('cancel')}
         onConfirm={handleConfirmEnroll}

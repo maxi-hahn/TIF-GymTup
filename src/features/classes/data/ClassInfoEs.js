@@ -1,6 +1,6 @@
-import yoga from '../public/class-yoga.png'
-import spinning from '../public/class-spinning.png'
-import funcional from '../public/class-Funcional.png'
+import yoga from '/class-yoga.png'
+import spinning from '/class-spinning.png'
+import funcional from '/class-funcional.png'
 
 // import pilates from '../public/class-pilates.png'
 // import musculacion from '../public/class-musculacion.png'

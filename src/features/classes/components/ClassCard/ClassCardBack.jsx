@@ -118,20 +118,30 @@ const ClassCardBack = ({
           />
         )}
 
-        {gymClass.schedules.map((schedule) => (
-          <ScheduleCard
-            key={schedule.id}
-            schedule={schedule}
-            onEnroll={onEnroll}
-            onCancel={onCancel}
-            isLoading={loadingSchedule === schedule.id}
-            classIsActive={classIsActive}
-            isAdmin={isAdmin}
-            onToggleScheduleStatus={onToggleScheduleStatus}
-            onDeleteSchedule={onDeleteSchedule}
-            onEditSchedule={onEditSchedule}
-          />
-        ))}
+        {(() => {
+          const daysOrderMap = { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 0: 7 }
+          const sortedSchedules = [...gymClass.schedules].sort((a, b) => {
+            const orderA = daysOrderMap[a.dayOfWeek] ?? 99
+            const orderB = daysOrderMap[b.dayOfWeek] ?? 99
+            if (orderA !== orderB) return orderA - orderB
+            return (a.startTime || '').localeCompare(b.startTime || '')
+          })
+
+          return sortedSchedules.map((schedule) => (
+            <ScheduleCard
+              key={schedule.id}
+              schedule={schedule}
+              onEnroll={onEnroll}
+              onCancel={onCancel}
+              isLoading={loadingSchedule === schedule.id}
+              classIsActive={classIsActive}
+              isAdmin={isAdmin}
+              onToggleScheduleStatus={onToggleScheduleStatus}
+              onDeleteSchedule={onDeleteSchedule}
+              onEditSchedule={onEditSchedule}
+            />
+          ))
+        })()}
 
       </div>
 

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import userService from '@/shared/services/userService'
 import LoadingSpinner from '@/shared/components/LoadingSpinner'
-import './UserDetailsModal.css'
 
 const UserDetailsModal = ({ user, onClose, onRemovePlan, onRemoveInscription }) => {
   const { t } = useTranslation('managmentUser')

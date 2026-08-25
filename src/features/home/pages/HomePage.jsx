@@ -1,8 +1,18 @@
+import { HeroSection } from '../components/HeroSection'
+import { FacilitiesSection } from '../components/FacilitiesSection'
+import { ClassesSection } from '../components/ClassesSection'
+import { MachinesSection } from '../components/MachinesSection'
+import { CtaSection } from '../components/CtaSection'
+import '../home.css'
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Home Page</h1>
-      <p>Welcome to GymTup!</p>
+    <div className="home-page-container">
+      <HeroSection />
+      <FacilitiesSection />
+      <ClassesSection />
+      <MachinesSection />
+      <CtaSection />
     </div>
   )
 }

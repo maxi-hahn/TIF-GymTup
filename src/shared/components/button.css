@@ -39,31 +39,33 @@
 
 /* Variants */
 .button-default {
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: #24d1a7;
+    color: #0f1a24;
+    font-weight: 600;
 }
 
 .button-default:hover {
-    background-color: #0056b3;
+    background-color: #1fb893;
 }
 
 .button-outline {
-    border-color: #e5e7eb;
-    background-color: #ffffff;
-    color: #333333;
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: transparent;
+    color: #ffffff;
 }
 
 .button-outline:hover {
-    background-color: #f3f4f6;
+    background-color: rgba(255, 255, 255, 0.08);
 }
 
 .button-secondary {
-    background-color: #f3f4f6;
-    color: #374151;
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .button-secondary:hover {
-    background-color: #e5e7eb;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .button-ghost {
