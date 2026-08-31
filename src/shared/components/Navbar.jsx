@@ -2,36 +2,42 @@ import { Link, NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useLanguage } from '@/shared/contexts/LanguageContext'
 import { Menu, X, Languages, Dumbbell } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/shared/contexts/AuthContext'
 import userService from '@/shared/services/userService'
+import notificationService from '@/shared/services/notificationService'
 import Button from '@/shared/components/Button'
-import './Navbar.css';
+import './Navbar.css'
 
 const links = [
-    {
-        path: '/',
-        label: 'home',
-    },
-    {
-        path: '/classes',
-        label: 'classes',
-    },
-    {
-        path: '/plans',
-        label: 'plans',
-    },
+    { path: '/', label: 'home' },
+    { path: '/classes', label: 'classes' },
+    { path: '/plans', label: 'plans' },
 ]
 
 const Navbar = () => {
-    const { t } = useTranslation()
+    const { t: tCommon } = useTranslation()
+    const { t: tNotif } = useTranslation('notifications')
+
+    const t = (key, options) => {
+        if (typeof key === 'string' && key.startsWith('notifications.')) {
+            const realKey = key.substring('notifications.'.length)
+            return tNotif(realKey, options)
+        }
+        return tCommon(key, options)
+    }
+
     const { language, changeLanguage } = useLanguage()
     const [open, setOpen] = useState(false)
     const { isAuthenticated, logout, user } = useAuth()
     const navigate = useNavigate()
-    
-    // Estado para la información del plan
+
+    const [notifications, setNotifications] = useState([])
+    const [unreadCount, setUnreadCount] = useState(0)
+    const [showNotifications, setShowNotifications] = useState(false)
+    const notificationRef = useRef(null)
+
     const [planInfo, setPlanInfo] = useState(null)
 
     const handleLogout = () => {
@@ -42,6 +48,126 @@ const Navbar = () => {
     const isAdmin = isAuthenticated && (user?.rol === 'Admin' || user?.rol === 'SysAdmin')
     const isSysAdmin = isAuthenticated && user?.rol === 'SysAdmin'
     const isClient = isAuthenticated && user?.rol === 'Client'
+
+    // Cargar notificaciones + listener para actualización instantánea
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            if (isAuthenticated) {
+                try {
+                    const notifs = await notificationService.getNotifications()
+                    setNotifications(notifs)
+                } catch (error) {
+                    console.error('Error loading notifications:', error)
+                }
+                
+                try {
+                    const count = await notificationService.getUnreadCount()
+                    setUnreadCount(count)
+                } catch (error) {
+                    console.error('Error loading unread count:', error)
+                }
+            }
+        }
+
+        if (isAuthenticated) {
+            fetchNotifications()
+
+            const handleNotificationUpdate = () => {
+                fetchNotifications()
+            }
+
+            window.addEventListener('notificationsUpdated', handleNotificationUpdate)
+
+            return () => {
+                window.removeEventListener('notificationsUpdated', handleNotificationUpdate)
+            }
+        }
+    }, [isAuthenticated, user?.id])
+
+    // Cerrar dropdown al hacer click fuera
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+                setShowNotifications(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
+    const handleMarkAsRead = async (notificationId) => {
+        try {
+            await notificationService.markAsRead(notificationId)
+            setNotifications(prev =>
+                prev.map(n => n.id === notificationId ? { ...n, isRead: true } : n)
+            )
+            setUnreadCount(prev => Math.max(0, prev - 1))
+        } catch (error) {
+            console.error('Error marking as read:', error)
+        }
+    }
+
+    const handleMarkAllAsRead = async () => {
+        try {
+            await notificationService.markAllAsRead()
+            setNotifications(prev => prev.map(n => ({ ...n, isRead: true })))
+            setUnreadCount(0)
+        } catch (error) {
+            console.error('Error marking all as read:', error)
+        }
+    }
+
+    const getNotificationIcon = (type) => {
+        const icons = {
+            'ClassCompleted': '🎉',
+            'PlanExpiring': '⚠️',
+            'PlanExpired': '❌',
+            'EnrollmentSuccess': '✅',
+            'EnrollmentCancelled': '📋'
+        }
+        return icons[type] || '📢'
+    }
+
+    const getNotificationContent = (notif) => {
+        const typeTranslations = {
+            'EnrollmentSuccess': {
+                title: t('notifications.enrollmentSuccessTitle'),
+                message: t('notifications.enrollmentSuccessMessage')
+            },
+            'EnrollmentCancelled': {
+                title: t('notifications.enrollmentCancelledTitle'),
+                message: t('notifications.enrollmentCancelledMessage')
+            },
+            'ClassCompleted': {
+                title: t('notifications.classCompletedTitle'),
+                message: t('notifications.classCompletedMessage')
+            },
+            'PlanExpiring': {
+                title: t('notifications.planExpiringTitle'),
+                message: t('notifications.planExpiringMessage')
+            },
+            'PlanExpired': {
+                title: t('notifications.planExpiredTitle'),
+                message: t('notifications.planExpiredMessage')
+            }
+        }
+        return typeTranslations[notif.type] || { title: notif.title, message: notif.message }
+    }
+
+    const formatTimeAgo = (dateString) => {
+        const date = new Date(dateString)
+        const now = new Date()
+        const diffMs = now - date
+        const diffMin = Math.floor(diffMs / 60000)
+        const diffHours = Math.floor(diffMs / 3600000)
+        const diffDays = Math.floor(diffMs / 86400000)
+
+        if (diffMin < 1) return tNotif('justNow')
+        if (diffMin < 60) return tNotif('minutesAgo', { minutes: diffMin })
+        if (diffHours < 24) return tNotif('hoursAgo', { hours: diffHours })
+        return tNotif('daysAgo', { days: diffDays })
+    }
 
     // Cargar información del plan si es cliente
     useEffect(() => {
@@ -56,17 +182,16 @@ const Navbar = () => {
                 }
             }
         }
-        
+
         if (isClient) {
             fetchPlanInfo()
-            
-            // Escuchar evento de actualización de plan
+
             const handlePlanUpdate = () => {
                 fetchPlanInfo()
             }
-            
+
             window.addEventListener('planUpdated', handlePlanUpdate)
-            
+
             return () => {
                 window.removeEventListener('planUpdated', handlePlanUpdate)
             }
@@ -74,29 +199,19 @@ const Navbar = () => {
             setPlanInfo(null)
         }
     }, [isClient, user?.id])
-    
-    // Actualizar calculateRemainingClasses
+
     const calculateRemainingClasses = () => {
         if (!planInfo?.planId) return null
-        
-        if (planInfo.planIsUnlimited) {
-            return '∞'
-        }
-        
+        if (planInfo.planIsUnlimited) return '∞'
         if (planInfo.classesRemaining !== null && planInfo.classesRemaining !== undefined) {
             return planInfo.classesRemaining
         }
-        
-        if (planInfo.planMaxClass) {
-            return planInfo.planMaxClass
-        }
-        
+        if (planInfo.planMaxClass) return planInfo.planMaxClass
         return null
     }
 
     const remainingClasses = calculateRemainingClasses()
 
-    // Componente del div de usuario
     const UserInfoCard = ({ isMobile = false }) => {
         if (!isAuthenticated) return null
 
@@ -107,7 +222,7 @@ const Navbar = () => {
         }
 
         return (
-            <div 
+            <div
                 className={cardClass}
                 onClick={handleCardClick}
                 role="button"
@@ -119,7 +234,7 @@ const Navbar = () => {
                 <div className="user-info-name">
                     {user?.name}
                 </div>
-                
+
                 {isClient && (
                     <div className="user-info-details">
                         <div className="user-info-plan">
@@ -127,7 +242,7 @@ const Navbar = () => {
                         </div>
                         <div className="user-info-divider"></div>
                         <div className="user-info-credits">
-                            {planInfo?.planId 
+                            {planInfo?.planId
                                 ? `${t('credits')}: ${remainingClasses}`
                                 : t('noCredits')
                             }
@@ -158,7 +273,7 @@ const Navbar = () => {
                             <NavLink
                                 key={link.path}
                                 to={link.path}
-                                className={({ isActive }) => 
+                                className={({ isActive }) =>
                                     isActive ? 'navbar-link active' : 'navbar-link'
                                 }
                             >
@@ -170,8 +285,76 @@ const Navbar = () => {
 
                 {/* Acciones */}
                 <div className="navbar-actions">
+                    {/* Notificaciones */}
+                    {isAuthenticated && (
+                        <div className="notification-wrapper" ref={notificationRef}>
+                            <button
+                                className="navbar-icon-button notification-bell"
+                                onClick={() => setShowNotifications(!showNotifications)}
+                                aria-label={tNotif('title')}
+                            >
+                                🔔
+                                {unreadCount > 0 && (
+                                    <span className="notification-badge">
+                                        {unreadCount > 9 ? '9+' : unreadCount}
+                                    </span>
+                                )}
+                            </button>
+
+                            {showNotifications && (
+                                <div className="notification-dropdown">
+                                    <div className="notification-header">
+                                        <h3>🔔 {tNotif('title')}</h3>
+                                        {unreadCount > 0 && (
+                                            <button
+                                                className="notification-mark-all"
+                                                onClick={handleMarkAllAsRead}
+                                                title={tNotif('markAllRead')}
+                                            >
+                                                ✓✓
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    <div className="notification-list">
+                                        {notifications.length === 0 ? (
+                                            <p className="notification-empty">
+                                                {tNotif('empty')}
+                                            </p>
+                                        ) : (
+                                            notifications.slice(0, 20).map((notif) => {
+                                                const content = getNotificationContent(notif)
+                                                return (
+                                                    <div
+                                                        key={notif.id}
+                                                        className={`notification-item ${!notif.isRead ? 'notification-unread' : ''}`}
+                                                        onClick={() => !notif.isRead && handleMarkAsRead(notif.id)}
+                                                    >
+                                                        <span className="notification-icon">
+                                                            {getNotificationIcon(notif.type)}
+                                                        </span>
+                                                        <div className="notification-content">
+                                                            <p className="notification-title">{content.title}</p>
+                                                            <p className="notification-message">{content.message}</p>
+                                                            <span className="notification-time">
+                                                                {formatTimeAgo(notif.createdAt)}
+                                                            </span>
+                                                        </div>
+                                                        {!notif.isRead && (
+                                                            <span className="notification-dot"></span>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     {/* Selector de idioma */}
-                    <button 
+                    <button
                         onClick={() => changeLanguage(language === 'es' ? 'en' : 'es')}
                         className="navbar-icon-button"
                         aria-label="Change language"
@@ -191,7 +374,7 @@ const Navbar = () => {
                     {isAdmin && (
                         <NavLink
                             to="/admin/plans"
-                            className={({ isActive }) => 
+                            className={({ isActive }) =>
                                 isActive ? 'navbar-link active' : 'navbar-link'
                             }
                         >
@@ -202,7 +385,7 @@ const Navbar = () => {
                     {isSysAdmin && (
                         <NavLink
                             to="/admin/roles"
-                            className={({ isActive }) => 
+                            className={({ isActive }) =>
                                 isActive ? 'navbar-link active' : 'navbar-link'
                             }
                         >
@@ -250,7 +433,7 @@ const Navbar = () => {
                                 key={link.path}
                                 to={link.path}
                                 onClick={() => setOpen(false)}
-                                className={({ isActive }) => 
+                                className={({ isActive }) =>
                                     isActive ? 'mobile-link active' : 'mobile-link'
                                 }
                             >
