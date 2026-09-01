@@ -9,7 +9,7 @@ const RoleRoute = ({ allowedRoles }) => {
     if (!isAuthenticated) return <Navigate to="/login" replace />
 
     if (!allowedRoles.includes(user.rol)) {
-        return <Navigate to="/" replace />
+        return <Navigate to="/403" replace />
     }
 
     return <Outlet />

@@ -61,7 +61,9 @@ const ClassesPage = () => {
       
       // Disparar evento para actualizar navbar
       window.dispatchEvent(new Event('planUpdated'))
-      
+      window.dispatchEvent(new Event('notificationsUpdated'))
+
+
       await loadData()
     } catch (error) {
       handleBackendError(error, navigate, t)
@@ -78,7 +80,8 @@ const handleCancel = async (scheduleId) => {
       
       // Disparar evento para actualizar navbar
       window.dispatchEvent(new Event('planUpdated'))
-      
+      window.dispatchEvent(new Event('notificationsUpdated'))
+
       await loadData()
     } catch (error) {
       handleBackendError(error, navigate, t)

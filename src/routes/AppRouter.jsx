@@ -11,6 +11,8 @@ import ProfilePage from '@/features/profile/pages/ProfilePage'
 import AdminPlansPage from '@/features/admin/pages/AdminPlansPage'
 import UserRolesPage from '@/features/admin/pages/UserRolesPage'
 import PaymentSuccessPage from '@/features/payments/pages/PaymentSuccessPage'
+import NotFoundPage from '@/features/notFound/pages/NotFoundPage'
+import ForbiddenPage from '@/features/notFound/pages/ForbiddenPage'
 import ScrollToTop from '@/shared/components/ScrollToTop'
 
 const AppRouter = () => {
@@ -18,37 +20,47 @@ const AppRouter = () => {
     <>
       <ScrollToTop />
       <Routes>
-      {/* Public routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-      </Route>
+        {/* Public routes - Login */}
+        <Route element={<AuthLayout />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
 
-      {/* Protected routes */}
-      <Route element={<ProtectedRoute />}>
+        {/* PUBLIC routes - Visible for everyone */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/plans" element={<PlansPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/payment/failure" element={<PaymentSuccessPage />} />
           <Route path="/payment/pending" element={<PaymentSuccessPage />} />
+          <Route path="/403" element={<ForbiddenPage />} />
         </Route>
-      </Route>
 
-      {/* Admin-only routes */}
-      <Route element={<RoleRoute allowedRoles={['Admin', 'SysAdmin']} />}>
-        <Route element={<MainLayout />}>
-          <Route path="/admin/plans" element={<AdminPlansPage />} />
+        {/* PROTECTED routes - Only authenticated */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>
+            <Route path="/profile" element={<ProfilePage />} />
+          </Route>
         </Route>
-      </Route>
 
-      {/* SysAdmin-only routes */}
-      <Route element={<RoleRoute allowedRoles={['SysAdmin']} />}>
-        <Route element={<MainLayout />}>
-          <Route path="/admin/roles" element={<UserRolesPage />} />
+        {/* Admin-only routes */}
+        <Route element={<RoleRoute allowedRoles={['Admin', 'SysAdmin']} />}>
+          <Route element={<MainLayout />}>
+            <Route path="/admin/plans" element={<AdminPlansPage />} />
+          </Route>
         </Route>
-      </Route>
+
+        {/* SysAdmin-only routes */}
+        <Route element={<RoleRoute allowedRoles={['SysAdmin']} />}>
+          <Route element={<MainLayout />}>
+            <Route path="/admin/roles" element={<UserRolesPage />} />
+          </Route>
+        </Route>
+
+        {/* 404 - Not Found */}
+        <Route element={<MainLayout />}>
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Routes>
     </>
   )

@@ -6,7 +6,7 @@ import { useAuth } from '@/shared/contexts/AuthContext'
 import ScheduleManagementModal from '@/shared/components/modals/ScheduleManagementModal'
 import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 import { TIME_SLOTS, DAYS_ORDER } from '@/utils/scheduleConstants'
-import { calculateNextClassDate } from '@/utils/dateUtils'
+import { useNavigate } from 'react-router-dom'
 
 const ScheduleCard = ({
   schedule,
@@ -19,6 +19,7 @@ const ScheduleCard = ({
   onToggleScheduleStatus,
   onDeleteSchedule
 }) => {
+  const navigate = useNavigate()
   const { user } = useAuth()
   const { t } = useTranslation('classes')
   const [showManagementModal, setShowManagementModal] = useState(false)
@@ -101,6 +102,10 @@ const ScheduleCard = ({
   }
 
   const handleEnrollClick = () => {
+    if (!user) {
+        navigate('/login')
+        return
+    }
     setShowConfirmModal(true)
   }
 
@@ -108,11 +113,6 @@ const ScheduleCard = ({
     onEnroll(schedule.id)
     setShowConfirmModal(false)
   }
-
-  const computedClassDate = calculateNextClassDate(
-    schedule.dayOfWeek,
-    schedule.startTime
-  )
 
   const formatClassDate = (val) => {
     if (!val) return ''
@@ -124,6 +124,9 @@ const ScheduleCard = ({
       year: 'numeric'
     })
   }
+
+  // Usar nextClassDate del backend
+  const classDate = schedule.nextClassDate
 
   return (
     <div className="schedule-card">
@@ -192,9 +195,9 @@ const ScheduleCard = ({
         </p>
       )}
 
-      {computedClassDate && (
+      {classDate && (
         <p className="next-class-date">
-          📅 {t(dayOfWeekMap[schedule.dayOfWeek])} {formatClassDate(computedClassDate)}
+          📅 {t(dayOfWeekMap[schedule.dayOfWeek])} {formatClassDate(classDate)}
         </p>
       )}
       <p>
@@ -271,7 +274,7 @@ const ScheduleCard = ({
               isDisabled ||
               schedule.isFull ||
               isLoading ||
-              !user?.hasPlan
+              (user && !user?.hasPlan)
             }
             onClick={handleEnrollClick}
           >
@@ -281,20 +284,21 @@ const ScheduleCard = ({
                 ? t('classDisabled')
                 : !isScheduleActive
                   ? t('scheduleDisabled')
-                  : !user?.hasPlan
-                    ? t('planRequired')
-                    : schedule.isFull
-                      ? t('full')
-                      : t('enroll')}
+                  : !user
+                    ? t('loginToEnroll')
+                    : !user?.hasPlan
+                      ? t('planRequired')
+                      : schedule.isFull
+                        ? t('full')
+                        : t('enroll')}
           </button>
         )
       )}
 
-      {/* Modal de confirmación usando ConfirmationModal existente */}
       <ConfirmationModal
         isOpen={showConfirmModal}
         title={t('confirmEnrollment')}
-        message={`${t('youAreAboutToEnroll')}:\n${t(dayOfWeekMap[schedule.dayOfWeek])}\n${formatClassDate(computedClassDate)}\n${schedule.startTime?.slice(0, 5)} - ${schedule.endTime?.slice(0, 5)}`}
+        message={`${t('youAreAboutToEnroll')}:\n${t(dayOfWeekMap[schedule.dayOfWeek])}\n${formatClassDate(classDate)}\n${schedule.startTime?.slice(0, 5)} - ${schedule.endTime?.slice(0, 5)}`}
         confirmText={t('confirm')}
         cancelText={t('cancel')}
         onConfirm={handleConfirmEnroll}

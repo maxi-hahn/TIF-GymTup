@@ -8,5 +8,5 @@ for (let h = 0; h < 24; h++) {
   }
 }
 
-// Days ordered Monday (1) through Sunday (0)
-export const DAYS_ORDER = [1, 2, 3, 4, 5, 6, 0]
+export const DAYS_ORDER = [0, 1, 2, 3, 4, 5, 6]
+// Lunes(0), Martes(1), Miercoles(2), Jueves(3), Viernes(4), Sabado(5), Domingo(6)

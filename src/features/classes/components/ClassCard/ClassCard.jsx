@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ClassCardFront from './ClassCardFront'
 import ClassCardBack from './ClassCardBack'
 import './ClassCard.css'
@@ -20,6 +20,15 @@ const ClassCard = ({
 }) => {
   const [showBack, setShowBack] = useState(false)
   const [showManagementModal, setShowManagementModal] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 480)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 480)
+    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleDisable = async () => {
     await onDisable()
@@ -32,7 +41,7 @@ const ClassCard = ({
   }
 
   return (
-    <article className={`class-card ${showBack ? 'is-flipped' : ''}`}>
+    <article className={`class-card ${showBack ? 'is-flipped' : ''} ${isMobile ? 'is-mobile' : ''}`}>
       <div className="class-card-inner"> 
         {showBack ? (
           <ClassCardBack

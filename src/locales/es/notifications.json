@@ -1,0 +1,19 @@
+{
+  "title": "Notificaciones",
+  "empty": "No hay notificaciones",
+  "markAllRead": "Marcar todas como leídas",
+  "justNow": "Ahora",
+  "minutesAgo": "Hace {{minutes}} min",
+  "hoursAgo": "Hace {{hours}}h",
+  "daysAgo": "Hace {{days}}d",
+  "enrollmentSuccessTitle": "Inscripción exitosa",
+  "enrollmentSuccessMessage": "Te inscribiste correctamente a la clase.",
+  "enrollmentCancelledTitle": "Inscripción cancelada",
+  "enrollmentCancelledMessage": "Cancelaste tu inscripción a la clase.",
+  "classCompletedTitle": "Clase completada",
+  "classCompletedMessage": "Tu clase ya pasó. ¡Reservá la próxima!",
+  "planExpiringTitle": "Plan por vencer",
+  "planExpiringMessage": "Tu plan vence en 3 días.",
+  "planExpiredTitle": "Plan vencido",
+  "planExpiredMessage": "Tu plan ha vencido. Comprá uno nuevo para seguir entrenando."
+}

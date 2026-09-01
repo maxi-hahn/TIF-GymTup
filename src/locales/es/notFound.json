@@ -1,0 +1,10 @@
+{
+    "title": "Página no encontrada",
+    "message": "La página que buscas no existe o fue movida.",
+    "backHome": "Volver al inicio",
+    
+        "titleF": "Acceso denegado",
+        "messageF": "No tenés permisos para acceder a esta página.",
+        "backHomeF": "Volver al inicio"
+    
+}

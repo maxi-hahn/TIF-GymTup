@@ -1,11 +1,11 @@
 const dayOfWeekMap = {
-    0: 'days.sunday',
-    1: 'days.monday',
-    2: 'days.tuesday',
-    3: 'days.wednesday',
-    4: 'days.thursday',
-    5: 'days.friday',
-    6: 'days.saturday',
-  }
-  
-  export default dayOfWeekMap
+  0: 'days.monday',
+  1: 'days.tuesday',
+  2: 'days.wednesday',
+  3: 'days.thursday',
+  4: 'days.friday',
+  5: 'days.saturday',
+  6: 'days.sunday',
+}
+
+export default dayOfWeekMap

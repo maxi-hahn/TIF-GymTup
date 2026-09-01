@@ -17,7 +17,7 @@ const faqs = [
 
 const PlansPage = () => {
   const { t } = useTranslation('plans')
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
   const [plans, setPlans] = useState([])
   const [myPlan, setMyPlan] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -37,25 +37,27 @@ const PlansPage = () => {
         return
       }
 
-      try {
-        const myPlanData = await userService.getMyPlanStatus()
-        setMyPlan(myPlanData)
-      } catch {
-        setMyPlan(null)
+      // Solo intentar obtener plan si está autenticado
+      if (isAuthenticated && isClient) {
+        try {
+          const myPlanData = await userService.getMyPlanStatus()
+          setMyPlan(myPlanData)
+        } catch {
+          setMyPlan(null)
+        }
       }
 
       setLoading(false)
     }
 
     fetchData()
-  }, [t])
+  }, [t, isAuthenticated, isClient])
 
   if (loading) return <LoadingSpinner />
   if (loadError) return <EmptyState message={t('loadingError')} />
 
   return (
     <main className="plans-page">
-      {/* Hero Section */}
       <section className="plans-hero">
         <div className="plans-hero-content">
           <span className="plans-hero-badge">{t('heroBadge')}</span>
@@ -64,18 +66,16 @@ const PlansPage = () => {
         </div>
       </section>
 
-      {/* Info de cambio de plan - solo para clientes */}
       {isClient && myPlan?.planId && (
         <section className="plan-change-info">
           <div className="plan-change-info-icon">💡</div>
           <div className="plan-change-info-content">
-            <h3 className="plan-change-info-title">{t('changeInfoTitle')}</h3>
-            <p className="plan-change-info-text">{t('changeInfoText')}</p>
+            <h3 className="plan-change-info-title">{t('planChangeInfoTitle')}</h3>
+            <p className="plan-change-info-text">{t('planChangeInfoText')}</p>
           </div>
         </section>
       )}
 
-      {/* Grid de planes */}
       <section className="plans-grid-section">
         <div className="plans-grid-container">
           {plans.length === 0 ? (
@@ -84,10 +84,11 @@ const PlansPage = () => {
             <div className="plans-grid">
               {plans.map((plan) => (
                 <PlanCard
-                  key={plan.id}
-                  plan={plan}
-                  isMyActivePlan={myPlan?.isActive && myPlan?.planId === plan.id}
-                  hasActivePlan={myPlan?.isActive ?? false}
+                    key={plan.id}
+                    plan={plan}
+                    isMyActivePlan={myPlan?.isActive && myPlan?.planId === plan.id}
+                    hasActivePlan={myPlan?.isActive ?? false}
+                    currentPlanValue={myPlan?.planValue || 0}
                 />
               ))}
             </div>
@@ -95,7 +96,6 @@ const PlansPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
       <section className="plans-faq-section">
         <div className="plans-faq-container">
           <h2 className="plans-faq-title">{t('faqTitle')}</h2>

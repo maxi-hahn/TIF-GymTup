@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import Button from '@/shared/components/Button'
 import classService from '@/shared/services/classService'
-import userService from '@/shared/services/userService'
+import inscriptionService from '@/shared/services/inscriptionService'  // ← CAMBIADO
 import { useAuth } from '@/shared/contexts/AuthContext'
 import { getClassInfo } from '@/features/classes/data/GetClassInfo'
 
@@ -20,24 +20,28 @@ export function ClassesSection() {
         const allClasses = await classService.getClasses()
         let sortedClasses = Array.isArray(allClasses) ? [...allClasses] : []
 
-        // Intentar obtener las inscripciones más frecuentes del usuario autenticado
+        // Intentar obtener las inscripciones del usuario autenticado
+        // Intentar obtener las inscripciones del usuario autenticado
         if (isAuthenticated && user?.id) {
           try {
-            const inscriptions = await userService.getUserInscriptions(user.id)
-            if (Array.isArray(inscriptions) && inscriptions.length > 0) {
-              const frequencyMap = {}
-              inscriptions.forEach((ins) => {
-                const cId = ins.classId || ins.schedule?.classId
-                if (cId) {
-                  frequencyMap[cId] = (frequencyMap[cId] || 0) + 1
-                }
-              })
+            // Solo llamar si es cliente, para evitar 403
+            if (user?.rol === 'Client') {
+              const inscriptions = await inscriptionService.getMyInscriptions()
+              if (Array.isArray(inscriptions) && inscriptions.length > 0) {
+                const frequencyMap = {}
+                inscriptions.forEach((ins) => {
+                  const cId = ins.classId || ins.schedule?.classId
+                  if (cId) {
+                    frequencyMap[cId] = (frequencyMap[cId] || 0) + 1
+                  }
+                })
 
-              sortedClasses.sort((a, b) => {
-                const freqA = frequencyMap[a.id] || 0
-                const freqB = frequencyMap[b.id] || 0
-                return freqB - freqA
-              })
+                sortedClasses.sort((a, b) => {
+                  const freqA = frequencyMap[a.id] || 0
+                  const freqB = frequencyMap[b.id] || 0
+                  return freqB - freqA
+                })
+              }
             }
           } catch (e) {
             // Silenciosamente continuar con el orden por defecto si falla la llamada
@@ -55,8 +59,7 @@ export function ClassesSection() {
     }
 
     loadClassesData()
-  }, [isAuthenticated, user?.id])
-
+  }, [isAuthenticated, user?.id, user?.rol])
   const classExtraInfo = getClassInfo(i18n.language)
 
   // Fallbacks si la API no entrega suficientes clases
@@ -92,18 +95,18 @@ export function ClassesSection() {
 
   const itemsToRender = displayedClasses.length >= 3
     ? displayedClasses.map((item) => {
-        const info = classExtraInfo[item.name] || classExtraInfo[item.name?.toLowerCase()] || {}
-        return {
-          id: item.id,
-          name: item.name,
-          badge: info.badge || 'GymTup Class',
-          description: info.description || item.description || '',
-          duration: info.duration || '60 min',
-          intensity: info.intensity || 'Media',
-          benefits: info.benefits || [],
-          image: info.image || '/gym-hero.png'
-        }
-      })
+      const info = classExtraInfo[item.name] || classExtraInfo[item.name?.toLowerCase()] || {}
+      return {
+        id: item.id,
+        name: item.name,
+        badge: info.badge || 'GymTup Class',
+        description: info.description || item.description || '',
+        duration: info.duration || '60 min',
+        intensity: info.intensity || 'Media',
+        benefits: info.benefits || [],
+        image: info.image || '/gym-hero.png'
+      }
+    })
     : fallbackClasses
 
   return (
