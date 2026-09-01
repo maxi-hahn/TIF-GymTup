@@ -12,5 +12,6 @@
   "credits": "Cupos",
   "noCredits": "Cupos: -",
   "openMenu": "Abrir menú",
-  "closeMenu": "Cerrar menú"
+  "closeMenu": "Cerrar menú",
+  "logout": "cerrar sesion"
  }

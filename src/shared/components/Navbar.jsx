@@ -212,13 +212,13 @@ const Navbar = () => {
 
     const remainingClasses = calculateRemainingClasses()
 
-    const UserInfoCard = ({ isMobile = false }) => {
+    // UserInfoCard - Solo desktop
+    const UserInfoCard = () => {
         if (!isAuthenticated) return null
 
         const cardClass = isClient ? 'user-info-card client' : 'user-info-card admin'
         const handleCardClick = () => {
             navigate('/profile')
-            if (isMobile) setOpen(false)
         }
 
         return (
@@ -266,7 +266,7 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                {/* Links de navegación */}
+                {/* Links de navegación (solo desktop) */}
                 <div className="navbar-links">
                     {links.map((link) => {
                         return (
@@ -283,7 +283,7 @@ const Navbar = () => {
                     })}
                 </div>
 
-                {/* Acciones */}
+                {/* Acciones desktop */}
                 <div className="navbar-actions">
                     {/* Notificaciones */}
                     {isAuthenticated && (
@@ -363,7 +363,7 @@ const Navbar = () => {
                         <span className="navbar-language-text">{language.toUpperCase()}</span>
                     </button>
 
-                    {/* User Info Card */}
+                    {/* User Info Card - Solo desktop */}
                     {isAuthenticated && (
                         <div className="user-info-card-wrapper">
                             <UserInfoCard />
@@ -412,6 +412,93 @@ const Navbar = () => {
                     )}
                 </div>
 
+                {/* Acciones móviles */}
+                <div className="navbar-actions-mobile">
+                    {/* Cupos para cliente */}
+                    {isAuthenticated && isClient && planInfo?.planId && (
+                        <span className="navbar-mobile-credits">
+                            {remainingClasses !== null ? `${remainingClasses} ${t('credits')}` : ''}
+                        </span>
+                    )}
+
+                    {/* Notificaciones */}
+                    {isAuthenticated && (
+                        <div className="notification-wrapper" ref={notificationRef}>
+                            <button
+                                className="navbar-icon-button notification-bell"
+                                onClick={() => setShowNotifications(!showNotifications)}
+                                aria-label={tNotif('title')}
+                            >
+                                🔔
+                                {unreadCount > 0 && (
+                                    <span className="notification-badge">
+                                        {unreadCount > 9 ? '9+' : unreadCount}
+                                    </span>
+                                )}
+                            </button>
+
+                            {showNotifications && (
+                                <div className="notification-dropdown">
+                                    <div className="notification-header">
+                                        <h3>🔔 {tNotif('title')}</h3>
+                                        {unreadCount > 0 && (
+                                            <button
+                                                className="notification-mark-all"
+                                                onClick={handleMarkAllAsRead}
+                                                title={tNotif('markAllRead')}
+                                            >
+                                                ✓✓
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    <div className="notification-list">
+                                        {notifications.length === 0 ? (
+                                            <p className="notification-empty">
+                                                {tNotif('empty')}
+                                            </p>
+                                        ) : (
+                                            notifications.slice(0, 20).map((notif) => {
+                                                const content = getNotificationContent(notif)
+                                                return (
+                                                    <div
+                                                        key={notif.id}
+                                                        className={`notification-item ${!notif.isRead ? 'notification-unread' : ''}`}
+                                                        onClick={() => !notif.isRead && handleMarkAsRead(notif.id)}
+                                                    >
+                                                        <span className="notification-icon">
+                                                            {getNotificationIcon(notif.type)}
+                                                        </span>
+                                                        <div className="notification-content">
+                                                            <p className="notification-title">{content.title}</p>
+                                                            <p className="notification-message">{content.message}</p>
+                                                            <span className="notification-time">
+                                                                {formatTimeAgo(notif.createdAt)}
+                                                            </span>
+                                                        </div>
+                                                        {!notif.isRead && (
+                                                            <span className="notification-dot"></span>
+                                                        )}
+                                                    </div>
+                                                )
+                                            })
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* Selector de idioma */}
+                    <button
+                        onClick={() => changeLanguage(language === 'es' ? 'en' : 'es')}
+                        className="navbar-icon-button"
+                        aria-label="Change language"
+                    >
+                        <Languages size={16} />
+                    </button>
+                </div>
+
                 {/* Botón de menú móvil */}
                 <button
                     type="button"
@@ -441,10 +528,17 @@ const Navbar = () => {
                             </NavLink>
                         ))}
 
+                        {/* Perfil como link normal */}
                         {isAuthenticated && (
-                            <div className="user-info-card-wrapper-mobile">
-                                <UserInfoCard isMobile={true} />
-                            </div>
+                            <NavLink
+                                to="/profile"
+                                onClick={() => setOpen(false)}
+                                className={({ isActive }) =>
+                                    isActive ? 'mobile-link active' : 'mobile-link'
+                                }
+                            >
+                                {t('profile')}
+                            </NavLink>
                         )}
 
                         {isAdmin && (

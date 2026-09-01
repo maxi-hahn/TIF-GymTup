@@ -12,5 +12,6 @@
   "credits": "Credits",
   "noCredits": "Credits: -",
   "openMenu": "Open menu",
-  "closeMenu": "Close menu"
+  "closeMenu": "Close menu",
+    "logout": "logout"
 } 
