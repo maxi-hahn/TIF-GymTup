@@ -19,9 +19,13 @@ import enManagmentUser from './en/managmentUser.json';
 import esManagmentUser from './es/managmentUser.json';
 import enHome from './en/home.json';
 import esHome from './es/home.json';
-
+import notificationsEs from './es/notifications.json';
+import notificationsEn from './en/notifications.json';
+import notFoundEs from './es/notFound.json'
+import notFoundEn from './en/notFound.json'
 const resources = {
   en: {
+    notifications: notificationsEn,
     common: enCommon,
     auth: enAuth,
     classes: enClasses,
@@ -30,9 +34,11 @@ const resources = {
     admin: enAdmin,
     validation: enValidation,
     managmentUser: enManagmentUser,
-    home: enHome
+    home: enHome,
+    notFound: notFoundEn
   },
   es: {
+    notifications: notificationsEs,
     common: esCommon,
     auth: esAuth,
     classes: esClasses,
@@ -41,7 +47,8 @@ const resources = {
     admin: esAdmin,
     validation: esValidation,
     managmentUser: esManagmentUser,
-    home: esHome
+    home: esHome,
+    notFound: notFoundEs
   }
 };
 
@@ -50,7 +57,7 @@ i18n
   .init({
     resources,
   
-    ns: ['common', 'auth'],
+    ns: ['common', 'auth', 'notifications'],
     defaultNS: 'common',
   
     lng: 'es',

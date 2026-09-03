@@ -1,17 +1,29 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import userService from '@/shared/services/userService'
 import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
+import { useAuth } from '@/shared/contexts/AuthContext'
 import './PlanCard.css'
 
-const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
+const PlanCard = ({ plan, isMyActivePlan, hasActivePlan, currentPlanValue = 0 }) => {
     const { t } = useTranslation('plans')
+    const navigate = useNavigate()
+    const { isAuthenticated } = useAuth()
     const [loading, setLoading] = useState(false)
     const [showChangeModal, setShowChangeModal] = useState(false)
 
+    const isUpgrade = hasActivePlan && plan.value > currentPlanValue
+    const isDowngrade = hasActivePlan && !isMyActivePlan && plan.value <= currentPlanValue
+
     const handleBuyClick = () => {
-        if (hasActivePlan) {
+        if (!isAuthenticated) {
+            navigate('/login')
+            return
+        }
+        if (isDowngrade) return
+        if (hasActivePlan && isUpgrade) {
             setShowChangeModal(true)
         } else {
             handleBuy()
@@ -27,6 +39,8 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
         } catch (err) {
             if (err.response?.status === 403) {
                 toast.error(t('adminCannotBuy'))
+            } else if (err.response?.status === 400) {
+                toast.error(t('downgradeNotAllowed'))
             } else {
                 toast.error(t('buyError'))
             }
@@ -86,6 +100,13 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
                     <p className="plan-card-active-indicator">
                         {t('planActiveIndicator')}
                     </p>
+                ) : isDowngrade ? (
+                    <button 
+                        className="plan-card-button plan-card-button-disabled"
+                        disabled
+                    >
+                        {t('downgradeNotAllowed')}
+                    </button>
                 ) : (
                     <button 
                         className="plan-card-button"
@@ -94,18 +115,17 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan }) => {
                     >
                         {loading 
                             ? t('redirecting')
-                            : hasActivePlan 
-                                ? t('changePlan')
+                            : isUpgrade
+                                ? t('upgradePlan')
                                 : t('buyPlan')}
                     </button>
                 )}
             </article>
 
-            {/* Modal de confirmación de cambio */}
             <ConfirmationModal
                 isOpen={showChangeModal}
-                title={t('changePlanTitle')}
-                message={t('changePlanMessage', { planName: plan.name })}
+                title={t('upgradeModalTitle')}
+                message={t('upgradeModalMessage')}
                 confirmText={t('confirmChange')}
                 cancelText={t('cancel')}
                 onConfirm={handleBuy}

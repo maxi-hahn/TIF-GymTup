@@ -1,0 +1,19 @@
+{
+  "title": "Notifications",
+  "empty": "No notifications",
+  "markAllRead": "Mark all as read",
+  "justNow": "Now",
+  "minutesAgo": "{{minutes}} min ago",
+  "hoursAgo": "{{hours}}h ago",
+  "daysAgo": "{{days}}d ago",
+  "enrollmentSuccessTitle": "Enrollment successful",
+  "enrollmentSuccessMessage": "You successfully enrolled in the class.",
+  "enrollmentCancelledTitle": "Enrollment cancelled",
+  "enrollmentCancelledMessage": "You cancelled your class enrollment.",
+  "classCompletedTitle": "Class completed",
+  "classCompletedMessage": "Your class has passed. Book the next one!",
+  "planExpiringTitle": "Plan expiring",
+  "planExpiringMessage": "Your plan expires in 3 days.",
+  "planExpiredTitle": "Plan expired",
+  "planExpiredMessage": "Your plan has expired. Buy a new one to keep training."
+}

@@ -30,13 +30,13 @@
   "emptyStateDescription": "No hay clases disponibles por el momento.",
   "planRequired": "Necesitás un plan",
   "days": {
-    "sunday": "Domingo",
     "monday": "Lunes",
     "tuesday": "Martes",
     "wednesday": "Miércoles",
     "thursday": "Jueves",
     "friday": "Viernes",
-    "saturday": "Sábado"
+    "saturday": "Sábado",
+    "sunday": "Domingo"
   },
   "errors": {
     "USER_NOT_FOUND": "Usuario no encontrado.",
@@ -97,15 +97,15 @@
   "createClass": "Crear clase",
   "creating": "Creando...",
   "classCreatedSuccess": "¡Clase creada exitosamente!",
-  "daysN": {
-    "1": "Lunes",
-    "2": "Martes",
-    "3": "Miércoles",
-    "4": "Jueves",
-    "5": "Viernes",
-    "6": "Sábado",
-    "0": "Domingo"
-  },
+ "daysN": {
+    "0": "Lunes",
+    "1": "Martes",
+    "2": "Miercoles",
+    "3": "Jueves",
+    "4": "Viernes",
+    "5": "Sabado",
+    "6": "Domingo"
+},
   "CLASS_ALREADY_EXISTS": "Ya existe una clase con ese nombre",
   "INVALID_CLASS_DATA": "Los datos de la clase son inválidos",
   "CLASS_CREATION_FAILED": "No se pudo crear la clase",
@@ -131,5 +131,6 @@
   "heroDescription": "Cada disciplina tiene un objetivo y beneficios distintos. Elegí la que más te motive; todas suman a la cantidad de clases de tu plan.",
   "cancellationPolicyTitle": "Política de cancelación",
   "policy30min": "Si cancelas dentro de los 30 minutos posteriores a la inscripción, recuperas tu cupo.",
-  "policy3days": "Si cancelas con más de 3 días de anticipación, recuperas tu cupo."
+  "policy3days": "Si cancelas con más de 3 días de anticipación, recuperas tu cupo.",
+  "loginToEnroll": "Iniciá sesión para inscribirte"
 }

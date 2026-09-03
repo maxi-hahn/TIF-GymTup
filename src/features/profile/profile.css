@@ -426,3 +426,72 @@
     gap: 0.75rem;
     margin-top: 0.5rem;
 }
+/*==========================
+  RESPONSIVE - FIX ALIGNMENT
+==========================*/
+
+@media (max-width: 1023px) {
+    .profile-grid-top {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .profile-card {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    .profile-info-fields,
+    .profile-plan-details-grid,
+    .profile-plan-benefits-list {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .profile-info-value {
+        flex-wrap: wrap;
+        word-break: break-word;
+    }
+
+    .profile-plan-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .profile-plan-actions button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-page {
+        padding: 5rem 0.75rem 3rem;
+        overflow-x: hidden;
+    }
+
+    .profile-container {
+        gap: 1.25rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .profile-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    .profile-header-title {
+        font-size: 1.75rem;
+    }
+
+    .profile-plan-details-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .profile-class-item {
+        padding: 0.875rem;
+    }
+}

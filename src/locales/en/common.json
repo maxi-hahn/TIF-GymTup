@@ -11,6 +11,7 @@
   "noPlan": "No plan",
   "credits": "Credits",
   "noCredits": "Credits: -",
-    "openMenu": "Open menu",
-  "closeMenu": "Close menu"
-}
+  "openMenu": "Open menu",
+  "closeMenu": "Close menu",
+    "logout": "logout"
+} 

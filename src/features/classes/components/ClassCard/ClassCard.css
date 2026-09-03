@@ -23,6 +23,7 @@
     height: 560px;
     perspective: 1000px;
     position: relative;
+    flex-shrink: 0;
 }
 
 /*==========================
@@ -423,6 +424,7 @@
     opacity: 0.5;
     cursor: not-allowed;
 }
+
 .class-image-placeholder {
     width: 100%;
     height: 100%;
@@ -437,4 +439,66 @@
 .class-image-placeholder-icon {
     font-size: 3rem;
     opacity: 0.5;
+}
+
+/*==========================
+  RESPONSIVE - MOBILE
+==========================*/
+
+@media (max-width: 480px) {
+    .class-card {
+        width: 100%;
+        max-width: 280px;
+        height: 400px;
+        margin: 0 auto;
+    }
+
+    .class-image {
+        height: 120px;
+    }
+
+    .class-image-placeholder {
+        min-height: 120px;
+    }
+
+    .class-content {
+        padding: 12px;
+        padding-top: 3px;
+    }
+
+    .class-header h2 {
+        font-size: 18px;
+    }
+
+    .class-header {
+        padding-left: 8px;
+        padding-right: 8px;
+        margin-top: 4px;
+    }
+
+    .class-info {
+        font-size: 11px;
+        gap: 8px;
+    }
+
+    .description {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .class-content li {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .availability {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .view-button,
+    .back-button {
+        padding: 10px;
+        font-size: 13px;
+    }
 }

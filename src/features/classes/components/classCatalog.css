@@ -16,7 +16,7 @@ html:has(.class-catalog) {
 .class-catalog .class-card,
 .class-catalog .create-class-card {
     scroll-snap-align: center;
-    scroll-snap-stop: normal
+    scroll-snap-stop: normal;
 }
 
 @media (max-width: 1200px) {
@@ -32,7 +32,19 @@ html:has(.class-catalog) {
 }
 
 @media (max-width: 480px) {
+    html:has(.class-catalog) {
+        scroll-snap-type: none;
+    }
+
     .class-catalog {
-        --card-snap-half-height: 250px;
+        grid-template-columns: 1fr;
+        padding: 24px 16px;
+        gap: 60px;  /* MUCHO espacio entre cards */
+        justify-items: center;
+    }
+
+    .class-catalog .class-card,
+    .class-catalog .create-class-card {
+        scroll-snap-align: none;
     }
 }

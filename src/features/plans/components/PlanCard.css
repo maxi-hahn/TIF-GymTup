@@ -124,3 +124,8 @@
     color: #999;
     cursor: not-allowed;
 }
+.plan-card-button-disabled {
+    background: #555 !important;
+    color: #999 !important;
+    cursor: not-allowed !important;
+}
