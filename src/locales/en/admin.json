@@ -1,3 +1,44 @@
 {
-    "title": "Admin"
+  "title": "Admin",
+  "plansTitle": "Plan Management",
+  "newPlan": "New plan",
+  "loadError": "Couldn't load the plans. Try reloading the page.",
+  "loadErrorToast": "Couldn't load the plans.",
+  "emptyPlans": "No plans have been created yet.",
+  "table": {
+    "name": "Name",
+    "price": "Price",
+    "classes": "Classes",
+    "benefits": "Benefits",
+    "actions": "Actions",
+    "unlimited": "Unlimited",
+    "noBenefits": "-",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete the plan \"{{name}}\"? This action cannot be undone.",
+    "deleteSuccess": "Plan deleted successfully.",
+    "deleteError": "Couldn't delete the plan."
+  },
+  "form": {
+    "editTitle": "Edit plan",
+    "newTitle": "New plan",
+    "name": "Name",
+    "price": "Price",
+    "unlimitedPlan": "Unlimited plan",
+    "classesAmount": "Number of classes",
+    "benefits": "Benefits",
+    "benefitsPlaceholder": "Ex: 3 hours of Personal Training, Access to all activities",
+    "benefitsHint": "Separate benefits with commas (,)",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving...",
+    "createSuccess": "Plan created successfully.",
+    "updateSuccess": "Plan updated successfully.",
+    "saveError": "Couldn't save the plan. Try again.",
+    "nameRequired": "Name is required",
+    "nameMax": "Maximum 50 characters",
+    "priceMin": "Price must be greater than 0",
+    "classesMin": "Must be at least 1",
+    "benefitsMax": "Maximum 500 characters"
+  }
 }

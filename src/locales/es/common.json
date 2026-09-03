@@ -13,5 +13,13 @@
   "noCredits": "Cupos: -",
   "openMenu": "Abrir menú",
   "closeMenu": "Cerrar menú",
-  "logout": "cerrar sesion"
- }
+  "logout": "cerrar sesion",
+  "footerTagline": "Entrená con propósito. Tu gym, tus horarios, tu ritmo.",
+  "footerLinksHeading": "Enlaces",
+  "footerContactHeading": "Sede central",
+  "footerAddress": "Av. Pellegrini 1234",
+  "footerCity": "Rosario, Santa Fe",
+  "footerHours": "Lun a Sáb · 7:00 - 22:00",
+  "footerSocialHeading": "Seguinos",
+  "footerRights": "Todos los derechos reservados."
+}

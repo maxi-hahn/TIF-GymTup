@@ -1,0 +1,252 @@
+/*==========================
+  ADMIN PLANS PAGE
+==========================*/
+.admin-page {
+    min-height: 100vh;
+    background: #0f1a24;
+    color: white;
+    padding: 40px 24px;
+}
+
+.admin-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.admin-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.admin-new-button {
+    background: #24d1a7;
+    color: #0f1a24;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+    .admin-new-button:hover {
+        opacity: 0.9;
+    }
+
+/*==========================
+  TABLE
+==========================*/
+.admin-table-wrapper {
+    background: rgba(19, 33, 45, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .admin-table th {
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #6ff3c4;
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .admin-table td {
+        padding: 16px 20px;
+        font-size: 14px;
+        color: #d6e2ec;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        vertical-align: top;
+    }
+
+    .admin-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    .admin-table ul {
+        margin: 0;
+        padding-left: 18px;
+    }
+
+        .admin-table ul li {
+            color: #b0c4d6;
+            font-size: 13px;
+        }
+
+.admin-table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.admin-btn-edit,
+.admin-btn-delete {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(15, 26, 36, 0.8);
+    color: #b0c4d6;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .admin-btn-edit:hover {
+        border-color: #24d1a7;
+        color: #6ff3c4;
+    }
+
+    .admin-btn-delete:hover {
+        border-color: #ff6b6b;
+        color: #ff6b6b;
+    }
+
+/*==========================
+  MODAL
+==========================*/
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 100;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 460px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #13212d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 32px;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 24px;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+    .modal-field label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #b0c4d6;
+    }
+
+    .modal-field input,
+    .modal-field textarea {
+        background: rgba(15, 26, 36, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        padding: 10px 12px;
+        color: white;
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        resize: vertical;
+        transition: border-color 0.2s ease;
+    }
+
+        .modal-field input:focus,
+        .modal-field textarea:focus {
+            border-color: #24d1a7;
+        }
+
+    .modal-field small {
+        font-size: 12px;
+        color: #6b8299;
+    }
+
+.modal-field-checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+    .modal-field-checkbox label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #d6e2ec;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+.modal-field-error {
+    font-size: 13px;
+    color: #ff6b6b;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.modal-cancel {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #b0c4d6;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .modal-cancel:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+.modal-actions .auth-submit {
+    flex: 1;
+    margin-top: 0;
+}
+
+@media (max-width: 700px) {
+    .admin-table-wrapper {
+        overflow-x: auto;
+    }
+
+    .admin-table {
+        min-width: 600px;
+    }
+}

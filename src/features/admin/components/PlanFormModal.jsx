@@ -2,20 +2,22 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import planService from '@/shared/services/planService'
 import SubmitButton from '@/shared/components/SubmitButton'
 
-const planSchema = z.object({
-  name: z.string().min(1, 'El nombre es obligatorio').max(50, 'Máximo 50 caracteres'),
-  value: z.coerce.number().positive('El precio debe ser mayor a 0'),
-  max_Class: z.coerce.number().int().min(1, 'Debe ser al menos 1'),
-  isUnlimited: z.boolean(),
-  benefits: z.string().max(500, 'Máximo 500 caracteres').optional(),
-})
-
 const PlanFormModal = ({ plan, onClose, onSaved }) => {
+  const { t } = useTranslation('admin')
   const isEditing = !!plan
+
+  const planSchema = z.object({
+    name: z.string().min(1, t('form.nameRequired')).max(50, t('form.nameMax')),
+    value: z.coerce.number().positive(t('form.priceMin')),
+    max_Class: z.coerce.number().int().min(1, t('form.classesMin')),
+    isUnlimited: z.boolean(),
+    benefits: z.string().max(500, t('form.benefitsMax')).optional(),
+  })
 
   const {
     register,
@@ -52,73 +54,74 @@ const PlanFormModal = ({ plan, onClose, onSaved }) => {
     try {
       if (isEditing) {
         await planService.updatePlan(plan.id, formData)
-        toast.success('Plan actualizado correctamente.')
+        toast.success(t('form.updateSuccess'))
       } else {
         await planService.createPlan(formData)
-        toast.success('Plan creado correctamente.')
+        toast.success(t('form.createSuccess'))
       }
       onSaved()
     } catch {
-      toast.error('No se pudo guardar el plan. Intentá de nuevo.')
+      toast.error(t('form.saveError'))
     }
   }
 
   return (
-    <div>
-      <div>
-        <h2>{isEditing ? 'Editar plan' : 'Nuevo plan'}</h2>
+    <div className="modal-overlay">
+      <div className="modal-card">
+        <h2 className="modal-title">{isEditing ? t('form.editTitle') : t('form.newTitle')}</h2>
 
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div>
-            <label htmlFor="name">Nombre</label>
+        <form className="modal-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div className="modal-field">
+            <label htmlFor="name">{t('form.name')}</label>
             <input id="name" {...register('name')} />
-            {errors.name && <span>{errors.name.message}</span>}
+            {errors.name && <span className="modal-field-error">{errors.name.message}</span>}
           </div>
 
-          <div>
-            <label htmlFor="value">Precio</label>
+          <div className="modal-field">
+            <label htmlFor="value">{t('form.price')}</label>
             <input id="value" type="number" step="0.01" {...register('value')} />
-            {errors.value && <span>{errors.value.message}</span>}
+            {errors.value && <span className="modal-field-error">{errors.value.message}</span>}
           </div>
 
-          <div>
+          <div className="modal-field modal-field-checkbox">
             <label htmlFor="isUnlimited">
-              <input 
-                id="isUnlimited" 
-                type="checkbox" 
-                {...register('isUnlimited')} 
+              <input
+                id="isUnlimited"
+                type="checkbox"
+                {...register('isUnlimited')}
               />
-              Plan ilimitado
+              {t('form.unlimitedPlan')}
             </label>
           </div>
 
-          {/* Solo mostrar cantidad de clases si NO es ilimitado */}
           {!isUnlimited && (
-            <div>
-              <label htmlFor="max_Class">Cantidad de clases</label>
+            <div className="modal-field">
+              <label htmlFor="max_Class">{t('form.classesAmount')}</label>
               <input id="max_Class" type="number" {...register('max_Class')} />
-              {errors.max_Class && <span>{errors.max_Class.message}</span>}
+              {errors.max_Class && <span className="modal-field-error">{errors.max_Class.message}</span>}
             </div>
           )}
 
-          <div>
-            <label htmlFor="benefits">Beneficios</label>
-            <textarea 
-              id="benefits" 
+          <div className="modal-field">
+            <label htmlFor="benefits">{t('form.benefits')}</label>
+            <textarea
+              id="benefits"
               rows="4"
-              placeholder="Ej: 3 horas de Personal Trainer, Acceso a todas las actividades"
-              {...register('benefits')} 
+              placeholder={t('form.benefitsPlaceholder')}
+              {...register('benefits')}
             />
-            {errors.benefits && <span>{errors.benefits.message}</span>}
-            <small>Separá los beneficios con comas (,)</small>
+            {errors.benefits && <span className="modal-field-error">{errors.benefits.message}</span>}
+            <small>{t('form.benefitsHint')}</small>
           </div>
 
-          <button type="button" onClick={onClose}>
-            Cancelar
-          </button>
-          <SubmitButton loading={isSubmitting} loadingText="Guardando...">
-            Guardar
-          </SubmitButton>
+          <div className="modal-actions">
+            <button type="button" className="modal-cancel" onClick={onClose}>
+              {t('form.cancel')}
+            </button>
+            <SubmitButton loading={isSubmitting} loadingText={t('form.saving')}>
+              {t('form.save')}
+            </SubmitButton>
+          </div>
         </form>
       </div>
     </div>

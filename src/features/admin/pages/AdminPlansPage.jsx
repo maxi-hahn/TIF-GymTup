@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
 import planService from '@/shared/services/planService'
 import PlanTable from '@/features/admin/components/PlanTable'
 import PlanFormModal from '@/features/admin/components/PlanFormModal'
 import LoadingSpinner from '@/shared/components/LoadingSpinner'
 import EmptyState from '@/shared/components/EmptyState'
+import './AdminPlansPage.css'
 
 const AdminPlansPage = () => {
+    const { t } = useTranslation('admin')
     const [plans, setPlans] = useState([])
     const [loading, setLoading] = useState(true)
     const [loadError, setLoadError] = useState(false)
@@ -18,7 +21,7 @@ const AdminPlansPage = () => {
             const data = await planService.getPlans()
             setPlans(data)
         } catch {
-            toast.error('No se pudieron cargar los planes.')
+            toast.error(t('loadErrorToast'))
             setLoadError(true)
         } finally {
             setLoading(false)
@@ -41,17 +44,15 @@ const AdminPlansPage = () => {
     }
 
     const handleDelete = async (plan) => {
-        const confirmDelete = window.confirm(
-            `¿Seguro que querés eliminar el plan "${plan.name}"? Esta acción no se puede deshacer.`
-        )
+        const confirmDelete = window.confirm(t('table.deleteConfirm', { name: plan.name }))
         if (!confirmDelete) return
 
         try {
             await planService.deletePlan(plan.id)
-            toast.success('Plan eliminado correctamente.')
+            toast.success(t('table.deleteSuccess'))
             fetchPlans()
         } catch {
-            toast.error('No se pudo eliminar el plan.')
+            toast.error(t('table.deleteError'))
         }
     }
 
@@ -67,26 +68,30 @@ const AdminPlansPage = () => {
     }
 
     if (loading) return <LoadingSpinner />
-    if (loadError) return <EmptyState message="No se pudieron cargar los planes. Intentá recargar la página." />
+    if (loadError) return <EmptyState message={t('loadError')} />
 
     return (
-        <div>
-            <h1>Gestión de Planes</h1>
-            <button onClick={handleNew}>Nuevo plan</button>
+        <div className="admin-page">
+            <div className="admin-container">
+                <div className="admin-header">
+                    <h1 className="admin-title">{t('plansTitle')}</h1>
+                    <button className="admin-new-button" onClick={handleNew}>{t('newPlan')}</button>
+                </div>
 
-            {plans.length === 0 ? (
-                <EmptyState message="Todavía no hay planes cargados." />
-            ) : (
-                <PlanTable plans={plans} onEdit={handleEdit} onDelete={handleDelete} />
-            )}
+                {plans.length === 0 ? (
+                    <EmptyState message={t('emptyPlans')} />
+                ) : (
+                    <PlanTable plans={plans} onEdit={handleEdit} onDelete={handleDelete} />
+                )}
 
-            {modalOpen && (
-                <PlanFormModal
-                    plan={editingPlan}
-                    onClose={handleModalClose}
-                    onSaved={handleSaved}
-                />
-            )}
+                {modalOpen && (
+                    <PlanFormModal
+                        plan={editingPlan}
+                        onClose={handleModalClose}
+                        onSaved={handleSaved}
+                    />
+                )}
+            </div>
         </div>
     )
 }

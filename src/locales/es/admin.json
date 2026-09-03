@@ -1,3 +1,44 @@
 {
-    "title": "Administración"
+  "title": "Administración",
+  "plansTitle": "Gestión de Planes",
+  "newPlan": "Nuevo plan",
+  "loadError": "No se pudieron cargar los planes. Intentá recargar la página.",
+  "loadErrorToast": "No se pudieron cargar los planes.",
+  "emptyPlans": "Todavía no hay planes cargados.",
+  "table": {
+    "name": "Nombre",
+    "price": "Precio",
+    "classes": "Clases",
+    "benefits": "Beneficios",
+    "actions": "Acciones",
+    "unlimited": "Ilimitadas",
+    "noBenefits": "-",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "deleteConfirm": "¿Seguro que querés eliminar el plan \"{{name}}\"? Esta acción no se puede deshacer.",
+    "deleteSuccess": "Plan eliminado correctamente.",
+    "deleteError": "No se pudo eliminar el plan."
+  },
+  "form": {
+    "editTitle": "Editar plan",
+    "newTitle": "Nuevo plan",
+    "name": "Nombre",
+    "price": "Precio",
+    "unlimitedPlan": "Plan ilimitado",
+    "classesAmount": "Cantidad de clases",
+    "benefits": "Beneficios",
+    "benefitsPlaceholder": "Ej: 3 horas de Personal Trainer, Acceso a todas las actividades",
+    "benefitsHint": "Separá los beneficios con comas (,)",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "createSuccess": "Plan creado correctamente.",
+    "updateSuccess": "Plan actualizado correctamente.",
+    "saveError": "No se pudo guardar el plan. Intentá de nuevo.",
+    "nameRequired": "El nombre es obligatorio",
+    "nameMax": "Máximo 50 caracteres",
+    "priceMin": "El precio debe ser mayor a 0",
+    "classesMin": "Debe ser al menos 1",
+    "benefitsMax": "Máximo 500 caracteres"
+  }
 }

@@ -13,5 +13,13 @@
   "noCredits": "Credits: -",
   "openMenu": "Open menu",
   "closeMenu": "Close menu",
-    "logout": "logout"
-} 
+  "logout": "logout",
+  "footerTagline": "Train with purpose. Your gym, your schedule, your pace.",
+  "footerLinksHeading": "Links",
+  "footerContactHeading": "Main location",
+  "footerAddress": "1234 Pellegrini Ave.",
+  "footerCity": "Rosario, Santa Fe",
+  "footerHours": "Mon to Sat · 7:00 AM - 10:00 PM",
+  "footerSocialHeading": "Follow us",
+  "footerRights": "All rights reserved."
+}
