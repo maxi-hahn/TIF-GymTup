@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -37,28 +37,32 @@ const LoginPage = () => {
     }
 
     return (
-        <div>
-            <h1>Login Page</h1>
-            <p>Please log in to continue.</p>
+        <>
+            <h1 className="auth-title">Iniciar sesión</h1>
+            <p className="auth-subtitle">Ingresá tus datos para continuar entrenando.</p>
 
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <div>
+            <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+                <div className="auth-field">
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email" {...register('email')} />
-                    {errors.email && <span>{errors.email.message}</span>}
+                    {errors.email && <span className="auth-field-error">{errors.email.message}</span>}
                 </div>
 
-                <div>
+                <div className="auth-field">
                     <label htmlFor="password">Contraseña</label>
                     <input id="password" type="password" {...register('password')} />
-                    {errors.password && <span>{errors.password.message}</span>}
+                    {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
                 </div>
 
-                <SubmitButton loading={isSubmitting} loadingText="Ingresando...">
+                <SubmitButton className="auth-submit" loading={isSubmitting} loadingText="Ingresando...">
                     Ingresar
                 </SubmitButton>
             </form>
-        </div>
+
+            <p className="auth-footer">
+                ¿Aún no tenés cuenta? <Link to="/register">Registrate</Link>
+            </p>
+        </>
     )
 }
 

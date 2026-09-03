@@ -5,7 +5,10 @@ const authService = {
         const { data } = await axiosClient.post('/Auth/singin', { email, password })
         return data // { token, rol, id, email }
     },
-    register: async (_userData) => { },
+    register: async (userData) => {
+        const { data } = await axiosClient.post('/Auth/signup', userData)
+        return data
+    },
     logout: () => { },
 }
 

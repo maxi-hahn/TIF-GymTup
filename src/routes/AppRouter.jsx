@@ -5,6 +5,7 @@ import ProtectedRoute from './ProtectedRoute'
 import RoleRoute from './RoleRoute'
 import HomePage from '@/features/home/pages/HomePage'
 import LoginPage from '@/features/auth/pages/LoginPage'
+import RegisterPage from '@/features/auth/pages/RegisterPage'
 import ClassesPage from '@/features/classes/pages/ClassesPage'
 import PlansPage from '@/features/plans/pages/PlansPage'
 import ProfilePage from '@/features/profile/pages/ProfilePage'
@@ -21,6 +22,7 @@ const AppRouter = () => {
       {/* Public routes */}
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
 
       {/* Protected routes */}
