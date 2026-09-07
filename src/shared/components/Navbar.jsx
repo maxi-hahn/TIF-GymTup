@@ -6,7 +6,9 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '@/shared/contexts/AuthContext'
 import userService from '@/shared/services/userService'
+import authService from '@/shared/services/authService'
 import notificationService from '@/shared/services/notificationService'
+import toast from 'react-hot-toast'
 import Button from '@/shared/components/Button'
 import './Navbar.css'
 
@@ -19,6 +21,8 @@ const links = [
 const Navbar = () => {
     const { t: tCommon } = useTranslation()
     const { t: tNotif } = useTranslation('notifications')
+    const { t: tVerif } = useTranslation('verification')
+    const [resendingVerification, setResendingVerification] = useState(false)
 
     const t = (key, options) => {
         if (typeof key === 'string' && key.startsWith('notifications.')) {
@@ -33,10 +37,23 @@ const Navbar = () => {
     const { isAuthenticated, logout, user } = useAuth()
     const navigate = useNavigate()
 
+    const handleResendVerification = async () => {
+        setResendingVerification(true)
+        try {
+            await authService.resendVerification()
+            toast.success(tVerif('emailSent') || 'Verification email sent!')
+        } catch (error) {
+            toast.error(error.response?.data?.error ?? 'Error sending email.')
+        } finally {
+            setResendingVerification(false)
+        }
+    }
+
     const [notifications, setNotifications] = useState([])
     const [unreadCount, setUnreadCount] = useState(0)
     const [showNotifications, setShowNotifications] = useState(false)
-    const notificationRef = useRef(null)
+    const desktopNotificationRef = useRef(null)
+    const mobileNotificationRef = useRef(null)
 
     const [planInfo, setPlanInfo] = useState(null)
 
@@ -87,7 +104,10 @@ const Navbar = () => {
     // Cerrar dropdown al hacer click fuera
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+            const isOutsideDesktop = !desktopNotificationRef.current || !desktopNotificationRef.current.contains(event.target)
+            const isOutsideMobile = !mobileNotificationRef.current || !mobileNotificationRef.current.contains(event.target)
+
+            if (isOutsideDesktop && isOutsideMobile) {
                 setShowNotifications(false)
             }
         }
@@ -255,6 +275,18 @@ const Navbar = () => {
 
     return (
         <header className="navbar">
+            {isAuthenticated && isClient && user?.emailVerified === false && (
+                <div className="unverified-email-banner">
+                    <span>⚠️ {tVerif('notVerifiedMessage')}</span>
+                    <button
+                        className="unverified-banner-button"
+                        onClick={handleResendVerification}
+                        disabled={resendingVerification}
+                    >
+                        {resendingVerification ? '...' : tVerif('resend')}
+                    </button>
+                </div>
+            )}
             <nav className="navbar-container">
                 {/* Logo */}
                 <Link to="/" className="navbar-logo">
@@ -287,7 +319,7 @@ const Navbar = () => {
                 <div className="navbar-actions">
                     {/* Notificaciones */}
                     {isAuthenticated && (
-                        <div className="notification-wrapper" ref={notificationRef}>
+                        <div className="notification-wrapper" ref={desktopNotificationRef}>
                             <button
                                 className="navbar-icon-button notification-bell"
                                 onClick={() => setShowNotifications(!showNotifications)}
@@ -423,7 +455,7 @@ const Navbar = () => {
 
                     {/* Notificaciones */}
                     {isAuthenticated && (
-                        <div className="notification-wrapper" ref={notificationRef}>
+                        <div className="notification-wrapper" ref={mobileNotificationRef}>
                             <button
                                 className="navbar-icon-button notification-bell"
                                 onClick={() => setShowNotifications(!showNotifications)}

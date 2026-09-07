@@ -118,7 +118,7 @@ const PlanFormModal = ({ plan, onClose, onSaved }) => {
             <button type="button" className="modal-cancel" onClick={onClose}>
               {t('form.cancel')}
             </button>
-            <SubmitButton loading={isSubmitting} loadingText={t('form.saving')}>
+            <SubmitButton className="modal-submit" loading={isSubmitting} loadingText={t('form.saving')}>
               {t('form.save')}
             </SubmitButton>
           </div>

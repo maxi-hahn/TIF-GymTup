@@ -129,3 +129,111 @@
     color: #999 !important;
     cursor: not-allowed !important;
 }
+
+/*==========================
+  UNVERIFIED EMAIL MODAL
+==========================*/
+.plan-unverified-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 200;
+    backdrop-filter: blur(4px);
+}
+
+.plan-unverified-modal {
+    background: #13212d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px 28px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    animation: plan-modal-in 0.2s ease-out;
+}
+
+@keyframes plan-modal-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.plan-unverified-modal-icon {
+    font-size: 40px;
+    margin-bottom: 14px;
+}
+
+.plan-unverified-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 10px;
+}
+
+.plan-unverified-modal-message {
+    font-size: 14px;
+    color: #b0c4d6;
+    line-height: 1.6;
+    margin: 0 0 24px;
+}
+
+.plan-unverified-modal-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.plan-unverified-modal-button {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.plan-unverified-modal-button-primary {
+    background: #24d1a7;
+    color: #0f1a24;
+}
+
+.plan-unverified-modal-button-primary:hover {
+    background: #1fb893;
+}
+
+.plan-unverified-modal-button-secondary {
+    background: transparent;
+    color: #b0c4d6;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.plan-unverified-modal-button-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+.plan-unverified-modal-button-secondary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.plan-unverified-modal-button-ghost {
+    background: transparent;
+    color: #6b8299;
+    font-weight: 500;
+    padding: 8px;
+}
+
+.plan-unverified-modal-button-ghost:hover {
+    color: #b0c4d6;
+}

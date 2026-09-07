@@ -1,0 +1,122 @@
+/*==========================
+  VERIFICATION PAGES CSS
+==========================*/
+.verification-page {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #0f1a24;
+}
+
+.verification-card {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(19, 33, 45, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.verification-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 32px;
+}
+
+.verification-icon-wrapper.success {
+  background: rgba(111, 243, 196, 0.15);
+  color: #6ff3c4;
+  border: 1px solid rgba(111, 243, 196, 0.3);
+}
+
+.verification-icon-wrapper.failed {
+  background: rgba(248, 113, 113, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(248, 113, 113, 0.3);
+}
+
+.verification-icon-wrapper.loading {
+  background: rgba(36, 209, 167, 0.15);
+  color: #24d1a7;
+  border: 1px solid rgba(36, 209, 167, 0.3);
+}
+
+.verification-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 12px;
+}
+
+.verification-message {
+  font-size: 15px;
+  color: #b0c4d6;
+  line-height: 1.6;
+  margin: 0 0 32px;
+}
+
+.verification-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.verification-button {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.verification-button-primary {
+  background: #24d1a7;
+  color: #0f1a24;
+}
+
+.verification-button-primary:hover {
+  background: #1fb893;
+}
+
+.verification-button-secondary {
+  background: transparent;
+  color: #b0c4d6;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.verification-button-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.verification-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(36, 209, 167, 0.2);
+  border-top-color: #24d1a7;
+  border-radius: 50%;
+  animation: verification-spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes verification-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

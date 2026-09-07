@@ -23,6 +23,8 @@ import notificationsEs from './es/notifications.json';
 import notificationsEn from './en/notifications.json';
 import notFoundEs from './es/notFound.json'
 import notFoundEn from './en/notFound.json'
+import verificationEs from './es/verification.json'
+import verificationEn from './en/verification.json'
 const resources = {
   en: {
     notifications: notificationsEn,
@@ -35,7 +37,8 @@ const resources = {
     validation: enValidation,
     managmentUser: enManagmentUser,
     home: enHome,
-    notFound: notFoundEn
+    notFound: notFoundEn,
+    verification: verificationEn
   },
   es: {
     notifications: notificationsEs,
@@ -48,7 +51,8 @@ const resources = {
     validation: esValidation,
     managmentUser: esManagmentUser,
     home: esHome,
-    notFound: notFoundEs
+    notFound: notFoundEs,
+    verification: verificationEs
   }
 };
 
@@ -57,7 +61,7 @@ i18n
   .init({
     resources,
   
-    ns: ['common', 'auth', 'notifications'],
+    ns: ['common', 'auth', 'notifications', 'verification'],
     defaultNS: 'common',
   
     lng: 'es',

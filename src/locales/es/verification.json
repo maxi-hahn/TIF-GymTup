@@ -1,0 +1,18 @@
+{
+  "title": "Verificación de Email",
+  "verifying": "Verificando...",
+  "success": "¡Email Verificado!",
+  "successMessage": "Tu email ha sido verificado con éxito.",
+  "failed": "Verificación Fallida",
+  "failedMessage": "El enlace no es válido o ha expirado.",
+  "resend": "Reenviar email",
+  "goToLogin": "Ir a iniciar sesión",
+  "goToClasses": "Ir a clases",
+  "backHome": "Volver al inicio",
+  "notVerified": "Tu email no está verificado",
+  "notVerifiedMessage": "Revisa tu bandeja de entrada o reenvía el correo de verificación.",
+  "emailSent": "¡Correo de verificación enviado!",
+  "buyPlanNeedVerify": "Necesitás verificar tu email para comprar un plan.",
+  "openGmail": "Abrir Gmail",
+  "resendEmail": "Reenviar email"
+}

@@ -309,6 +309,43 @@
 }
 
 /* ==========================================================================
+   Unverified Email Banner
+   ========================================================================== */
+.unverified-email-banner {
+    background: rgba(248, 113, 113, 0.15);
+    border-bottom: 1px solid rgba(248, 113, 113, 0.3);
+    color: #ffffff;
+    padding: 8px 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.unverified-banner-button {
+    background: #24d1a7;
+    color: #0f1a24;
+    border: none;
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.unverified-banner-button:hover:not(:disabled) {
+    background: #1fb893;
+}
+
+.unverified-banner-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
    Responsive
    ========================================================================== */
 @media (max-width: 767px) {

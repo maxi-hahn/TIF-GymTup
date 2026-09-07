@@ -3,16 +3,20 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import userService from '@/shared/services/userService'
+import authService from '@/shared/services/authService'
 import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 import { useAuth } from '@/shared/contexts/AuthContext'
 import './PlanCard.css'
 
 const PlanCard = ({ plan, isMyActivePlan, hasActivePlan, currentPlanValue = 0 }) => {
     const { t } = useTranslation('plans')
+    const { t: tVerif } = useTranslation('verification')
     const navigate = useNavigate()
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated, user } = useAuth()
     const [loading, setLoading] = useState(false)
     const [showChangeModal, setShowChangeModal] = useState(false)
+    const [showUnverifiedModal, setShowUnverifiedModal] = useState(false)
+    const [resending, setResending] = useState(false)
 
     const isUpgrade = hasActivePlan && plan.value > currentPlanValue
     const isDowngrade = hasActivePlan && !isMyActivePlan && plan.value <= currentPlanValue
@@ -20,6 +24,10 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan, currentPlanValue = 0 })
     const handleBuyClick = () => {
         if (!isAuthenticated) {
             navigate('/login')
+            return
+        }
+        if (user?.rol === 'Client' && user?.emailVerified === false) {
+            setShowUnverifiedModal(true)
             return
         }
         if (isDowngrade) return
@@ -45,6 +53,18 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan, currentPlanValue = 0 })
                 toast.error(t('buyError'))
             }
             setLoading(false)
+        }
+    }
+
+    const handleResendVerification = async () => {
+        setResending(true)
+        try {
+            await authService.resendVerification()
+            toast.success(tVerif('emailSent'))
+        } catch (err) {
+            toast.error(err.response?.data?.error ?? 'Error')
+        } finally {
+            setResending(false)
         }
     }
 
@@ -122,6 +142,7 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan, currentPlanValue = 0 })
                 )}
             </article>
 
+            {/* Upgrade/downgrade confirmation modal */}
             <ConfirmationModal
                 isOpen={showChangeModal}
                 title={t('upgradeModalTitle')}
@@ -131,6 +152,44 @@ const PlanCard = ({ plan, isMyActivePlan, hasActivePlan, currentPlanValue = 0 })
                 onConfirm={handleBuy}
                 onCancel={() => setShowChangeModal(false)}
             />
+
+            {/* Unverified email modal */}
+            {showUnverifiedModal && (
+                <div className="plan-unverified-modal-overlay" onClick={() => setShowUnverifiedModal(false)}>
+                    <div
+                        className="plan-unverified-modal"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div className="plan-unverified-modal-icon">✉️</div>
+                        <h2 className="plan-unverified-modal-title">{tVerif('notVerified')}</h2>
+                        <p className="plan-unverified-modal-message">{tVerif('buyPlanNeedVerify')}</p>
+                        <div className="plan-unverified-modal-actions">
+                            <a
+                                href="https://mail.google.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="plan-unverified-modal-button plan-unverified-modal-button-primary"
+                                onClick={() => setShowUnverifiedModal(false)}
+                            >
+                                {tVerif('openGmail')}
+                            </a>
+                            <button
+                                className="plan-unverified-modal-button plan-unverified-modal-button-secondary"
+                                onClick={handleResendVerification}
+                                disabled={resending}
+                            >
+                                {resending ? '...' : tVerif('resendEmail')}
+                            </button>
+                            <button
+                                className="plan-unverified-modal-button plan-unverified-modal-button-ghost"
+                                onClick={() => setShowUnverifiedModal(false)}
+                            >
+                                {t('cancel')}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

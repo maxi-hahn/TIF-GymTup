@@ -5,6 +5,7 @@ import { z } from 'zod'
 import toast from 'react-hot-toast'
 import { useAuth } from '@/shared/contexts/AuthContext'
 import SubmitButton from '@/shared/components/SubmitButton'
+import '@/shared/layouts/AuthLayout.css'
 
 const loginSchema = z.object({
     email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
@@ -37,32 +38,34 @@ const LoginPage = () => {
     }
 
     return (
-        <>
-            <h1 className="auth-title">Iniciar sesión</h1>
-            <p className="auth-subtitle">Ingresá tus datos para continuar entrenando.</p>
+        <div className="auth-page">
+            <div className="auth-card">
+                <h1 className="auth-title">Iniciar sesión</h1>
+                <p className="auth-subtitle">Ingresá tus datos para continuar entrenando.</p>
 
-            <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
-                <div className="auth-field">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" type="email" {...register('email')} />
-                    {errors.email && <span className="auth-field-error">{errors.email.message}</span>}
-                </div>
+                <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+                    <div className="auth-field">
+                        <label htmlFor="email">Email</label>
+                        <input id="email" type="email" {...register('email')} />
+                        {errors.email && <span className="auth-field-error">{errors.email.message}</span>}
+                    </div>
 
-                <div className="auth-field">
-                    <label htmlFor="password">Contraseña</label>
-                    <input id="password" type="password" {...register('password')} />
-                    {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
-                </div>
+                    <div className="auth-field">
+                        <label htmlFor="password">Contraseña</label>
+                        <input id="password" type="password" {...register('password')} />
+                        {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
+                    </div>
 
-                <SubmitButton className="auth-submit" loading={isSubmitting} loadingText="Ingresando...">
-                    Ingresar
-                </SubmitButton>
-            </form>
+                    <SubmitButton className="auth-submit" loading={isSubmitting} loadingText="Ingresando...">
+                        Ingresar
+                    </SubmitButton>
+                </form>
 
-            <p className="auth-footer">
-                ¿Aún no tenés cuenta? <Link to="/register">Registrate</Link>
-            </p>
-        </>
+                <p className="auth-footer">
+                    ¿Aún no tenés cuenta? <Link to="/register">Registrate</Link>
+                </p>
+            </div>
+        </div>
     )
 }
 

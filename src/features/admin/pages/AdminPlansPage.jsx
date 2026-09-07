@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import planService from '@/shared/services/planService'
 import PlanTable from '@/features/admin/components/PlanTable'
 import PlanFormModal from '@/features/admin/components/PlanFormModal'
+import ConfirmationModal from '@/shared/components/modals/ConfirmationModal'
 import LoadingSpinner from '@/shared/components/LoadingSpinner'
 import EmptyState from '@/shared/components/EmptyState'
 import './AdminPlansPage.css'
@@ -15,6 +16,7 @@ const AdminPlansPage = () => {
     const [loadError, setLoadError] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [editingPlan, setEditingPlan] = useState(null)
+    const [deletingPlan, setDeletingPlan] = useState(null)
 
     const fetchPlans = async () => {
         try {
@@ -43,16 +45,20 @@ const AdminPlansPage = () => {
         setModalOpen(true)
     }
 
-    const handleDelete = async (plan) => {
-        const confirmDelete = window.confirm(t('table.deleteConfirm', { name: plan.name }))
-        if (!confirmDelete) return
+    const handleDeleteClick = (plan) => {
+        setDeletingPlan(plan)
+    }
 
+    const handleConfirmDelete = async () => {
+        if (!deletingPlan) return
         try {
-            await planService.deletePlan(plan.id)
+            await planService.deletePlan(deletingPlan.id)
             toast.success(t('table.deleteSuccess'))
             fetchPlans()
         } catch {
             toast.error(t('table.deleteError'))
+        } finally {
+            setDeletingPlan(null)
         }
     }
 
@@ -81,7 +87,7 @@ const AdminPlansPage = () => {
                 {plans.length === 0 ? (
                     <EmptyState message={t('emptyPlans')} />
                 ) : (
-                    <PlanTable plans={plans} onEdit={handleEdit} onDelete={handleDelete} />
+                    <PlanTable plans={plans} onEdit={handleEdit} onDelete={handleDeleteClick} />
                 )}
 
                 {modalOpen && (
@@ -91,6 +97,16 @@ const AdminPlansPage = () => {
                         onSaved={handleSaved}
                     />
                 )}
+
+                <ConfirmationModal
+                    isOpen={!!deletingPlan}
+                    title={deletingPlan ? `${t('table.delete')} "${deletingPlan.name}"` : ''}
+                    message={t('table.deleteConfirm', { name: deletingPlan?.name ?? '' })}
+                    confirmText={t('table.delete')}
+                    cancelText={t('form.cancel')}
+                    onConfirm={handleConfirmDelete}
+                    onCancel={() => setDeletingPlan(null)}
+                />
             </div>
         </div>
     )

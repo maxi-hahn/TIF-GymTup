@@ -1,0 +1,18 @@
+{
+  "title": "Email Verification",
+  "verifying": "Verifying...",
+  "success": "Email Verified!",
+  "successMessage": "Your email has been verified successfully.",
+  "failed": "Verification Failed",
+  "failedMessage": "The link is invalid or has expired.",
+  "resend": "Resend email",
+  "goToLogin": "Go to login",
+  "goToClasses": "Go to classes",
+  "backHome": "Back to home",
+  "notVerified": "Your email is not verified",
+  "notVerifiedMessage": "Check your inbox or resend verification email.",
+  "emailSent": "Verification email sent!",
+  "buyPlanNeedVerify": "You need to verify your email to buy a plan.",
+  "openGmail": "Open Gmail",
+  "resendEmail": "Resend email"
+}

@@ -9,6 +9,14 @@ const authService = {
         const { data } = await axiosClient.post('/Auth/signup', userData)
         return data
     },
+    verifyEmail: async (token) => {
+        const { data } = await axiosClient.get('/Auth/verify-email', { params: { token } })
+        return data
+    },
+    resendVerification: async () => {
+        const { data } = await axiosClient.post('/Auth/resend-verification')
+        return data
+    },
     logout: () => { },
 }
 

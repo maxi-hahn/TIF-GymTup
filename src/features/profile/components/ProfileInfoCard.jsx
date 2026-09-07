@@ -6,6 +6,7 @@ import { z } from 'zod'
 import toast from 'react-hot-toast'
 import Button from '@/shared/components/Button'
 import userService from '@/shared/services/userService'
+import authService from '@/shared/services/authService'
 
 const profileSchema = z
   .object({
@@ -23,7 +24,21 @@ const profileSchema = z
 
 const ProfileInfoCard = ({ user, updateUser }) => {
   const { t } = useTranslation('profile')
+  const { t: tVerif } = useTranslation('verification')
   const [isEditing, setIsEditing] = useState(false)
+  const [resending, setResending] = useState(false)
+
+  const handleResendVerification = async () => {
+    setResending(true)
+    try {
+      await authService.resendVerification()
+      toast.success(tVerif('emailSent') || 'Email sent!')
+    } catch (err) {
+      toast.error(err.response?.data?.error ?? 'Error')
+    } finally {
+      setResending(false)
+    }
+  }
 
   const {
     register,
@@ -121,13 +136,33 @@ const ProfileInfoCard = ({ user, updateUser }) => {
             <span className="profile-info-label">{t('info.email')}</span>
             <div className="profile-info-value">
               {user?.email || '-'}
-              {user?.emailVerified ? (
-                <span className="profile-badge profile-badge-verified">✓ {t('info.verified')}</span>
-              ) : (
-                <span className="profile-badge profile-badge-unverified">! {t('info.notVerified')}</span>
+              {user?.rol === 'Client' && (
+                user?.emailVerified ? (
+                  <span className="profile-badge profile-badge-verified">✓ {t('info.verified')}</span>
+                ) : (
+                  <span className="profile-badge profile-badge-unverified">! {t('info.notVerified')}</span>
+                )
               )}
             </div>
           </div>
+
+          {user?.rol === 'Client' && user?.emailVerified === false && (
+            <div className="profile-unverified-warning">
+              <p className="profile-unverified-warning-text">
+                ⚠️ {tVerif('notVerifiedMessage')}
+              </p>
+              <div>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  onClick={handleResendVerification}
+                  disabled={resending}
+                >
+                  {resending ? '...' : tVerif('resend')}
+                </Button>
+              </div>
+            </div>
+          )}
 
           {user?.dni && (
             <div className="profile-info-field">

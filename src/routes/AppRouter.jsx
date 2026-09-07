@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 import MainLayout from '@/shared/layouts/MainLayout'
-import AuthLayout from '@/shared/layouts/AuthLayout'
 import ProtectedRoute from './ProtectedRoute'
 import RoleRoute from './RoleRoute'
 import HomePage from '@/features/home/pages/HomePage'
@@ -14,6 +13,9 @@ import UserRolesPage from '@/features/admin/pages/UserRolesPage'
 import PaymentSuccessPage from '@/features/payments/pages/PaymentSuccessPage'
 import NotFoundPage from '@/features/notFound/pages/NotFoundPage'
 import ForbiddenPage from '@/features/notFound/pages/ForbiddenPage'
+import VerifyEmailPage from '@/features/verification/pages/VerifyEmailPage'
+import EmailVerifiedPage from '@/features/verification/pages/EmailVerifiedPage'
+import EmailVerificationFailedPage from '@/features/verification/pages/EmailVerificationFailedPage'
 import ScrollToTop from '@/shared/components/ScrollToTop'
 
 const AppRouter = () => {
@@ -21,17 +23,16 @@ const AppRouter = () => {
     <>
       <ScrollToTop />
       <Routes>
-      {/* Public routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-      </Route>
-
         {/* PUBLIC routes - Visible for everyone */}
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/plans" element={<PlansPage />} />
+          <Route path="/verify-email" element={<VerifyEmailPage />} />
+          <Route path="/email-verified" element={<EmailVerifiedPage />} />
+          <Route path="/email-verification-failed" element={<EmailVerificationFailedPage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/payment/failure" element={<PaymentSuccessPage />} />
           <Route path="/payment/pending" element={<PaymentSuccessPage />} />

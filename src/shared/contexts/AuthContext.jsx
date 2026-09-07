@@ -50,6 +50,29 @@ export function AuthProvider({ children }) {
         return userData
     }
 
+    const register = async (formData) => {
+        const data = await authService.register(formData)
+
+        const token = data?.token
+        const userData = {
+            id: data?.id || data?.user?.id,
+            name: data?.name || data?.user?.name || formData.name,
+            email: data?.email || data?.user?.email || formData.email,
+            rol: data?.rol || data?.user?.rol || 'Client',
+            planName: data?.planName || data?.user?.planName || null,
+            hasPlan: data?.hasPlan || data?.user?.hasPlan || false,
+            emailVerified: data?.emailVerified ?? data?.user?.emailVerified ?? false,
+        }
+
+        if (token) {
+            localStorage.setItem('token', token)
+        }
+        localStorage.setItem('user', JSON.stringify(userData))
+        setUser(userData)
+
+        return userData
+    }
+
     const logout = () => {
         localStorage.removeItem('token')
         localStorage.removeItem('user')
@@ -69,6 +92,7 @@ export function AuthProvider({ children }) {
         isAuthenticated: !!user,
         loading,
         login,
+        register,
         logout,
         updateUser,
     }

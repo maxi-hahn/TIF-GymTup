@@ -135,6 +135,7 @@
 }
 
 .modal-card {
+    margin-top:50px;
     width: 100%;
     max-width: 460px;
     max-height: 90vh;
@@ -236,9 +237,28 @@
         border-color: rgba(255, 255, 255, 0.3);
     }
 
-.modal-actions .auth-submit {
+.modal-actions .auth-submit,
+.modal-submit {
     flex: 1;
     margin-top: 0;
+    background: #24d1a7;
+    color: #0f1a24;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, opacity 0.2s ease;
+}
+
+.modal-submit:hover:not(:disabled) {
+    background: #1fb893;
+}
+
+.modal-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 @media (max-width: 700px) {
