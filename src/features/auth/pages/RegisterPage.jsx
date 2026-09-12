@@ -2,21 +2,21 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
-import { useAuth } from '@/shared/contexts/AuthContext'
+import authService from '@/shared/services/authService'
 import SubmitButton from '@/shared/components/SubmitButton'
-import '@/shared/layouts/AuthLayout.css'
-
-const registerSchema = z.object({
-  name: z.string().min(1, 'El nombre es obligatorio').max(50, 'Máximo 50 caracteres'),
-  email: z.string().min(1, 'El email es obligatorio').email('Email inválido'),
-  dni: z.coerce.number().int().positive('DNI inválido'),
-  password: z.string().min(8, 'La contraseña debe tener al menos 8 caracteres'),
-})
 
 const RegisterPage = () => {
+  const { t } = useTranslation('auth')
   const navigate = useNavigate()
-  const { register: registerUser } = useAuth()
+
+  const registerSchema = z.object({
+    name: z.string().min(1, t('nameRequired')).max(50, t('nameMax')),
+    email: z.string().min(1, t('emailRequired')).email(t('emailInvalid')),
+    dni: z.coerce.number().int().positive(t('dniInvalid')),
+    password: z.string().min(8, t('passwordMin')),
+  })
 
   const {
     register,
@@ -28,55 +28,53 @@ const RegisterPage = () => {
 
   const onSubmit = async (formData) => {
     try {
-      await registerUser(formData)
-      toast.success('Welcome to GymTup!')
-      navigate('/')
-    } catch (err) {
-      toast.error(err.response?.data?.error ?? 'No se pudo crear la cuenta. Intentá de nuevo.')
+      await authService.register(formData)
+      toast.success(t('registerSuccess'))
+      navigate('/login')
+    } catch {
+      toast.error(t('registerError'))
     }
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
-        <h1 className="auth-title">Crear cuenta</h1>
-        <p className="auth-subtitle">Sumate a GymTup y empezá a entrenar con propósito.</p>
+    <>
+      <h1 className="auth-title">{t('registerTitle')}</h1>
+      <p className="auth-subtitle">{t('registerSubtitle')}</p>
 
-        <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="auth-field">
-            <label htmlFor="name">Nombre</label>
-            <input id="name" {...register('name')} />
-            {errors.name && <span className="auth-field-error">{errors.name.message}</span>}
-          </div>
+      <form className="auth-form" onSubmit={handleSubmit(onSubmit)} noValidate>
+        <div className="auth-field">
+          <label htmlFor="name">{t('name')}</label>
+          <input id="name" {...register('name')} />
+          {errors.name && <span className="auth-field-error">{errors.name.message}</span>}
+        </div>
 
-          <div className="auth-field">
-            <label htmlFor="email">Email</label>
-            <input id="email" type="email" {...register('email')} />
-            {errors.email && <span className="auth-field-error">{errors.email.message}</span>}
-          </div>
+        <div className="auth-field">
+          <label htmlFor="email">{t('email')}</label>
+          <input id="email" type="email" {...register('email')} />
+          {errors.email && <span className="auth-field-error">{errors.email.message}</span>}
+        </div>
 
-          <div className="auth-field">
-            <label htmlFor="dni">DNI</label>
-            <input id="dni" type="number" {...register('dni')} />
-            {errors.dni && <span className="auth-field-error">{errors.dni.message}</span>}
-          </div>
+        <div className="auth-field">
+          <label htmlFor="dni">{t('dni')}</label>
+          <input id="dni" type="number" {...register('dni')} />
+          {errors.dni && <span className="auth-field-error">{errors.dni.message}</span>}
+        </div>
 
-          <div className="auth-field">
-            <label htmlFor="password">Contraseña</label>
-            <input id="password" type="password" autoComplete="new-password" {...register('password')} />
-            {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
-          </div>
+        <div className="auth-field">
+          <label htmlFor="password">{t('password')}</label>
+          <input id="password" type="password" autoComplete="new-password" {...register('password')} />
+          {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
+        </div>
 
-          <SubmitButton className="auth-submit" loading={isSubmitting} loadingText="Creando cuenta...">
-            Registrarse
-          </SubmitButton>
-        </form>
+        <SubmitButton className="auth-submit" loading={isSubmitting} loadingText={t('registering')}>
+          {t('registerButton')}
+        </SubmitButton>
+      </form>
 
-        <p className="auth-footer">
-          ¿Ya tenés cuenta? <Link to="/login">Iniciá sesión</Link>
-        </p>
-      </div>
-    </div>
+      <p className="auth-footer">
+        {t('haveAccount')} <Link to="/login">{t('loginLink')}</Link>
+      </p>
+    </>
   )
 }
 
