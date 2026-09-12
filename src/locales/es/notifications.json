@@ -15,5 +15,7 @@
   "planExpiringTitle": "Plan por vencer",
   "planExpiringMessage": "Tu plan vence en 3 días.",
   "planExpiredTitle": "Plan vencido",
-  "planExpiredMessage": "Tu plan ha vencido. Comprá uno nuevo para seguir entrenando."
+  "planExpiredMessage": "Tu plan ha vencido. Comprá uno nuevo para seguir entrenando.",
+  "newClassTitle": "Nueva clase disponible",
+  "newClassMessage": "Se agregó una clase nueva. ¡Anotate si te interesa!"
 }

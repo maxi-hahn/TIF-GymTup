@@ -15,5 +15,7 @@
   "planExpiringTitle": "Plan expiring",
   "planExpiringMessage": "Your plan expires in 3 days.",
   "planExpiredTitle": "Plan expired",
-  "planExpiredMessage": "Your plan has expired. Buy a new one to keep training."
+  "planExpiredMessage": "Your plan has expired. Buy a new one to keep training.",
+  "newClassTitle": "New class available",
+  "newClassMessage": "A new class was added. Sign up if you're interested!"
 }

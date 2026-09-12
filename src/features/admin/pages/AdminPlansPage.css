@@ -262,11 +262,29 @@
 }
 
 @media (max-width: 700px) {
+    .admin-page {
+        padding: 24px 16px;
+    }
+
     .admin-table-wrapper {
         overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        position: relative;
     }
 
     .admin-table {
         min-width: 600px;
     }
+
+    .admin-table-wrapper::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 24px;
+        background: linear-gradient(to right, transparent, rgba(19, 33, 45, 0.9));
+        pointer-events: none;
+    }
+
 }

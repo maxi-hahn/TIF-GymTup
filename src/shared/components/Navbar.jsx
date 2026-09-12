@@ -144,7 +144,8 @@ const Navbar = () => {
             'PlanExpiring': '⚠️',
             'PlanExpired': '❌',
             'EnrollmentSuccess': '✅',
-            'EnrollmentCancelled': '📋'
+            'EnrollmentCancelled': '📋',
+            'NewClass': '🆕'
         }
         return icons[type] || '📢'
     }
@@ -170,6 +171,10 @@ const Navbar = () => {
             'PlanExpired': {
                 title: t('notifications.planExpiredTitle'),
                 message: t('notifications.planExpiredMessage')
+            },
+            'NewClass': {
+                title: t('notifications.newClassTitle'),
+                message: t('notifications.newClassMessage')
             }
         }
         return typeTranslations[notif.type] || { title: notif.title, message: notif.message }

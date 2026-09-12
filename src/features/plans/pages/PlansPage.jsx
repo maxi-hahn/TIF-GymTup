@@ -29,7 +29,8 @@ const PlansPage = () => {
     const fetchData = async () => {
       try {
         const plansData = await planService.getPlans()
-        setPlans(plansData)
+        const sortedPlans = [...plansData].sort((a, b) => a.value - b.value)
+        setPlans(sortedPlans)
       } catch {
         toast.error(t('loadingError'))
         setLoadError(true)
