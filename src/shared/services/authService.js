@@ -17,6 +17,14 @@ const authService = {
         const { data } = await axiosClient.post('/Auth/resend-verification')
         return data
     },
+    forgotPassword: async (email) => {
+        const { data } = await axiosClient.post('/Auth/forgot-password', { email })
+        return data
+    },
+    resetPassword: async (token, newPassword) => {
+        const { data } = await axiosClient.post('/Auth/reset-password', { token, newPassword })
+        return data
+    },
     logout: () => { },
 }
 

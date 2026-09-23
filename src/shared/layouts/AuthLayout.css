@@ -112,3 +112,15 @@
 .auth-footer a:hover {
   text-decoration: underline;
 }
+
+.auth-forgot-link {
+    align-self: flex-end;
+    font-size: 13px;
+    color: #6ff3c4;
+    text-decoration: none;
+    margin-top: 4px;
+}
+
+.auth-forgot-link:hover {
+    text-decoration: underline;
+}

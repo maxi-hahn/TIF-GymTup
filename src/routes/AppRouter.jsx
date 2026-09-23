@@ -5,6 +5,8 @@ import RoleRoute from './RoleRoute'
 import HomePage from '@/features/home/pages/HomePage'
 import LoginPage from '@/features/auth/pages/LoginPage'
 import RegisterPage from '@/features/auth/pages/RegisterPage'
+import ForgotPasswordPage from '@/features/auth/pages/ForgotPasswordPage'
+import ResetPasswordPage from '@/features/auth/pages/ResetPasswordPage'
 import ClassesPage from '@/features/classes/pages/ClassesPage'
 import PlansPage from '@/features/plans/pages/PlansPage'
 import ProfilePage from '@/features/profile/pages/ProfilePage'
@@ -28,6 +30,8 @@ const AppRouter = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/verify-email" element={<VerifyEmailPage />} />

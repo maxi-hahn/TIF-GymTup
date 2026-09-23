@@ -56,6 +56,7 @@ const LoginPage = () => {
                         <label htmlFor="password">{t('password')}</label>
                         <input id="password" type="password" {...register('password')} />
                         {errors.password && <span className="auth-field-error">{errors.password.message}</span>}
+                        <Link to="/forgot-password" className="auth-forgot-link">{t('forgotPasswordLink')}</Link>
                     </div>
 
                     <SubmitButton className="auth-submit" loading={isSubmitting} loadingText={t('loggingIn')}>
