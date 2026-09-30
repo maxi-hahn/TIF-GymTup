@@ -3,7 +3,7 @@ import spinning from '/class-spinning.png'
 import funcional from '/class-funcional.png'
 
 // import pilates from '../public/class-pilates.png'
-// import musculacion from '../public/class-musculacion.png'
+import musculacion from '/class-strength.png'
 // import crossfit from '../public/class-crossfit.png'
 // import zumba from '../public/class-zumba.png'
 // import boxeo from '../public/class-boxeo.png'
@@ -78,7 +78,7 @@ export const ClassInfoEs = {
   },
 
   "Musculación": {
-    // image: musculacion,
+    image: musculacion,
     badge: "Construí tu mejor versión",
     description:
       "Entrenamiento de fuerza utilizando máquinas, barras y mancuernas para desarrollar masa muscular.",

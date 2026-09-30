@@ -1,7 +1,7 @@
 import yoga from '/class-yoga.png'
 import spinning from '/class-spinning.png'
 import funcional from '/class-funcional.png'
-// import musculacion from '../public/class-musculacion.png'
+import musculacion from '/class-strength.png'
 // import pilates from '../public/class-pilates.png'
 // import crossfit from '../public/class-crossfit.png'
 // import zumba from '../public/class-zumba.png'
@@ -76,7 +76,7 @@ export const ClassInfoEn = {
   },
 
   "Musculación": {
-    // image: musculacion,
+    image: musculacion,
     badge: "Build strength every day",
     description:
       "Strength training with free weights and machines focused on muscle development and overall fitness.",
