@@ -16,6 +16,38 @@
   "planExpiringMessage": "Your plan expires in 3 days.",
   "planExpiredTitle": "Plan expired",
   "planExpiredMessage": "Your plan has expired. Buy a new one to keep training.",
+  
   "newClassTitle": "New class available",
-  "newClassMessage": "A new class was added. Sign up if you're interested!"
+  "newClassMessage": "A new class was added. Book it if you're interested!",
+  "classDeletedTitle": "Class deleted",
+  "classDeletedMessage": "A class has been removed from the gym.",
+  "classDisabledTitle": "Class disabled",
+  "classDisabledMessage": "A class has been temporarily disabled.",
+  "classEnabledTitle": "Class enabled",
+  "classEnabledMessage": "A class has been enabled again.",
+  "scheduleUpdatedTitle": "Schedule updated",
+  "scheduleUpdatedMessage": "The schedules for a class have been modified.",
+  "planChangedTitle": "Plans updated",
+  "planChangedMessage": "Gym plans have been updated. Check them out!",
+  
+  
+  
+  "scheduleDeletedTitle": "Schedule deleted",
+  "scheduleCreatedMsg": "The schedule for {{className}} ({{day}} from {{startTime}} to {{endTime}}) has been created.",
+  "scheduleUpdatedMsg": "The schedule for {{className}} ({{day}} from {{startTime}} to {{endTime}}) has been updated.",
+  "scheduleDeletedMsg": "The schedule for {{className}} ({{day}} from {{startTime}} to {{endTime}}) has been deleted.",
+  "scheduleDisabledMsg": "The schedule for {{className}} ({{day}} from {{startTime}} to {{endTime}}) has been disabled.",
+  "scheduleEnabledMsg": "The schedule for {{className}} ({{day}} from {{startTime}} to {{endTime}}) has been enabled.",
+  
+  "newClassMsg": "The class {{className}} was added.",
+  "classDeletedMsg": "The class {{className}} has been deleted.",
+  "classDisabledMsg": "The class {{className}} has been disabled.",
+  "classEnabledMsg": "The class {{className}} has been enabled.",
+  
+  "planChangedMsg": "The plan {{planName}} has been modified.",
+
+
+  "planCreatedMsg": "A new plan has been created: {{planName}}.",
+  "planUpdatedMsg": "The plan {{planName}} has been updated.",
+  "planDeletedMsg": "The plan {{planName}} has been deleted."
 }

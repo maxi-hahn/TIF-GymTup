@@ -29,7 +29,7 @@
   "noClassesAvailable": "No classes available.",
   "emptyStateDescription": "There are no classes available at the moment.",
   "planRequired": "Plan required",
-"days": {
+  "days": {
     "monday": "Monday",
     "tuesday": "Tuesday",
     "wednesday": "Wednesday",
@@ -37,7 +37,7 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday"
-},
+  },
   "errors": {
     "USER_NOT_FOUND": "User not found.",
     "PLAN_REQUIRED": "You need an active membership.",
@@ -49,6 +49,7 @@
     "CLASS_DISABLED": "This class is currently disabled.",
     "CLASS_NOT_FOUND": "Class not found.",
     "CLASS_HAS_INSCRIPTIONS": "The class cannot be deleted because it has registered users.",
+    "SCHEDULE_HAS_ACTIVE_INSCRIPTIONS": "Cannot delete this schedule because it has active enrollments.",
     "SCHEDULE_OVERLAP": "Schedule overlaps another class.",
     "SCHEDULE_DISABLED": "This schedule is currently disabled.",
     "SCHEDULE_NOT_FOUND": "Schedule not found.",
@@ -97,7 +98,7 @@
   "createClass": "Create class",
   "creating": "Creating...",
   "classCreatedSuccess": "Class created successfully!",
- "daysN": {
+  "daysN": {
     "0": "Monday",
     "1": "Tuesday",
     "2": "Wednesday",
@@ -105,7 +106,7 @@
     "4": "Friday",
     "5": "Saturday",
     "6": "Sunday"
-},
+  },
   "CLASS_ALREADY_EXISTS": "A class with that name already exists",
   "INVALID_CLASS_DATA": "Invalid class data",
   "CLASS_CREATION_FAILED": "Failed to create class",
@@ -125,7 +126,6 @@
   "confirmEnrollment": "Confirm Enrollment",
   "youAreAboutToEnroll": "you are about to Enroll",
   "confirm": "confirm",
-
   "heroBadge": "Our classes",
   "heroTitle": "Move, push yourself and feel better",
   "heroDescription": "Each discipline has different goals and benefits. Choose the one that motivates you most; they all count towards your plan's class allowance.",

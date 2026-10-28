@@ -49,6 +49,7 @@
     "CLASS_DISABLED": "Esta clase se encuentra deshabilitada.",
     "CLASS_NOT_FOUND": "Clase no encontrada.",
     "CLASS_HAS_INSCRIPTIONS": "No se puede eliminar la clase porque tiene usuarios inscriptos.",
+    "SCHEDULE_HAS_ACTIVE_INSCRIPTIONS": "No se puede eliminar este horario porque tiene inscripciones activas.",
     "SCHEDULE_OVERLAP": "El horario se solapa con otra clase.",
     "SCHEDULE_DISABLED": "Este horario se encuentra deshabilitado.",
     "SCHEDULE_NOT_FOUND": "Horario no encontrado.",
@@ -97,7 +98,7 @@
   "createClass": "Crear clase",
   "creating": "Creando...",
   "classCreatedSuccess": "¡Clase creada exitosamente!",
- "daysN": {
+  "daysN": {
     "0": "Lunes",
     "1": "Martes",
     "2": "Miercoles",
@@ -105,7 +106,7 @@
     "4": "Viernes",
     "5": "Sabado",
     "6": "Domingo"
-},
+  },
   "CLASS_ALREADY_EXISTS": "Ya existe una clase con ese nombre",
   "INVALID_CLASS_DATA": "Los datos de la clase son inválidos",
   "CLASS_CREATION_FAILED": "No se pudo crear la clase",
@@ -125,7 +126,6 @@
   "confirmEnrollment": "Confirmar inscripcion",
   "youAreAboutToEnroll": "Está a punto de inscribirse",
   "confirm": "confirmar",
-  
   "heroBadge": "Nuestras clases",
   "heroTitle": "Movete, superate y sentite mejor",
   "heroDescription": "Cada disciplina tiene un objetivo y beneficios distintos. Elegí la que más te motive; todas suman a la cantidad de clases de tu plan.",

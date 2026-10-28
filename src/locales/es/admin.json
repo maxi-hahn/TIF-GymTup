@@ -17,7 +17,7 @@
     "delete": "Eliminar",
     "deleteConfirm": "¿Seguro que querés eliminar el plan \"{{name}}\"? Esta acción no se puede deshacer.",
     "deleteSuccess": "Plan eliminado correctamente.",
-    "deleteError": "No se pudo eliminar el plan."
+    "deleteError": "No se puede eliminar el plan porque tiene clientes asociados."
   },
   "form": {
     "editTitle": "Editar plan",

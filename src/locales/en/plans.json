@@ -27,5 +27,8 @@
    "upgradePlan": "Upgrade plan",
    "adminCannotBuy": "Administrators cannot buy plans. Log in with a client account.",
    "buyError": "Could not start the purchase. Try again.",
-   "downgradeNotAllowed": "Not available - Downgrade not allowed"
+   "downgradeNotAllowed": "Not available - Downgrade not allowed",
+   "errors": {
+       "PLAN_HAS_CLIENTS": "Cannot delete this plan because there are clients subscribed to it."
+   }
 }

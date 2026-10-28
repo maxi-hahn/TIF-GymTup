@@ -17,7 +17,7 @@
     "delete": "Delete",
     "deleteConfirm": "Are you sure you want to delete the plan \"{{name}}\"? This action cannot be undone.",
     "deleteSuccess": "Plan deleted successfully.",
-    "deleteError": "Couldn't delete the plan."
+    "deleteError": "Couldn't delete the plan because it has associated clients."
   },
   "form": {
     "editTitle": "Edit plan",

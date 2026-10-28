@@ -76,7 +76,7 @@ const Navbar = () => {
                 } catch (error) {
                     console.error('Error loading notifications:', error)
                 }
-                
+
                 try {
                     const count = await notificationService.getUnreadCount()
                     setUnreadCount(count)
@@ -145,39 +145,94 @@ const Navbar = () => {
             'PlanExpired': '❌',
             'EnrollmentSuccess': '✅',
             'EnrollmentCancelled': '📋',
-            'NewClass': '🆕'
+            'NewClass': '🏋️',
+            'ClassDeleted': '🗑️',
+            'ClassDisabled': '🚫',
+            'ClassEnabled': '✅',
+            'ScheduleUpdated': '📅',
+            'ScheduleDeleted': '🗑️', // <-- AGREGAR ESTO
+            'PlanChanged': '💳'
         }
         return icons[type] || '📢'
     }
-
     const getNotificationContent = (notif) => {
-        const typeTranslations = {
-            'EnrollmentSuccess': {
-                title: t('notifications.enrollmentSuccessTitle'),
-                message: t('notifications.enrollmentSuccessMessage')
-            },
-            'EnrollmentCancelled': {
-                title: t('notifications.enrollmentCancelledTitle'),
-                message: t('notifications.enrollmentCancelledMessage')
-            },
-            'ClassCompleted': {
-                title: t('notifications.classCompletedTitle'),
-                message: t('notifications.classCompletedMessage')
-            },
-            'PlanExpiring': {
-                title: t('notifications.planExpiringTitle'),
-                message: t('notifications.planExpiringMessage')
-            },
-            'PlanExpired': {
-                title: t('notifications.planExpiredTitle'),
-                message: t('notifications.planExpiredMessage')
-            },
-            'NewClass': {
-                title: t('notifications.newClassTitle'),
-                message: t('notifications.newClassMessage')
+        // 1. Intentar parsear la data JSON que envía el backend
+        let parsedData = null
+        try {
+            if (notif.data) {
+                parsedData = JSON.parse(notif.data)
             }
+        } catch (e) {
+            console.error("Error parsing notification data", e)
         }
-        return typeTranslations[notif.type] || { title: notif.title, message: notif.message }
+
+        // 2. Diccionario de títulos
+        const titles = {
+            'EnrollmentSuccess': t('notifications.enrollmentSuccessTitle'),
+            'EnrollmentCancelled': t('notifications.enrollmentCancelledTitle'),
+            'ClassCompleted': t('notifications.classCompletedTitle'),
+            'PlanExpiring': t('notifications.planExpiringTitle'),
+            'PlanExpired': t('notifications.planExpiredTitle'),
+            'NewClass': t('notifications.newClassTitle'),
+            'ClassDeleted': t('notifications.classDeletedTitle'),
+            'ClassDisabled': t('notifications.classDisabledTitle'),
+            'ClassEnabled': t('notifications.classEnabledTitle'),
+            'ScheduleUpdated': t('notifications.scheduleUpdatedTitle'),
+            'ScheduleDeleted': t('notifications.scheduleDeletedTitle'), // <-- NUEVO
+            'PlanChanged': t('notifications.planChangedTitle')
+        }
+
+        const title = titles[notif.type] || notif.title
+
+        // 3. Armar el mensaje dinámico
+        let message = notif.message // Fallback
+
+        if (parsedData) {
+            // Manejar los tipos de HORARIOS (creados, editados o eliminados)
+            if (notif.type === 'ScheduleUpdated' || notif.type === 'ScheduleDeleted') {
+                // El backend ahora manda "created", "updated" o "deleted" en el action
+                const action = parsedData.action || (notif.type === 'ScheduleDeleted' ? 'deleted' : 'updated')
+                const msgKey = `notifications.schedule${action.charAt(0).toUpperCase() + action.slice(1)}Msg`
+
+                message = t(msgKey, {
+                    className: parsedData.className,
+                    day: parsedData.day,
+                    startTime: parsedData.startTime,
+                    endTime: parsedData.endTime,
+                    defaultValue: notif.message
+                })
+            }
+            // Manejar los tipos de CLASES
+            else if (['NewClass', 'ClassDeleted', 'ClassDisabled', 'ClassEnabled'].includes(notif.type)) {
+                const msgKey = `notifications.${notif.type.charAt(0).toLowerCase() + notif.type.slice(1)}Msg`
+                message = t(msgKey, {
+                    className: parsedData.className,
+                    defaultValue: notif.message
+                })
+            }
+            // Manejar los tipos de PLANES
+            else if (notif.type === 'PlanChanged' && parsedData.planName) {
+                const action = parsedData.action || 'updated'
+                const msgKey = `notifications.plan${action.charAt(0).toUpperCase() + action.slice(1)}Msg`
+
+                message = t(msgKey, {
+                    planName: parsedData.planName,
+                    defaultValue: notif.message
+                })
+            }
+        } else {
+            // Para las notificaciones viejas (inscripciones)
+            const legacyMessages = {
+                'EnrollmentSuccess': t('notifications.enrollmentSuccessMessage'),
+                'EnrollmentCancelled': t('notifications.enrollmentCancelledMessage'),
+                'ClassCompleted': t('notifications.classCompletedMessage'),
+                'PlanExpiring': t('notifications.planExpiringMessage'),
+                'PlanExpired': t('notifications.planExpiredMessage')
+            }
+            message = legacyMessages[notif.type] || notif.message
+        }
+
+        return { title, message }
     }
 
     const formatTimeAgo = (dateString) => {

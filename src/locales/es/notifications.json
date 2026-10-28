@@ -16,6 +16,37 @@
   "planExpiringMessage": "Tu plan vence en 3 días.",
   "planExpiredTitle": "Plan vencido",
   "planExpiredMessage": "Tu plan ha vencido. Comprá uno nuevo para seguir entrenando.",
+  
   "newClassTitle": "Nueva clase disponible",
-  "newClassMessage": "Se agregó una clase nueva. ¡Anotate si te interesa!"
+  "newClassMessage": "Se agregó una clase nueva. ¡Anotate si te interesa!",
+  "classDeletedTitle": "Clase eliminada",
+  "classDeletedMessage": "Una clase ha sido eliminada del gimnasio.",
+  "classDisabledTitle": "Clase deshabilitada",
+  "classDisabledMessage": "Una clase ha sido deshabilitada temporalmente.",
+  "classEnabledTitle": "Clase habilitada",
+  "classEnabledMessage": "Una clase ha sido habilitada nuevamente.",
+  "scheduleUpdatedTitle": "Horario modificado",
+  "scheduleUpdatedMessage": "Los horarios de una clase han sido modificados.",
+  "planChangedTitle": "Planes actualizados",
+  "planChangedMessage": "Los planes del gimnasio han sido actualizados. ¡Revisalos!",
+
+
+  "scheduleDeletedTitle": "Horario eliminado",
+  "scheduleCreatedMsg": "El horario de la clase {{className}} ({{day}} de {{startTime}} a {{endTime}}) ha sido creado.",
+    "scheduleUpdatedMsg": "El horario de la clase {{className}} ({{day}} de {{startTime}} a {{endTime}}) ha sido modificado.",
+    "scheduleDeletedMsg": "El horario de la clase {{className}} ({{day}} de {{startTime}} a {{endTime}}) ha sido eliminado.",
+    "scheduleDisabledMsg": "El horario de la clase {{className}} ({{day}} de {{startTime}} a {{endTime}}) ha sido deshabilitado.",
+    "scheduleEnabledMsg": "El horario de la clase {{className}} ({{day}} de {{startTime}} a {{endTime}}) ha sido habilitado.",
+    
+    "newClassMsg": "Se agregó la clase {{className}}.",
+    "classDeletedMsg": "La clase {{className}} ha sido eliminada.",
+    "classDisabledMsg": "La clase {{className}} ha sido deshabilitada.",
+    "classEnabledMsg": "La clase {{className}} ha sido habilitada.",
+    
+    "planChangedMsg": "El plan {{planName}} ha sido modificado.",
+
+
+    "planCreatedMsg": "Se ha creado un nuevo plan: {{planName}}.",
+    "planUpdatedMsg": "El plan {{planName}} ha sido actualizado.",
+    "planDeletedMsg": "El plan {{planName}} ha sido eliminado."
 }

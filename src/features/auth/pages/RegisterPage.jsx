@@ -4,13 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslation } from 'react-i18next'
 import toast from 'react-hot-toast'
-import authService from '@/shared/services/authService'
+import { useAuth } from '@/shared/contexts/AuthContext'
 import SubmitButton from '@/shared/components/SubmitButton'
 import '@/shared/layouts/AuthLayout.css'
 
 const RegisterPage = () => {
   const { t } = useTranslation('auth')
   const navigate = useNavigate()
+  const { register: registerUser } = useAuth()
 
   const registerSchema = z.object({
     name: z.string().min(1, t('nameRequired')).max(50, t('nameMax')),
@@ -29,9 +30,9 @@ const RegisterPage = () => {
 
   const onSubmit = async (formData) => {
     try {
-      await authService.register(formData)
+      await registerUser(formData)
       toast.success(t('registerSuccess'))
-      navigate('/login')
+      navigate('/')
     } catch {
       toast.error(t('registerError'))
     }
